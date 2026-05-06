@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/futrixdata-gateway.png" alt="FutrixData Gateway connecting AI agents to governed data sources" width="1000">
+  <img src="docs/assets/futrixdata-gateway.svg" alt="FutrixData Gateway connecting AI agents to governed data sources" width="1000">
 </p>
 
 <h1 align="center">FutrixData Security Package</h1>
