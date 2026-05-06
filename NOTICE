@@ -1,0 +1,7 @@
+FutrixData Security Package
+Copyright 2026 FutrixData
+
+This repository contains public security specifications, verification
+utilities, and small reusable packages extracted from FutrixData. It does not
+contain the proprietary FutrixData desktop app, enterprise server, licensing,
+billing, account, signing, or release infrastructure.
