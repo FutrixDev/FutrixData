@@ -1,3 +1,5 @@
 dist/
 artifacts/
+release-assets/
+.worktrees/
 .DS_Store

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "prod-users-delete-approval",
+    "description": "Require approval before deleting from users in production",
+    "scope": {
+      "datasourceId": "prod-postgres",
+      "entity": "users"
+    },
+    "enabled": true,
+    "priority": 500,
+    "action": "require_approval",
+    "reason": "production user data",
+    "when": {
+      "command": ["delete"]
+    }
+  }
+]

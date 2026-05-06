@@ -1,0 +1,23 @@
+{
+  "tool": "execute_statement",
+  "ok": false,
+  "approvalRequired": {
+    "tool": "execute_statement",
+    "summary": "Execute statement on datasource \"prod-postgres\"",
+    "params": {
+      "datasourceId": "prod-postgres",
+      "statement": "UPDATE users SET status = 'inactive' WHERE id = 1042"
+    },
+    "riskAttribution": {
+      "source": "risk_engine",
+      "action": "warn",
+      "level": "medium",
+      "ruleId": "sql-warn-update",
+      "ruleCode": "SQL-008",
+      "ruleDescription": "Warn on UPDATE with WHERE",
+      "builtin": true,
+      "reasons": ["UPDATE"]
+    }
+  },
+  "auditId": "audit_public_approval_001"
+}

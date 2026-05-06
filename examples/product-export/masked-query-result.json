@@ -1,0 +1,15 @@
+{
+  "tool": "execute_statement",
+  "ok": true,
+  "datasourceId": "prod-postgres",
+  "entity": "users",
+  "maskedColumns": ["email", "phone"],
+  "rows": [
+    {
+      "id": 1042,
+      "email": "masked:v1:8f3a1c9b72e04d11",
+      "phone": "masked:v1:b219ac74e1d908f2",
+      "status": "active"
+    }
+  ]
+}
