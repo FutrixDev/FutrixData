@@ -1,0 +1,312 @@
+/* ── AI Preferences ── */
+.ai-prefs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Header */
+.ai-prefs__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.ai-prefs__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: color-mix(in oklab, var(--primary) 10%, var(--surface));
+  border: 1px solid color-mix(in oklab, var(--primary) 15%, var(--edge));
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.ai-prefs__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.ai-prefs__desc {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--soft-ink);
+}
+
+/* ── Toggle Row ── */
+.ai-prefs__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--edge);
+  background: var(--panel);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.ai-prefs__toggle:hover {
+  border-color: color-mix(in oklab, var(--primary) 25%, var(--edge));
+}
+
+.ai-prefs__toggle-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ai-prefs__toggle-icon {
+  color: var(--soft-ink);
+  flex-shrink: 0;
+}
+
+.ai-prefs__toggle-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ── Custom Switch ── */
+.ai-prefs__switch {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.ai-prefs__switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.ai-prefs__switch-track {
+  width: 40px;
+  height: 22px;
+  border-radius: 11px;
+  background: color-mix(in oklab, var(--ink) 18%, var(--surface));
+  border: 1px solid var(--edge);
+  position: relative;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.ai-prefs__switch--on .ai-prefs__switch-track {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.ai-prefs__switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s ease;
+}
+
+.ai-prefs__switch--on .ai-prefs__switch-thumb {
+  transform: translateX(18px);
+}
+
+.ai-prefs__switch--sm .ai-prefs__switch-track {
+  width: 34px;
+  height: 18px;
+  border-radius: 9px;
+}
+
+.ai-prefs__switch--sm .ai-prefs__switch-thumb {
+  width: 12px;
+  height: 12px;
+  top: 2px;
+  left: 2px;
+}
+
+.ai-prefs__switch--sm.ai-prefs__switch--on .ai-prefs__switch-thumb {
+  transform: translateX(16px);
+}
+
+/* ── Field Row (number input) ── */
+.ai-prefs__field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--edge);
+  background: var(--panel);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.ai-prefs__field:hover {
+  border-color: color-mix(in oklab, var(--primary) 25%, var(--edge));
+}
+
+.ai-prefs__field-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ai-prefs__field-icon {
+  color: var(--soft-ink);
+  flex-shrink: 0;
+}
+
+.ai-prefs__field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.ai-prefs__number {
+  width: 72px;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 8px;
+  border: 1px solid var(--edge);
+  background: var(--input-bg, var(--surface));
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  transition: border-color 0.2s ease;
+}
+
+.ai-prefs__number:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 15%, transparent);
+}
+
+/* ── Risk Levels Section ── */
+.ai-prefs__risk-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ai-prefs__risk-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.ai-prefs__risk-header-icon {
+  color: var(--soft-ink);
+}
+
+.ai-prefs__risk-hint {
+  margin: 0;
+  font-size: 11px;
+  color: var(--soft-ink);
+  line-height: 1.5;
+}
+
+.ai-prefs__risk-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ai-prefs__risk-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--edge);
+  background: var(--panel);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ai-prefs__risk-item:hover {
+  border-color: color-mix(in oklab, var(--primary) 20%, var(--edge));
+}
+
+.ai-prefs__risk-item--active {
+  border-color: color-mix(in oklab, var(--primary) 30%, var(--edge));
+  background: color-mix(in oklab, var(--primary) 4%, var(--panel));
+}
+
+.ai-prefs__risk-item--disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.ai-prefs__risk-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ai-prefs__risk-item--low .ai-prefs__risk-dot {
+  background: var(--success, #16a34a);
+}
+
+.ai-prefs__risk-item--medium .ai-prefs__risk-dot {
+  background: #f59e0b;
+}
+
+.ai-prefs__risk-item--high .ai-prefs__risk-dot {
+  background: var(--danger, #ef4444);
+}
+
+.ai-prefs__risk-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ai-prefs__risk-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.ai-prefs__risk-desc {
+  font-size: 11px;
+  color: var(--soft-ink);
+  line-height: 1.4;
+}
+
+.ai-prefs__risk-note {
+  margin: 0;
+  font-size: 11px;
+  color: var(--soft-ink);
+  opacity: 0.7;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .ai-prefs__toggle,
+  .ai-prefs__field {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .ai-prefs__number {
+    width: 100%;
+  }
+}

@@ -1,3 +1,0 @@
-{"id":"legacy","toolName":"list_datasources","status":"success"}
-{"chain_hash":"315274addcb6d90c3cad80e700c2a5ec64088bf08346127fa801744d28a466de","chain_version":"local-sha256-v1","id":"audit-1","payload_hash":"69786a037ca8fe364aa96e150211e53801dd4c54b13ca77535f7f0a1eb026b09","prev_hash":"0000000000000000000000000000000000000000000000000000000000000000","seq":2,"status":"success","toolName":"execute_statement"}
-{"chain_hash":"630a1544e8a5bfaa70f80bed9af05f3344c91414604aebf85f4d63145a449bd2","chain_version":"local-sha256-v1","id":"audit-2","payload_hash":"001ee09721bbc8c99ed9e78f202ee52f2b25cc3bb8fd7578b3ceeff895d01dc0","prev_hash":"315274addcb6d90c3cad80e700c2a5ec64088bf08346127fa801744d28a466de","seq":3,"status":"approval_required","toolName":"execute_statement"}

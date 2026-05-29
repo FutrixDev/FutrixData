@@ -1,0 +1,2272 @@
+.console-shell.sql-editor-parity {
+  gap: 0;
+  grid-template-columns: minmax(220px, var(--console-left, 250px)) 1px minmax(0, 1fr);
+  --console-left: 250px;
+  --sql-editor-bg: var(--color-background-light);
+  --sql-editor-surface: var(--color-surface-light);
+  --sql-editor-surface-soft: var(--color-surface-active-light);
+  --sql-editor-border: var(--color-border-light);
+  --sql-editor-border-strong: color-mix(in oklab, var(--sql-editor-border) 88%, var(--primary) 12%);
+  --sql-editor-text: var(--color-text-main-light);
+  --sql-editor-muted: var(--color-text-muted-light);
+  --sql-editor-hover: color-mix(in oklab, var(--sql-editor-surface-soft) 78%, var(--primary) 22%);
+  --sql-editor-active: color-mix(in oklab, var(--primary) 14%, var(--sql-editor-surface));
+  --sql-editor-splitter-hover: color-mix(in oklab, var(--primary) 42%, var(--sql-editor-border));
+  --sql-editor-button-bg-start: color-mix(in oklab, var(--sql-editor-surface) 95%, #ffffff 5%);
+  --sql-editor-button-bg-end: color-mix(in oklab, var(--sql-editor-surface-soft) 84%, var(--sql-editor-surface) 16%);
+  --sql-editor-button-text: color-mix(in oklab, var(--sql-editor-text) 78%, var(--primary) 22%);
+  --sql-editor-placeholder: color-mix(in oklab, var(--sql-editor-muted) 78%, var(--sql-editor-surface) 22%);
+  --sql-editor-selection: color-mix(in oklab, var(--primary) 34%, transparent);
+  --sql-editor-line-number: color-mix(in oklab, var(--sql-editor-muted) 78%, var(--sql-editor-surface) 22%);
+  --sql-editor-grid-even: color-mix(in oklab, var(--sql-editor-surface-soft) 74%, var(--sql-editor-surface) 26%);
+  --sql-editor-execute-start: color-mix(in oklab, var(--primary) 86%, #7ec6ff 14%);
+  --sql-editor-execute-end: color-mix(in oklab, var(--primary) 74%, #0b4f9f 26%);
+  --sql-editor-execute-border: color-mix(in oklab, var(--primary) 64%, #0c4a8e 36%);
+  --sql-editor-execute-text: var(--primary-foreground);
+  --statement-tab-rail: color-mix(in oklab, var(--sql-editor-surface-soft) 90%, #eef3f9 10%);
+  --statement-tab-fill: color-mix(in oklab, var(--sql-editor-surface-soft) 76%, #d9e1ea 24%);
+  --statement-tab-fill-hover: color-mix(in oklab, var(--statement-tab-fill) 82%, #edf3fa 18%);
+  --statement-tab-fill-active: color-mix(in oklab, var(--statement-tab-fill) 88%, #f1f5fb 12%);
+  --statement-tab-divider: color-mix(in oklab, var(--sql-editor-border) 84%, #c4cfde 16%);
+  --statement-tab-text: color-mix(in oklab, var(--sql-editor-text) 88%, #203a66 12%);
+  --statement-tab-muted: color-mix(in oklab, var(--sql-editor-muted) 72%, var(--statement-tab-text) 28%);
+  --sql-editor-token-sql: var(--ds-mysql);
+  --sql-editor-token-mongo: var(--ds-mongodb);
+  --sql-editor-token-es: var(--ds-elasticsearch);
+  --sql-editor-token-method: color-mix(in oklab, var(--ds-redis) 68%, var(--ds-mysql) 32%);
+  --sql-editor-token-operator: var(--ds-postgresql);
+  --sql-editor-token-string: color-mix(in oklab, var(--ds-mongodb) 65%, #7c4a00 35%);
+  --sql-editor-token-number: var(--ds-postgresql);
+  --sql-editor-token-comment: var(--sql-editor-muted);
+  background: var(--sql-editor-bg);
+}
+
+.dark .console-shell.sql-editor-parity {
+  --sql-editor-bg: var(--color-background-dark);
+  --sql-editor-surface: var(--color-surface-dark);
+  --sql-editor-surface-soft: var(--color-surface-active-dark);
+  --sql-editor-border: var(--color-border-dark);
+  --sql-editor-border-strong: color-mix(in oklab, var(--sql-editor-border) 80%, var(--primary) 20%);
+  --sql-editor-text: var(--color-text-main-dark);
+  --sql-editor-muted: var(--color-text-muted-dark);
+  --sql-editor-hover: color-mix(in oklab, var(--sql-editor-surface-soft) 78%, var(--primary) 22%);
+  --sql-editor-active: color-mix(in oklab, var(--primary) 22%, var(--sql-editor-surface));
+  --sql-editor-splitter-hover: color-mix(in oklab, var(--primary) 48%, var(--sql-editor-border));
+  --sql-editor-button-bg-start: color-mix(in oklab, var(--sql-editor-surface) 92%, #1e293b 8%);
+  --sql-editor-button-bg-end: color-mix(in oklab, var(--sql-editor-surface-soft) 84%, #111827 16%);
+  --sql-editor-button-text: color-mix(in oklab, var(--sql-editor-text) 78%, var(--primary) 22%);
+  --sql-editor-placeholder: color-mix(in oklab, var(--sql-editor-muted) 78%, #111827 22%);
+  --sql-editor-selection: color-mix(in oklab, var(--primary) 38%, transparent);
+  --sql-editor-line-number: color-mix(in oklab, var(--sql-editor-muted) 78%, #111827 22%);
+  --sql-editor-grid-even: color-mix(in oklab, var(--sql-editor-surface-soft) 80%, #111827 20%);
+  --sql-editor-execute-start: color-mix(in oklab, var(--primary) 76%, #93c5fd 24%);
+  --sql-editor-execute-end: color-mix(in oklab, var(--primary) 66%, #1d4ed8 34%);
+  --sql-editor-execute-border: color-mix(in oklab, var(--primary) 60%, #1e3a8a 40%);
+  --sql-editor-execute-text: #f8fafc;
+  --statement-tab-rail: color-mix(in oklab, var(--sql-editor-surface-soft) 92%, #111827 8%);
+  --statement-tab-fill: color-mix(in oklab, var(--sql-editor-surface-soft) 82%, #253041 18%);
+  --statement-tab-fill-hover: color-mix(in oklab, var(--statement-tab-fill) 86%, #364152 14%);
+  --statement-tab-fill-active: color-mix(in oklab, var(--statement-tab-fill) 90%, #465468 10%);
+  --statement-tab-divider: color-mix(in oklab, var(--sql-editor-border) 78%, #475569 22%);
+  --statement-tab-text: color-mix(in oklab, var(--sql-editor-text) 90%, #cddcf6 10%);
+  --statement-tab-muted: color-mix(in oklab, var(--sql-editor-muted) 78%, var(--statement-tab-text) 22%);
+}
+
+.redis-proto-shell {
+  --sql-editor-bg: var(--color-background-light);
+  --sql-editor-surface: var(--color-surface-light);
+  --sql-editor-surface-soft: var(--color-surface-active-light);
+  --sql-editor-border: var(--color-border-light);
+  --sql-editor-border-strong: color-mix(in oklab, var(--sql-editor-border) 88%, var(--primary) 12%);
+  --sql-editor-text: var(--color-text-main-light);
+  --sql-editor-muted: var(--color-text-muted-light);
+  --statement-tab-rail: color-mix(in oklab, var(--sql-editor-surface-soft) 90%, #eef3f9 10%);
+  --statement-tab-fill: color-mix(in oklab, var(--sql-editor-surface-soft) 76%, #d9e1ea 24%);
+  --statement-tab-fill-hover: color-mix(in oklab, var(--statement-tab-fill) 82%, #edf3fa 18%);
+  --statement-tab-fill-active: color-mix(in oklab, var(--statement-tab-fill) 88%, #f1f5fb 12%);
+  --statement-tab-divider: color-mix(in oklab, var(--sql-editor-border) 84%, #c4cfde 16%);
+  --statement-tab-text: color-mix(in oklab, var(--sql-editor-text) 88%, #203a66 12%);
+  --statement-tab-muted: color-mix(in oklab, var(--sql-editor-muted) 72%, var(--statement-tab-text) 28%);
+}
+
+.dark .redis-proto-shell {
+  --sql-editor-bg: var(--color-background-dark);
+  --sql-editor-surface: var(--color-surface-dark);
+  --sql-editor-surface-soft: var(--color-surface-active-dark);
+  --sql-editor-border: var(--color-border-dark);
+  --sql-editor-border-strong: color-mix(in oklab, var(--sql-editor-border) 80%, var(--primary) 20%);
+  --sql-editor-text: var(--color-text-main-dark);
+  --sql-editor-muted: var(--color-text-muted-dark);
+  --statement-tab-rail: color-mix(in oklab, var(--sql-editor-surface-soft) 92%, #111827 8%);
+  --statement-tab-fill: color-mix(in oklab, var(--sql-editor-surface-soft) 82%, #253041 18%);
+  --statement-tab-fill-hover: color-mix(in oklab, var(--statement-tab-fill) 86%, #364152 14%);
+  --statement-tab-fill-active: color-mix(in oklab, var(--statement-tab-fill) 90%, #465468 10%);
+  --statement-tab-divider: color-mix(in oklab, var(--sql-editor-border) 78%, #475569 22%);
+  --statement-tab-text: color-mix(in oklab, var(--sql-editor-text) 90%, #cddcf6 10%);
+  --statement-tab-muted: color-mix(in oklab, var(--sql-editor-muted) 78%, var(--statement-tab-text) 22%);
+}
+
+.console-shell.sql-editor-parity,
+.console-shell.sql-editor-parity .panel,
+.console-shell.sql-editor-parity .panel h4 {
+  font-family: Inter, 'PingFang SC', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif;
+}
+
+.console-shell.sql-editor-parity button,
+.console-shell.sql-editor-parity input,
+.console-shell.sql-editor-parity select,
+.console-shell.sql-editor-parity textarea,
+.console-shell.sql-editor-parity table,
+.console-shell.sql-editor-parity code {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+}
+
+.console-shell.sql-editor-parity .console-splitter {
+  display: block;
+  width: 32px;
+  margin-left: -15.5px;
+  margin-right: -15.5px;
+  cursor: col-resize;
+  background: transparent;
+  position: relative;
+  overflow: visible;
+  z-index: 2;
+  transition: background-color 120ms ease, box-shadow 120ms ease;
+}
+
+.console-shell.sql-editor-parity .console-splitter::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: var(--sql-editor-border);
+}
+
+.console-shell.sql-editor-parity .console-splitter:hover,
+.console-shell.sql-editor-parity.resizing .console-splitter {
+  background: color-mix(in oklab, var(--sql-editor-splitter-hover) 10%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--sql-editor-splitter-hover) 20%, transparent);
+}
+
+.console-shell.sql-editor-parity .console-splitter:focus-visible {
+  outline: none;
+  background: color-mix(in oklab, var(--sql-editor-splitter-hover) 12%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--sql-editor-splitter-hover) 30%, transparent),
+    0 0 0 3px color-mix(in oklab, var(--primary) 28%, transparent);
+}
+
+.console-shell.sql-editor-parity .console-splitter:hover::after,
+.console-shell.sql-editor-parity.resizing .console-splitter::after {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: var(--sql-editor-splitter-hover);
+  position: absolute;
+  content: '';
+}
+
+.console-shell.sql-editor-parity .console-splitter-grip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 30px;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(180deg,
+      color-mix(in oklab, var(--sql-editor-border-strong) 90%, transparent) 0%,
+      color-mix(in oklab, var(--sql-editor-border-strong) 64%, transparent) 100%);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--sql-editor-border) 60%, transparent);
+  opacity: 0.42;
+  pointer-events: none;
+  transition: opacity 120ms ease, background-color 120ms ease;
+}
+
+.console-shell.sql-editor-parity .console-splitter:hover .console-splitter-grip,
+.console-shell.sql-editor-parity.resizing .console-splitter .console-splitter-grip,
+.console-shell.sql-editor-parity .console-splitter:focus-visible .console-splitter-grip {
+  opacity: 0.9;
+  background: color-mix(in oklab, var(--primary) 68%, var(--sql-editor-border-strong) 32%);
+}
+
+.console-shell.sql-editor-parity .console-panel--entities {
+  border: 0;
+  border-right: 1px solid var(--sql-editor-border);
+  border-radius: 0;
+  box-shadow: none;
+  background: var(--sql-editor-surface-soft);
+  padding: 0;
+}
+
+.console-shell.sql-editor-parity .console-panel--entities .panel-head {
+  padding: 10px 42px 10px 10px;
+  border-bottom: 1px solid var(--sql-editor-border);
+  margin: 0;
+}
+
+.entity-panel-header-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.entity-panel-header-copy {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.entity-panel-header-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  display: block;
+  object-fit: contain;
+}
+
+.entity-panel-header-label {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.entity-panel-header-meta {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  line-height: 1.25;
+  font-weight: 400;
+  color: var(--sql-editor-muted, var(--text-muted));
+}
+
+.entity-panel-refresh-button {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: color-mix(in oklab, var(--sql-editor-text, var(--ink)) 65%, transparent 35%);
+  box-sizing: border-box;
+  transition: color 120ms ease, background-color 120ms ease, border-color 120ms ease;
+}
+
+.entity-panel-refresh-button .material-symbols-outlined {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.entity-panel-refresh-button:hover:not(:disabled) {
+  color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 8%, transparent 92%);
+  border-color: color-mix(in oklab, var(--primary) 30%, transparent 70%);
+}
+
+.entity-panel-refresh-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.console-shell.sql-editor-parity .console-panel--entities .panel-head h4 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sql-editor-text);
+  letter-spacing: 0.01em;
+}
+
+.console-shell.sql-editor-parity .console-panel--entities .panel-head-actions {
+  gap: 6px;
+}
+
+.console-shell.sql-editor-parity .console-panel--entities .pill {
+  border: 1px solid color-mix(in oklab, var(--primary) 35%, transparent);
+  border-radius: 999px;
+  padding: 2px 8px;
+  color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 8%, transparent);
+}
+
+.console-shell.sql-editor-parity .console-panel--entities .btn.ghost.mini,
+.console-shell.sql-editor-parity .console-panel--entities .btn.ghost.small {
+  border: 1px solid var(--sql-editor-border);
+  border-radius: 7px;
+  background: linear-gradient(180deg, var(--sql-editor-button-bg-start) 0%, var(--sql-editor-button-bg-end) 100%);
+  color: var(--sql-editor-button-text);
+  min-height: 32px;
+  height: 32px;
+  padding: 0 10px;
+}
+
+.console-shell.sql-editor-parity .console-panel--entities #entity-pattern-label {
+  display: none;
+}
+
+.console-shell.sql-editor-parity .console-panel--entities #entity-pattern {
+  margin: 10px 10px 0;
+  width: calc(100% - 20px);
+  height: 33px;
+  border-radius: 6px;
+  border: 1px solid var(--sql-editor-border);
+  padding: 0 10px;
+  background: var(--sql-editor-surface);
+  color: var(--sql-editor-text);
+}
+
+.console-shell.sql-editor-parity .console-panel--entities #entity-pattern::placeholder {
+  color: var(--sql-editor-placeholder);
+}
+
+.console-shell.sql-editor-parity .console-panel--entities #entity-pattern-hint {
+  margin: 8px 10px 0;
+  color: var(--sql-editor-muted);
+}
+
+.console-shell.sql-editor-parity .console-panel--entities .entity-list {
+  padding: 8px;
+  gap: 0;
+}
+
+.console-shell.sql-editor-parity .console-panel--entities .entity-entry {
+  gap: 0;
+}
+
+.console-shell.sql-editor-parity .console-panel--entities .entity-item {
+  border: 1px solid transparent;
+  border-radius: 6px;
+  min-height: 32px;
+  padding: 0 8px;
+  color: var(--sql-editor-text);
+  background: transparent;
+}
+
+.console-shell.sql-editor-parity .console-panel--entities .entity-item:hover {
+  background: var(--sql-editor-hover);
+}
+
+.console-shell.sql-editor-parity .console-panel--entities .entity-item.active {
+  background: var(--sql-editor-active);
+  border-color: color-mix(in oklab, var(--primary) 48%, var(--sql-editor-border));
+}
+
+.console-shell.sql-editor-parity .console-panel--entities .entity-title {
+  font-weight: 600;
+}
+
+.console-shell.sql-editor-parity .console-panel--entities .entity-expand {
+  border-radius: 8px;
+  border-color: var(--sql-editor-border);
+  background: var(--sql-editor-surface);
+}
+
+.console-shell.sql-editor-parity .console-panel--entities .meta {
+  color: var(--sql-editor-muted);
+}
+
+.console-panel--statement.sql-editor-parity {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--sql-editor-bg);
+  font-size: 16px;
+  line-height: normal;
+  min-width: 0;
+}
+
+.console-panel--statement.sql-editor-parity>* {
+  min-height: 0;
+  min-width: 0;
+}
+
+.console-panel--statement.sql-editor-parity .console-editor-results-shell {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+
+.console-panel--statement.sql-editor-parity .console-editor-results-shell.sql-editor-parity {
+  gap: 0;
+  grid-template-rows:
+    minmax(220px, max(var(--console-editor-height, 56%), var(--elastic-live-dsl-min-editor-height, 0px)))
+    1px
+    minmax(180px, 1fr);
+}
+
+.console-panel--statement.sql-editor-parity .console-editor-results-splitter {
+  width: 100%;
+  height: 32px;
+  margin-top: -15.5px;
+  margin-bottom: -15.5px;
+  cursor: row-resize;
+  position: relative;
+  overflow: visible;
+  background: transparent;
+  z-index: 2;
+  transition: background-color 120ms ease, box-shadow 120ms ease;
+}
+
+.console-panel--statement.sql-editor-parity .console-editor-results-splitter::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  transform: translateY(-50%);
+  background: var(--sql-editor-border);
+}
+
+.console-panel--statement.sql-editor-parity .console-editor-results-splitter:hover,
+.console-panel--statement.sql-editor-parity .console-editor-results-shell.resizing .console-editor-results-splitter {
+  background: color-mix(in oklab, var(--sql-editor-splitter-hover) 10%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--sql-editor-splitter-hover) 20%, transparent);
+}
+
+.console-panel--statement.sql-editor-parity .console-editor-results-splitter:focus-visible {
+  outline: none;
+  background: color-mix(in oklab, var(--sql-editor-splitter-hover) 12%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--sql-editor-splitter-hover) 30%, transparent),
+    0 0 0 3px color-mix(in oklab, var(--primary) 28%, transparent);
+}
+
+.console-panel--statement.sql-editor-parity .console-editor-results-splitter:hover::after,
+.console-panel--statement.sql-editor-parity .console-editor-results-shell.resizing .console-editor-results-splitter::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  transform: translateY(-50%);
+  background: var(--sql-editor-splitter-hover);
+}
+
+.console-panel--statement.sql-editor-parity .console-editor-results-splitter-grip {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 38px;
+  height: 5px;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(90deg,
+      color-mix(in oklab, var(--sql-editor-border-strong) 90%, transparent) 0%,
+      color-mix(in oklab, var(--sql-editor-border-strong) 64%, transparent) 100%);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--sql-editor-border) 60%, transparent);
+  opacity: 0.45;
+  pointer-events: none;
+  transition: opacity 120ms ease, background-color 120ms ease;
+}
+
+.console-panel--statement.sql-editor-parity .console-editor-results-splitter:hover .console-editor-results-splitter-grip,
+.console-panel--statement.sql-editor-parity .console-editor-results-shell.resizing .console-editor-results-splitter .console-editor-results-splitter-grip,
+.console-panel--statement.sql-editor-parity .console-editor-results-splitter:focus-visible .console-editor-results-splitter-grip {
+  opacity: 0.9;
+  background: color-mix(in oklab, var(--primary) 68%, var(--sql-editor-border-strong) 32%);
+}
+
+.console-panel--statement.sql-editor-parity .console-statement-panel--sql-editor {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.console-panel--statement.sql-editor-parity .console-statement-panel--sql-editor > * {
+  min-width: 0;
+}
+
+.console-panel--statement.sql-editor-parity .console-results-panel {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.console-panel--statement.sql-editor-parity .console-results-panel>.console-results-content,
+.console-panel--statement.sql-editor-parity .console-results-panel>.console-results-content--sql-editor {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+
+.console-statement-panel--sql-editor .statement-tabs,
+.redis-session-tabs-shell .statement-tabs {
+  margin-bottom: 0;
+  height: 42px;
+  min-height: 42px;
+  flex: 0 0 42px;
+  border-bottom: 1px solid var(--sql-editor-border);
+  background: transparent;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 0;
+  position: relative;
+  z-index: 3;
+  isolation: isolate;
+}
+
+.statement-tabs-viewport {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  flex: 0 1 auto;
+  align-self: stretch;
+  width: fit-content;
+  height: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.statement-tabs-viewport::before,
+.statement-tabs-viewport::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 18px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 120ms ease;
+  z-index: 1;
+}
+
+.statement-tabs-viewport::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--sql-editor-surface-soft) 0%, transparent 100%);
+}
+
+.statement-tabs-viewport::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--sql-editor-surface-soft) 0%, transparent 100%);
+}
+
+.statement-tabs-viewport.statement-tabs-viewport--overflow-left::before,
+.statement-tabs-viewport.statement-tabs-viewport--overflow-right::after {
+  opacity: 1;
+}
+
+.statement-tabs-viewport.statement-tabs-viewport--overflow-left .statement-tabs-list {
+  padding-left: 24px;
+}
+
+.statement-tabs-viewport.statement-tabs-viewport--overflow-right .statement-tabs-list {
+  padding-right: 24px;
+}
+
+.console-statement-panel--sql-editor .statement-tabs-list,
+.redis-session-tabs-shell .statement-tabs-list {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  height: 100%;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.console-statement-panel--sql-editor .statement-tabs-list::-webkit-scrollbar,
+.redis-session-tabs-shell .statement-tabs-list::-webkit-scrollbar {
+  display: none;
+}
+
+.statement-tabs-scroll {
+  display: grid;
+  place-items: center;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-right: 1px solid var(--statement-tab-divider);
+  background: transparent;
+  color: var(--statement-tab-muted);
+  cursor: pointer;
+  transition: color 120ms ease, background 120ms ease, opacity 120ms ease;
+  z-index: 2;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  box-sizing: border-box;
+  align-self: stretch;
+}
+
+.statement-tabs-scroll.statement-tabs-scroll--right {
+  position: absolute;
+  top: 0;
+  right: 48px;
+  bottom: 0;
+  border-left: 1px solid var(--statement-tab-divider);
+  border-right: 0;
+  z-index: 4;
+}
+
+.statement-tabs-scroll:hover:not(:disabled) {
+  color: var(--primary);
+  background: transparent;
+}
+
+.statement-tabs-scroll:disabled {
+  opacity: 1;
+  color: var(--statement-tab-muted);
+  cursor: default;
+}
+
+.console-statement-panel--sql-editor .statement-tab--sql-editor,
+.redis-session-tabs-shell .statement-tab--sql-editor {
+  position: relative;
+  min-width: 132px;
+  max-width: 208px;
+  height: 100%;
+  border: 0;
+  border-right: 1px solid var(--statement-tab-divider);
+  border-radius: 0;
+  background: transparent;
+  color: var(--statement-tab-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 0 10px 0 12px;
+  overflow: hidden;
+  letter-spacing: 0;
+  gap: 8px;
+  flex: 0 0 auto;
+  box-shadow: none;
+  box-sizing: border-box;
+  align-self: stretch;
+  cursor: grab;
+  transition: color 120ms ease;
+}
+
+.console-statement-panel--sql-editor .statement-tab--sql-editor:first-child,
+.redis-session-tabs-shell .statement-tab--sql-editor:first-child {
+  border-left: 1px solid var(--statement-tab-divider);
+}
+
+.console-statement-panel--sql-editor .statement-tab--sql-editor .statement-tab-content,
+.redis-session-tabs-shell .statement-tab--sql-editor .statement-tab-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+}
+
+.console-statement-panel--sql-editor .statement-tab--sql-editor .statement-tab-datasource-icon,
+.redis-session-tabs-shell .statement-tab--sql-editor .statement-tab-datasource-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  display: block;
+  object-fit: contain;
+}
+
+.console-statement-panel--sql-editor .statement-tab--sql-editor .statement-tab-label,
+.redis-session-tabs-shell .statement-tab--sql-editor .statement-tab-label {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: inherit;
+}
+
+.console-statement-panel--sql-editor .statement-tab--sql-editor .statement-tab-close,
+.redis-session-tabs-shell .statement-tab--sql-editor .statement-tab-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  margin-left: 2px;
+  color: var(--statement-tab-muted);
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.console-statement-panel--sql-editor .statement-tab--sql-editor .statement-tab-close:hover,
+.redis-session-tabs-shell .statement-tab--sql-editor .statement-tab-close:hover {
+  color: var(--statement-tab-text);
+  background: color-mix(in oklab, var(--primary) 12%, transparent);
+}
+
+.console-statement-panel--sql-editor .statement-tab--sql-editor .statement-tab-rename-input,
+.redis-session-tabs-shell .statement-tab--sql-editor .statement-tab-rename-input {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  background: color-mix(in oklab, var(--sql-editor-surface) 84%, #ffffff 16%);
+  border-color: color-mix(in oklab, var(--primary) 46%, var(--sql-editor-border));
+  color: var(--sql-editor-text);
+}
+
+.console-statement-panel--sql-editor .statement-tab--sql-editor:hover,
+.redis-session-tabs-shell .statement-tab--sql-editor:hover {
+  color: var(--statement-tab-text);
+  background: transparent;
+}
+
+.console-statement-panel--sql-editor .statement-tab--sql-editor.statement-tab--dragging,
+.redis-session-tabs-shell .statement-tab--sql-editor.statement-tab--dragging {
+  opacity: 0.74;
+  cursor: grabbing;
+}
+
+.console-statement-panel--sql-editor .statement-tab--sql-editor.statement-tab--drop-before,
+.redis-session-tabs-shell .statement-tab--sql-editor.statement-tab--drop-before {
+  box-shadow: inset 3px 0 0 var(--primary);
+}
+
+.console-statement-panel--sql-editor .statement-tab--sql-editor.statement-tab--drop-after,
+.redis-session-tabs-shell .statement-tab--sql-editor.statement-tab--drop-after {
+  box-shadow: inset -3px 0 0 var(--primary);
+}
+
+.console-statement-panel--sql-editor .statement-tab--sql-editor.active,
+.redis-session-tabs-shell .statement-tab--sql-editor.active {
+  color: var(--primary);
+  background: transparent;
+}
+
+.console-statement-panel--sql-editor .statement-tab--sql-editor.active::after,
+.redis-session-tabs-shell .statement-tab--sql-editor.active::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -1px;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+.console-statement-panel--sql-editor .statement-tab-dot,
+.redis-session-tabs-shell .statement-tab-dot {
+  width: 10px;
+  height: 10px;
+  margin-left: auto;
+  border-radius: 999px;
+  background: var(--primary);
+  flex: 0 0 auto;
+}
+
+.console-statement-panel--sql-editor .statement-tab-add--sql-editor,
+.redis-session-tabs-shell .statement-tab-add--sql-editor {
+  min-width: 48px;
+  width: 48px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  border: 0;
+  border-left: 1px solid var(--statement-tab-divider);
+  border-right: 1px solid var(--statement-tab-divider);
+  background: transparent;
+  color: var(--statement-tab-muted);
+  font-size: 28px;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+  font-weight: 600;
+  line-height: 1;
+  flex: 0 0 48px;
+  box-sizing: border-box;
+  align-self: stretch;
+  transition: color 120ms ease;
+}
+
+.console-statement-panel--sql-editor .statement-tab-add--sql-editor:hover,
+.redis-session-tabs-shell .statement-tab-add--sql-editor:hover {
+  color: var(--primary);
+  background: transparent;
+}
+
+.console-statement-panel--sql-editor button.statement-tab-add--sql-editor,
+.redis-session-tabs-shell button.statement-tab-add--sql-editor {
+  font-size: 28px;
+}
+
+.editor-toolbar-sql-editor {
+  min-height: 41px;
+  flex: 0 0 auto;
+  border-bottom: 1px solid var(--sql-editor-border);
+  background: color-mix(in oklab, var(--sql-editor-surface-soft) 85%, var(--sql-editor-surface) 15%);
+  padding: 0 11px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.editor-toolbar-sql-editor .toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.editor-toolbar-sql-editor .toolbar-left::-webkit-scrollbar {
+  display: none;
+}
+
+.editor-toolbar-sql-editor .toolbar-cluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  position: relative;
+  padding-right: 10px;
+}
+
+.editor-toolbar-sql-editor .toolbar-cluster + .toolbar-cluster {
+  padding-left: 10px;
+}
+
+.editor-toolbar-sql-editor .toolbar-cluster + .toolbar-cluster::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 16px;
+  background: color-mix(in oklab, var(--sql-editor-border) 75%, transparent);
+}
+
+.editor-toolbar-sql-editor .toolbar-cluster:last-child {
+  padding-right: 0;
+}
+
+.editor-toolbar-sql-editor .toolbar-btn-icon {
+  flex: 0 0 auto;
+  margin-right: 5px;
+  color: color-mix(in oklab, var(--primary) 65%, var(--sql-editor-text) 35%);
+}
+
+.editor-toolbar-sql-editor .toolbar-btn-label {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.editor-toolbar-sql-editor .toolbar-left button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  padding: 0 10px;
+  margin: 0;
+  box-sizing: border-box;
+  line-height: 1;
+  cursor: pointer;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  color: color-mix(in oklab, var(--sql-editor-text) 70%, transparent 30%);
+  background: transparent;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.editor-toolbar-sql-editor .toolbar-left button:hover:not(:disabled) {
+  border-color: color-mix(in oklab, var(--primary) 30%, transparent 70%);
+  background: color-mix(in oklab, var(--primary) 8%, transparent 92%);
+  color: var(--primary);
+}
+
+.editor-toolbar-sql-editor .toolbar-left button:hover:not(:disabled) .toolbar-btn-icon {
+  color: var(--primary);
+}
+
+.editor-toolbar-sql-editor .toolbar-left button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.editor-toolbar-sql-editor .toolbar-left .execute-btn {
+  border-color: var(--primary);
+  color: var(--primary-foreground, #fff);
+  background: var(--primary, #4f46e5);
+  box-shadow: 0 1px 2px color-mix(in oklab, var(--primary, #4f46e5) 30%, transparent);
+}
+
+.editor-toolbar-sql-editor .toolbar-left .execute-btn .toolbar-btn-icon {
+  color: var(--primary-foreground, #fff);
+}
+
+.editor-toolbar-sql-editor .toolbar-left .execute-btn:hover:not(:disabled) {
+  border-color: color-mix(in oklab, var(--primary) 80%, white 20%);
+  background: color-mix(in oklab, var(--primary, #4f46e5) 88%, white 12%);
+  color: var(--primary-foreground, #fff);
+}
+
+.editor-toolbar-sql-editor .toolbar-left .execute-btn:hover:not(:disabled) .toolbar-btn-icon {
+  color: var(--primary-foreground, #fff);
+}
+
+.editor-toolbar-sql-editor .d1-execution-mode {
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid color-mix(in oklab, var(--sql-editor-border) 80%, transparent 20%);
+  padding: 2px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--sql-editor-muted);
+  background: transparent;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.editor-toolbar-sql-editor .d1-execution-mode .d1-execution-option {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  cursor: pointer;
+}
+
+.editor-toolbar-sql-editor .d1-execution-mode .d1-execution-option-text {
+  height: 24px;
+  min-width: 58px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  padding: 0 9px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sql-editor-muted);
+  background: transparent;
+  transition: color 120ms ease, border-color 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
+}
+
+.editor-toolbar-sql-editor .d1-execution-mode .d1-execution-option input[type='radio'] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.editor-toolbar-sql-editor .d1-execution-mode .d1-execution-option input[type='radio']:checked+.d1-execution-option-text {
+  color: var(--primary);
+  border-color: transparent;
+  background: color-mix(in oklab, var(--primary) 12%, transparent 88%);
+  box-shadow: none;
+}
+
+.editor-toolbar-sql-editor .d1-execution-mode .d1-execution-option input[type='radio']:focus-visible+.d1-execution-option-text {
+  outline: 2px solid color-mix(in oklab, var(--primary) 65%, white 35%);
+  outline-offset: 1px;
+}
+
+.editor-toolbar-sql-editor .analyze-toggle-sql-editor {
+  min-height: 32px;
+  height: 32px;
+  border-radius: 7px;
+  border: 1px solid var(--sql-editor-border-strong);
+  padding: 0 9px;
+  margin: 0;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--sql-editor-button-text);
+  background: linear-gradient(180deg, var(--sql-editor-button-bg-start) 0%, var(--sql-editor-button-bg-end) 100%);
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+  flex: 0 0 auto;
+}
+
+.editor-toolbar-sql-editor .analyze-toggle-sql-editor input {
+  margin: 0;
+  accent-color: var(--primary);
+}
+
+.editor-toolbar-sql-editor .toolbar-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: Inter, 'PingFang SC', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  color: var(--sql-editor-muted);
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.editor-toolbar-sql-editor .toolbar-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--sql-editor-border) 70%, transparent);
+  background: color-mix(in oklab, var(--sql-editor-surface) 60%, transparent);
+  color: var(--sql-editor-muted);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.editor-toolbar-sql-editor .toolbar-status-icon {
+  flex: 0 0 auto;
+  opacity: 0.85;
+}
+
+.editor-toolbar-sql-editor .toolbar-status-chip--target {
+  color: color-mix(in oklab, var(--sql-editor-text) 80%, var(--sql-editor-muted) 20%);
+  background: color-mix(in oklab, var(--primary) 6%, var(--sql-editor-surface) 94%);
+  border-color: color-mix(in oklab, var(--primary) 18%, var(--sql-editor-border) 82%);
+}
+
+.editor-toolbar-sql-editor .toolbar-status-chip--engine {
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: color-mix(in oklab, var(--sql-editor-text) 70%, var(--primary) 30%);
+  background: color-mix(in oklab, var(--primary) 8%, transparent);
+  border-color: color-mix(in oklab, var(--primary) 22%, var(--sql-editor-border) 78%);
+}
+
+.editor-toolbar-sql-editor .divider {
+  width: 1px;
+  height: 11px;
+  background: color-mix(in oklab, var(--sql-editor-border) 80%, transparent);
+}
+
+.target-bar-sql-editor {
+  min-height: 44px;
+  flex: 0 0 auto;
+  padding: 6px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  border-bottom: 1px solid var(--sql-editor-border);
+  background: color-mix(in oklab, var(--sql-editor-surface-soft) 88%, transparent);
+  line-height: normal;
+}
+
+.target-bar-sql-editor .target-label {
+  margin: 0;
+  font-size: 11px;
+  color: var(--sql-editor-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: normal;
+}
+
+.target-bar-sql-editor .target-path {
+  margin: 0;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  color: var(--sql-editor-text);
+  line-height: normal;
+}
+
+.console-statement-panel--sql-editor .statement-shell--sql-editor {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: color-mix(in oklab, var(--sql-editor-surface) 94%, var(--sql-editor-bg) 6%);
+  --statement-pad-y: 10px;
+  --statement-pad-x: 12px;
+  --statement-gutter: 30px;
+  position: relative;
+}
+
+.console-statement-panel--sql-editor .statement-shell--sql-editor .statement-monaco {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  position: relative;
+}
+
+.console-statement-panel--sql-editor .statement-shell--sql-editor .statement-highlight {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  margin: 0;
+  pointer-events: none;
+  overflow: hidden;
+  padding: var(--statement-pad-y) var(--statement-pad-x) var(--statement-pad-y) calc(var(--statement-pad-x) + var(--statement-gutter));
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+  font-size: 14px;
+  line-height: 22px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  color: var(--sql-editor-text);
+}
+
+.console-statement-panel--sql-editor .statement-shell--sql-editor .statement-token {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.console-statement-panel--sql-editor .statement-shell--sql-editor .statement-token-keyword-sql {
+  font-weight: 700;
+  color: var(--sql-editor-token-sql);
+}
+
+.console-statement-panel--sql-editor .statement-shell--sql-editor .statement-token-keyword-mongo {
+  font-weight: 700;
+  color: var(--sql-editor-token-mongo);
+}
+
+.console-statement-panel--sql-editor .statement-shell--sql-editor .statement-token-keyword-es {
+  font-weight: 700;
+  color: var(--sql-editor-token-es);
+}
+
+.console-statement-panel--sql-editor .statement-shell--sql-editor .statement-token-method {
+  font-weight: 700;
+  color: var(--sql-editor-token-method);
+}
+
+.console-statement-panel--sql-editor .statement-shell--sql-editor .statement-token-operator {
+  font-weight: 700;
+  color: var(--sql-editor-token-operator);
+}
+
+.console-statement-panel--sql-editor .statement-shell--sql-editor .statement-token-string {
+  color: var(--sql-editor-token-string);
+}
+
+.console-statement-panel--sql-editor .statement-shell--sql-editor .statement-token-number {
+  color: var(--sql-editor-token-number);
+}
+
+.console-statement-panel--sql-editor .statement-shell--sql-editor .statement-token-comment {
+  color: var(--sql-editor-token-comment);
+  font-style: italic;
+}
+
+.console-statement-panel--sql-editor .statement-line-numbers {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(var(--statement-pad-x) + var(--statement-gutter));
+  border-right: 1px solid color-mix(in oklab, var(--sql-editor-border) 72%, transparent);
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.console-statement-panel--sql-editor .statement-line-numbers-inner {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  padding-top: var(--statement-pad-y);
+}
+
+.console-statement-panel--sql-editor .statement-line-number {
+  height: 22px;
+  line-height: 22px;
+  text-align: right;
+  padding-right: 6px;
+  color: var(--sql-editor-line-number);
+  font-size: 12px;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+}
+
+.console-results-content--sql-editor {
+  min-height: 0;
+  min-width: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.console-results-content--sql-editor.console-results-content--sql-editor-with-tabs {
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+}
+
+.console-results-content--sql-editor .result-tabs {
+  margin-top: 0;
+  padding: 0 8px;
+  gap: 0;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--sql-editor-border);
+  background: transparent;
+}
+
+.console-results-content--sql-editor .result-tab {
+  position: relative;
+  flex: 0 0 auto;
+  gap: 6px;
+  padding: 8px 12px 9px;
+  margin-bottom: -1px;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  color: color-mix(in oklab, var(--sql-editor-muted) 78%, var(--sql-editor-text) 22%);
+  font-weight: 500;
+  transition: color 120ms ease;
+}
+
+.console-results-content--sql-editor .result-tab:hover {
+  background: transparent;
+  color: var(--sql-editor-text);
+}
+
+.console-results-content--sql-editor .result-tab.active {
+  background: transparent;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.console-results-content--sql-editor .result-tab.active::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -1px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+}
+
+.console-results-content--sql-editor .result-tab-dot {
+  display: none;
+}
+
+.console-results-content--sql-editor .result-tab-label {
+  max-width: none;
+}
+
+.result-header-sql-editor {
+  min-height: 44px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--sql-editor-border);
+  background: var(--sql-editor-surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  line-height: normal;
+}
+
+.result-header-sql-editor .result-header-main {
+  min-width: 0;
+}
+
+.result-header-sql-editor h2 {
+  margin: 0 0 2px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sql-editor-text);
+  line-height: normal;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0.01em;
+}
+
+.result-header-sql-editor p {
+  margin: 0;
+  font-size: 12px;
+  color: color-mix(in oklab, var(--sql-editor-muted) 84%, var(--sql-editor-text) 16%);
+  line-height: normal;
+}
+
+.result-header-sql-editor p.result-meta-success {
+  color: color-mix(in oklab, var(--success) 90%, var(--sql-editor-text) 10%);
+}
+
+.result-actions-sql-editor {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.result-actions-sql-editor button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  min-height: 32px;
+  height: 32px;
+  border: 1px solid color-mix(in oklab, var(--sql-editor-border) 82%, var(--primary) 18%);
+  border-radius: 6px;
+  padding: 0 9px;
+  color: var(--sql-editor-button-text);
+  background: linear-gradient(180deg, var(--sql-editor-button-bg-start) 0%, var(--sql-editor-button-bg-end) 100%);
+  cursor: pointer;
+  line-height: normal;
+}
+
+.result-actions-sql-editor button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.result-actions-sql-editor button:hover:not(:disabled) {
+  border-color: color-mix(in oklab, var(--primary) 40%, var(--sql-editor-border));
+  color: color-mix(in oklab, var(--sql-editor-text) 82%, var(--primary) 18%);
+  background: linear-gradient(180deg,
+      color-mix(in oklab, var(--sql-editor-button-bg-start) 92%, var(--sql-editor-surface) 8%) 0%,
+      color-mix(in oklab, var(--sql-editor-button-bg-end) 92%, var(--sql-editor-surface-soft) 8%) 100%);
+}
+
+.result-filter-anchor {
+  position: relative;
+}
+
+.result-filter-toolbar .result-filter-anchor {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.result-filter-trigger {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+  min-height: 32px;
+  height: 32px;
+  border: 1px solid color-mix(in oklab, var(--edge) 82%, var(--primary) 18%);
+  border-radius: var(--control-radius, 8px);
+  padding: 0 12px;
+  color: color-mix(in oklab, var(--ink) 72%, var(--primary) 28%);
+  background: color-mix(in oklab, var(--surface-strong) 94%, var(--primary) 6%);
+  cursor: pointer;
+  line-height: normal;
+  font-weight: 600;
+  box-shadow: 0 1px 0 color-mix(in oklab, var(--edge) 40%, transparent);
+  transition: border-color 120ms ease, box-shadow 120ms ease, background-color 120ms ease, color 120ms ease;
+}
+
+.result-filter-trigger:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.result-filter-trigger:hover:not(:disabled) {
+  border-color: color-mix(in oklab, var(--primary) 52%, var(--edge) 48%);
+  color: color-mix(in oklab, var(--ink) 70%, var(--primary) 30%);
+  background: color-mix(in oklab, var(--surface-strong) 88%, var(--primary) 12%);
+}
+
+.result-filter-trigger.is-active {
+  border-color: color-mix(in oklab, var(--primary) 68%, var(--edge) 32%);
+  color: color-mix(in oklab, var(--ink) 64%, var(--primary) 36%);
+  background: color-mix(in oklab, var(--surface-strong) 84%, var(--primary) 16%);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--ring) 60%, transparent);
+}
+
+.result-filter-toolbar {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  border-bottom: 1px solid color-mix(in oklab, var(--sql-editor-border) 85%, transparent);
+  background: color-mix(in oklab, var(--sql-editor-surface-soft) 90%, var(--sql-editor-surface) 10%);
+}
+
+.result-filter-toolbar-left {
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 8px;
+  min-width: 0;
+  flex-wrap: wrap;
+  overflow: visible;
+  padding: 1px 0;
+}
+
+.result-filter-chip-list {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  row-gap: 8px;
+}
+
+.result-filter-chip-shell {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  inline-size: min(220px, 100%);
+  max-width: 100%;
+  min-width: 0;
+  border: 1px solid color-mix(in oklab, var(--primary) 18%, var(--sql-editor-border) 82%);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--primary) 10%, var(--sql-editor-surface) 90%);
+  box-shadow: 0 1px 2px color-mix(in oklab, var(--sql-editor-bg) 14%, transparent);
+  padding: 2px 5px 2px 3px;
+}
+
+.result-filter-chip-shell:hover {
+  border-color: color-mix(in oklab, var(--primary) 28%, var(--sql-editor-border) 72%);
+  background: color-mix(in oklab, var(--primary) 12%, var(--sql-editor-surface) 88%);
+}
+
+.result-filter-chip-shell.is-editing {
+  border-color: color-mix(in oklab, var(--primary) 48%, var(--sql-editor-border) 52%);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--primary) 24%, transparent);
+  background: color-mix(in oklab, var(--primary) 16%, var(--sql-editor-surface) 84%);
+}
+
+.result-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 25px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--sql-editor-text);
+  font-size: 11px;
+  line-height: normal;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0 6px 0 8px;
+  cursor: pointer;
+}
+
+.result-filter-chip .chip-field {
+  min-width: 0;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.result-filter-chip .chip-operator {
+  flex: 0 0 auto;
+  color: color-mix(in oklab, var(--sql-editor-muted) 75%, var(--sql-editor-text) 25%);
+}
+
+.result-filter-chip .chip-value {
+  min-width: 0;
+  max-width: 108px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.result-filter-chip-remove {
+  width: 18px;
+  height: 18px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: color-mix(in oklab, var(--sql-editor-muted) 70%, var(--sql-editor-text) 30%);
+  cursor: pointer;
+  line-height: 18px;
+  padding: 0;
+}
+
+.result-filter-chip-remove:hover {
+  background: color-mix(in oklab, var(--danger) 12%, transparent);
+  color: color-mix(in oklab, var(--danger) 78%, var(--sql-editor-text) 22%);
+}
+
+.result-filter-chip-hover-card {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 70;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: max-content;
+  max-width: min(320px, calc(100vw - 40px));
+  padding: 8px 10px;
+  border: 1px solid color-mix(in oklab, var(--sql-editor-border) 72%, transparent);
+  border-radius: 10px;
+  background: #fffbea;
+  box-shadow:
+    0 16px 28px -24px color-mix(in oklab, var(--sql-editor-bg) 70%, transparent),
+    0 8px 16px -14px color-mix(in oklab, var(--sql-editor-bg) 36%, transparent);
+}
+
+.result-filter-chip-hover-card::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+}
+
+.result-filter-chip-hover-text {
+  min-width: 0;
+  font-size: 11px;
+  color: var(--sql-editor-text);
+  white-space: nowrap;
+  overflow-wrap: break-word;
+  user-select: text;
+}
+
+.result-filter-chip-hover-copy {
+  flex: 0 0 auto;
+  height: 24px;
+  border: 1px solid color-mix(in oklab, var(--sql-editor-border) 80%, var(--primary) 20%);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--sql-editor-surface-soft) 76%, transparent);
+  color: color-mix(in oklab, var(--sql-editor-text) 80%, var(--primary) 20%);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  padding: 0 9px;
+}
+
+.result-filter-toolbar-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  align-self: flex-start;
+}
+
+.result-filter-export {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  min-height: 32px;
+  height: 32px;
+  border: 1px solid color-mix(in oklab, var(--sql-editor-border) 82%, var(--primary) 18%);
+  border-radius: 6px;
+  padding: 0 9px;
+  color: var(--sql-editor-button-text);
+  background: linear-gradient(180deg, var(--sql-editor-button-bg-start) 0%, var(--sql-editor-button-bg-end) 100%);
+  cursor: pointer;
+  line-height: normal;
+}
+
+.result-filter-export:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.result-filter-export:hover:not(:disabled) {
+  border-color: color-mix(in oklab, var(--primary) 40%, var(--sql-editor-border));
+  color: color-mix(in oklab, var(--sql-editor-text) 82%, var(--primary) 18%);
+  background: linear-gradient(180deg,
+      color-mix(in oklab, var(--sql-editor-button-bg-start) 92%, var(--sql-editor-surface) 8%) 0%,
+      color-mix(in oklab, var(--sql-editor-button-bg-end) 92%, var(--sql-editor-surface-soft) 8%) 100%);
+}
+
+.result-filter-clear {
+  flex: 0 0 auto;
+  min-height: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: color-mix(in oklab, var(--sql-editor-muted) 75%, var(--sql-editor-text) 25%);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0 6px;
+  cursor: pointer;
+}
+
+.result-filter-clear:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.result-filter-clear:hover:not(:disabled) {
+  color: color-mix(in oklab, var(--sql-editor-text) 78%, var(--primary) 22%);
+  background: color-mix(in oklab, var(--sql-editor-surface-soft) 78%, transparent);
+}
+
+.result-filter-search {
+  flex: 0 0 auto;
+  min-height: 32px;
+  height: 32px;
+  border: 1px solid color-mix(in oklab, var(--primary) 76%, var(--sql-editor-border) 24%);
+  border-radius: 7px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 1px 0 color-mix(in oklab, var(--sql-editor-bg) 74%, transparent);
+}
+
+.result-filter-search:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.result-filter-search:hover:not(:disabled) {
+  background: color-mix(in oklab, var(--primary) 88%, #000 12%);
+}
+
+.result-filter-popover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 160;
+  width: 280px;
+  max-height: min(360px, calc(100vh - 128px));
+  display: flex;
+  flex-direction: column;
+  border: 1px solid color-mix(in oklab, var(--edge) 85%, var(--primary) 15%);
+  border-radius: 10px;
+  background: var(--surface-strong);
+  box-shadow:
+    0 14px 28px -24px color-mix(in oklab, var(--ink) 42%, transparent),
+    0 8px 16px -14px color-mix(in oklab, var(--ink) 24%, transparent);
+  padding: 10px;
+}
+
+.result-filter-popover[data-mode='edit'] {
+  width: 280px;
+}
+
+.result-filter-popover-arrow {
+  position: absolute;
+  top: -6px;
+  left: calc(var(--result-filter-arrow-left, 16px) - 6px);
+  width: 12px;
+  height: 12px;
+  background: var(--surface-strong);
+  border-top: 1px solid color-mix(in oklab, var(--edge) 85%, var(--primary) 15%);
+  border-left: 1px solid color-mix(in oklab, var(--edge) 85%, var(--primary) 15%);
+  transform: rotate(45deg);
+}
+
+.result-filter-popover[data-placement='above'] .result-filter-popover-arrow {
+  top: auto;
+  bottom: -6px;
+  border-top: 0;
+  border-left: 0;
+  border-right: 1px solid color-mix(in oklab, var(--edge) 85%, var(--primary) 15%);
+  border-bottom: 1px solid color-mix(in oklab, var(--edge) 85%, var(--primary) 15%);
+}
+
+.result-filter-popover-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.result-filter-popover-title {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: color-mix(in oklab, var(--soft-ink) 72%, var(--primary) 28%);
+}
+
+.result-filter-popover-badge {
+  flex: 0 0 auto;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--primary) 12%, var(--surface-soft) 88%);
+  border: 1px solid color-mix(in oklab, var(--primary) 32%, var(--edge) 68%);
+  color: color-mix(in oklab, var(--ink) 62%, var(--primary) 38%);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.result-filter-panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+.result-filter-panel-fields,
+.result-filter-panel-editor {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  min-width: 0;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.result-filter-field-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--edge);
+  background: color-mix(in oklab, var(--surface-soft) 90%, var(--surface-strong) 10%);
+}
+
+.result-filter-popover .result-filter-field-option {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+  padding: 7px 8px;
+  border-radius: 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  column-gap: 8px;
+  row-gap: 2px;
+  transition: background-color 120ms ease;
+}
+
+.result-filter-popover .result-filter-field-option:hover {
+  background: color-mix(in oklab, var(--primary) 10%, transparent);
+}
+
+.result-filter-popover .result-filter-field-option.is-selected {
+  background: color-mix(in oklab, var(--primary) 16%, transparent);
+  box-shadow: inset 3px 0 0 var(--primary);
+}
+
+.result-filter-popover .field-option-name {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: 12px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.result-filter-popover .field-option-type {
+  grid-column: 1;
+  grid-row: 2;
+  font-size: 10px;
+  color: var(--soft-ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.result-filter-popover .field-option-chevron {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  color: var(--primary);
+  font-size: 15px;
+  line-height: 1;
+}
+
+.result-filter-step-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  height: 26px;
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+  padding: 0 10px 0 8px;
+  background: color-mix(in oklab, var(--primary) 10%, var(--surface-soft) 90%);
+  color: color-mix(in oklab, var(--ink) 62%, var(--primary) 38%);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  max-width: 100%;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.result-filter-step-back:hover {
+  border-color: color-mix(in oklab, var(--primary) 40%, var(--edge) 60%);
+  background: color-mix(in oklab, var(--primary) 16%, var(--surface-soft) 84%);
+}
+
+.result-filter-step-back-arrow {
+  flex: 0 0 auto;
+  color: var(--primary);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.result-filter-step-back-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.result-filter-step-back-hint {
+  color: var(--soft-ink);
+  font-size: 10px;
+  font-weight: 500;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.result-filter-panel-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.result-filter-panel-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--soft-ink);
+}
+
+.result-filter-panel-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 10px;
+  position: sticky;
+  bottom: 0;
+  background: var(--surface-strong);
+  border-top: 1px solid var(--edge);
+}
+
+.result-filter-popover input,
+.result-filter-popover select {
+  height: var(--control-height, 32px);
+  min-height: var(--control-height, 32px);
+  border-radius: 6px;
+  border: 1px solid var(--edge);
+  padding: 0 10px;
+  color: var(--ink);
+  background: var(--input-bg, var(--surface-strong));
+  font-size: 12px;
+  line-height: normal;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease;
+}
+
+.result-filter-popover input::placeholder {
+  color: color-mix(in oklab, var(--soft-ink) 70%, var(--edge) 30%);
+}
+
+.result-filter-popover input:focus-visible,
+.result-filter-popover select:focus-visible {
+  outline: none;
+  border-color: color-mix(in oklab, var(--primary) 62%, var(--edge) 38%);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+}
+
+.result-filter-popover input[data-testid='result-filter-field-search'] {
+  width: 100%;
+}
+
+.result-filter-popover select[data-testid='result-filter-field'] {
+  width: 100%;
+}
+
+.result-filter-popover select[data-testid='result-filter-field'][size] {
+  height: 124px;
+  padding: 4px;
+}
+
+.result-filter-popover select[data-testid='result-filter-operator'] {
+  --result-filter-select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%234f46e5' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  padding-right: 30px;
+  border-color: var(--edge);
+  background-image:
+    var(--result-filter-select-chevron),
+    linear-gradient(180deg,
+      color-mix(in oklab, var(--surface-strong) 92%, var(--primary) 8%) 0%,
+      color-mix(in oklab, var(--surface-strong) 98%, var(--primary) 2%) 100%);
+  box-shadow: 0 1px 0 color-mix(in oklab, var(--edge) 50%, transparent);
+  background-repeat: no-repeat, no-repeat;
+  background-position: right 10px center, 0 0;
+  background-size: 10px 6px, 100% 100%;
+}
+
+.result-filter-popover select[data-testid='result-filter-operator']:hover {
+  border-color: color-mix(in oklab, var(--primary) 40%, var(--edge) 60%);
+  background-image:
+    var(--result-filter-select-chevron),
+    linear-gradient(180deg,
+      color-mix(in oklab, var(--surface-strong) 84%, var(--primary) 16%) 0%,
+      color-mix(in oklab, var(--surface-strong) 94%, var(--primary) 6%) 100%);
+}
+
+.result-filter-popover select[data-testid='result-filter-operator']:focus-visible {
+  outline: none;
+  border-color: color-mix(in oklab, var(--primary) 62%, var(--edge) 38%);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+}
+
+.result-filter-popover input[data-testid='result-filter-value'] {
+  width: 100%;
+}
+
+.result-filter-panel-actions button {
+  flex: 0 0 auto;
+  min-height: var(--control-height, 32px);
+  height: var(--control-height, 32px);
+  border-radius: 6px;
+  padding: 0 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.result-filter-cancel {
+  border: 0;
+  background: transparent;
+  color: var(--soft-ink);
+  font-weight: 600;
+}
+
+.result-filter-cancel:hover:not(:disabled) {
+  color: color-mix(in oklab, var(--ink) 72%, var(--primary) 28%);
+  background: color-mix(in oklab, var(--surface-soft) 80%, transparent);
+}
+
+.result-filter-apply {
+  border: 1px solid color-mix(in oklab, var(--primary) 80%, var(--edge) 20%);
+  background: linear-gradient(180deg,
+    color-mix(in oklab, var(--primary) 98%, #ffffff 2%) 0%,
+    color-mix(in oklab, var(--primary) 88%, #000000 12%) 100%);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 1px 0 color-mix(in oklab, var(--primary) 36%, transparent);
+}
+
+.result-filter-apply:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.result-filter-apply:hover:not(:disabled) {
+  background: linear-gradient(180deg,
+    color-mix(in oklab, var(--primary) 94%, #ffffff 6%) 0%,
+    color-mix(in oklab, var(--primary) 82%, #000000 18%) 100%);
+}
+
+.result-filter-apply:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 60%, transparent);
+}
+
+.result-filter-panel-empty {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--soft-ink);
+}
+
+.console-results-content--sql-editor .result {
+  margin-top: 0;
+  padding: 0;
+  min-height: 0;
+  max-height: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border-radius: 0;
+  border: 0;
+  border-top: 1px solid color-mix(in oklab, var(--sql-editor-border) 88%, var(--primary) 12%);
+  background: var(--sql-editor-bg);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, var(--sql-editor-surface) 72%, transparent);
+}
+
+.console-results-content--sql-editor .result,
+.console-results-content--sql-editor .mongo-result-shell,
+.console-results-content--sql-editor .result-table-shell,
+.console-results-content--sql-editor .result-json,
+.console-results-content--sql-editor .virtual-table-container,
+.console-results-content--sql-editor .virtual-mongo-list,
+.console-results-content--sql-editor .virtual-mongo-scroll,
+.console-results-content--sql-editor .result-content {
+  min-height: 0;
+}
+
+.console-results-content--sql-editor .result-table-shell {
+  margin-top: 0;
+  display: block;
+  min-height: 0;
+}
+
+.console-results-content--sql-editor .virtual-table-container,
+.console-results-content--sql-editor .virtual-mongo-scroll {
+  min-height: 0;
+}
+
+.console-results-content--sql-editor .sql-editor-json-tree-wrap {
+  min-height: 100%;
+  overflow: auto;
+  padding: 0;
+  background: color-mix(in oklab, var(--sql-editor-surface-soft) 82%, transparent);
+}
+
+.console-results-content--sql-editor .sql-editor-json-tree-row+.sql-editor-json-tree-row {
+  border-top: 1px solid color-mix(in oklab, var(--sql-editor-border) 74%, transparent);
+}
+
+.console-results-content--sql-editor .row-copy-button,
+.console-results-content--sql-editor .result-table-copy {
+  display: none !important;
+}
+
+.console-results-content--sql-editor table {
+  width: 100%;
+  border-collapse: collapse !important;
+  font-size: 12px;
+  background: var(--sql-editor-surface);
+}
+
+.console-results-content--sql-editor thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.console-results-content--sql-editor .result-table {
+  border-collapse: separate !important;
+  border-spacing: 0;
+}
+
+.console-results-content--sql-editor .result-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.console-results-content--sql-editor th,
+.console-results-content--sql-editor td {
+  border: 1px solid color-mix(in oklab, var(--sql-editor-border) 80%, transparent);
+  padding: 7px 8px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.console-results-content--sql-editor th {
+  background: var(--sql-editor-surface-soft);
+  color: var(--sql-editor-muted);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.console-results-content--sql-editor tbody tr:nth-child(even) {
+  background: var(--sql-editor-grid-even);
+}
+
+.console-results-content--sql-editor tbody tr:hover {
+  background: var(--sql-editor-active);
+}
+
+.result-footer-sql-editor {
+  height: 34px;
+  border-top: 1px solid var(--sql-editor-border);
+  padding: 0 9px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--sql-editor-muted);
+  background: transparent;
+  line-height: normal;
+  font-weight: 500;
+}
+
+.result-footer-sql-editor.result-footer-sql-editor--compact {
+  justify-content: flex-start;
+}
+
+.console-results-content--sql-editor .empty-tip-sql-editor {
+  padding: 12px;
+  overflow: auto;
+  font-size: 12px;
+  color: var(--sql-editor-text);
+}
+
+.console-results-content--sql-editor .empty-tip-sql-editor code {
+  border-radius: 4px;
+  border: 1px solid color-mix(in oklab, var(--sql-editor-border) 80%, transparent);
+  padding: 2px 4px;
+  background: color-mix(in oklab, var(--sql-editor-surface) 88%, transparent);
+  color: var(--sql-editor-button-text);
+}
+
+.result-footer-sql-editor .pager {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.result-footer-sql-editor .pager button {
+  min-width: 32px;
+  width: 32px;
+  min-height: 32px;
+  height: 32px;
+  border-radius: 5px;
+  border: 1px solid color-mix(in oklab, var(--sql-editor-border) 82%, var(--primary) 18%);
+  color: var(--sql-editor-button-text);
+  background: linear-gradient(180deg, var(--sql-editor-button-bg-start) 0%, var(--sql-editor-button-bg-end) 100%);
+  cursor: pointer;
+}
+
+.result-footer-sql-editor .pager button.active {
+  border-color: var(--sql-editor-execute-border);
+  color: var(--sql-editor-execute-text);
+  background: linear-gradient(180deg, var(--sql-editor-execute-start) 0%, var(--sql-editor-execute-end) 100%);
+}
+
+.result-footer-sql-editor .pager button:hover:not(.active) {
+  border-color: color-mix(in oklab, var(--primary) 40%, var(--sql-editor-border));
+  color: color-mix(in oklab, var(--sql-editor-text) 82%, var(--primary) 18%);
+  background: linear-gradient(180deg,
+      color-mix(in oklab, var(--sql-editor-button-bg-start) 92%, var(--sql-editor-surface) 8%) 0%,
+      color-mix(in oklab, var(--sql-editor-button-bg-end) 92%, var(--sql-editor-surface-soft) 8%) 100%);
+}
+
+@media (max-width: 760px) {
+  .console-panel--statement.sql-editor-parity .console-editor-results-shell.sql-editor-parity {
+    min-height: 520px;
+    grid-template-rows:
+      minmax(240px, 45%)
+      1px
+      minmax(180px, 1fr);
+  }
+}
+
+@media (max-width: 1380px) {
+  .console-shell.sql-editor-parity {
+    grid-template-columns: minmax(220px, var(--console-left, 250px)) 1px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1080px) {
+  .console-shell.sql-editor-parity {
+    grid-template-columns: minmax(168px, min(var(--console-left, 236px), 200px)) 1px minmax(0, 1fr);
+  }
+
+  .console-shell.sql-editor-parity .console-panel--entities .panel-head {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .console-shell.sql-editor-parity .console-panel--entities .panel-head-actions {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+}
+
+@media (max-width: 840px) {
+  .console-shell.sql-editor-parity {
+    grid-template-columns: minmax(136px, min(var(--console-left, 210px), 150px)) 1px minmax(0, 1fr);
+  }
+
+  .console-shell.sql-editor-parity .console-panel--entities .panel-head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .console-shell.sql-editor-parity .console-panel--entities .panel-head-actions {
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 2px;
+  }
+
+  .console-shell.sql-editor-parity .console-panel--entities .btn.ghost.mini,
+  .console-shell.sql-editor-parity .console-panel--entities .btn.ghost.small {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}

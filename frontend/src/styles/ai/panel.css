@@ -1,0 +1,258 @@
+      /* AI Configuration Panel Styles */
+      .ai-panel {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: clamp(360px, 32vw, 600px);
+        min-width: 320px;
+        max-width: min(760px, 92vw);
+        height: 100%;
+        background: linear-gradient(160deg, rgba(255, 252, 246, 0.96) 0%, rgba(238, 226, 210, 0.96) 100%);
+        border-left: 1px solid var(--edge);
+        box-shadow: -12px 0 28px rgba(25, 23, 15, 0.12);
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease;
+        overflow: hidden;
+        resize: none;
+        transform: translateX(100%);
+        container-type: inline-size;
+        --ai-icon-size: clamp(9px, 1.9cqw, 16px);
+        --ai-close-size: clamp(14px, 3cqw, 22px);
+        --ai-font-sm: clamp(9px, 1.6cqw, 12px);
+        --ai-font-md: clamp(11px, 2cqw, 14px);
+        --ai-font-lg: clamp(13px, 2.5cqw, 17px);
+        --ai-pad-xs: clamp(2px, 0.7cqw, 5px);
+        --ai-pad-sm: clamp(4px, 1cqw, 7px);
+        --ai-pad-md: clamp(7px, 1.4cqw, 10px);
+      }
+
+      .ai-panel-resizer {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 10px;
+        cursor: ew-resize;
+        z-index: 2;
+        background: linear-gradient(90deg, rgba(15, 23, 42, 0.08), rgba(255, 255, 255, 0));
+        opacity: 0.6;
+        transition: opacity 0.2s ease;
+      }
+
+      .ai-panel-resizer::after {
+        content: "";
+        position: absolute;
+        left: 4px;
+        top: 50%;
+        width: 3px;
+        height: 56px;
+        border-radius: 999px;
+        background: rgba(25, 23, 15, 0.28);
+        transform: translateY(-50%);
+      }
+
+      .ai-panel-resizer:hover {
+        opacity: 0.9;
+      }
+
+      .ai-panel.resizing {
+        user-select: none;
+      }
+
+      .ai-panel.show {
+        display: flex;
+        transform: translateX(0);
+      }
+
+      .ai-panel.inline {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        height: auto;
+        border-left: none;
+        box-shadow: none;
+        transform: none;
+        overflow: visible;
+        resize: none;
+        background: transparent;
+      }
+
+      .ai-panel.inline .ai-panel-shell {
+        margin: 0;
+      }
+
+      .ai-panel-shell {
+        margin: var(--ai-pad-sm);
+        border-radius: 18px;
+        background: var(--panel-strong);
+        border: 1px solid var(--edge);
+        box-shadow: var(--surface-shadow);
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      .ai-panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: var(--ai-pad-sm) var(--ai-pad-md);
+        border-bottom: 1px solid rgba(25, 23, 15, 0.08);
+        background: transparent;
+      }
+
+      .ai-panel #ai-panel-close,
+      .ai-panel #aiconfig-form-cancel {
+        width: calc(var(--ai-close-size) + 12px);
+        height: calc(var(--ai-close-size) + 12px);
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--ai-close-size);
+        line-height: 1;
+      }
+
+      .ai-panel-title h3 {
+        margin: 0;
+        font-weight: 600;
+        font-size: var(--ai-font-lg);
+      }
+
+      .ai-panel-subtitle {
+        margin: 1px 0 0;
+        font-size: var(--ai-font-sm);
+        color: var(--soft-ink);
+      }
+
+      .ai-panel-core {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: var(--ai-pad-sm) var(--ai-pad-md);
+        overflow: hidden;
+        min-height: 0;
+      }
+
+      .ai-panel-core-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 2px 2px var(--ai-pad-sm);
+        border-bottom: 1px solid rgba(25, 23, 15, 0.08);
+      }
+
+      .ai-panel-section {
+        font-size: var(--ai-font-sm);
+        font-weight: 600;
+        color: var(--soft-ink);
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+      }
+
+      .ai-panel-core-head .btn {
+        width: auto;
+        min-width: 120px;
+        padding: var(--ai-pad-sm) var(--ai-pad-md);
+        font-size: var(--ai-font-md);
+        box-shadow: 0 8px 16px var(--glow);
+      }
+
+      .ai-panel-list-body {
+        flex: 1;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: var(--ai-pad-sm) 2px var(--ai-pad-xs);
+        min-height: 0;
+        overscroll-behavior: contain;
+      }
+
+      .ai-config-columns {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 12px;
+        align-items: start;
+      }
+
+      .ai-config-column {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .ai-config-column-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--soft-ink);
+      }
+
+      .ai-group-count {
+        font-size: 10px;
+        padding: 2px 6px;
+        border-radius: 999px;
+        border: 1px solid var(--edge);
+        background: var(--panel-soft);
+        color: var(--soft-ink);
+        letter-spacing: 0.05em;
+      }
+
+      .ai-settings-tabs {
+        display: flex;
+        gap: 2px;
+        padding: 0 4px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid var(--edge);
+      }
+
+      .ai-settings-tab {
+        position: relative;
+        padding: 8px 20px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--soft-ink);
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+        transition: color 0.15s, border-color 0.15s;
+        letter-spacing: 0.02em;
+      }
+
+      .ai-settings-tab:hover {
+        color: var(--ink);
+      }
+
+      .ai-settings-tab.active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
+
+      .ai-embedding-note {
+        margin: 8px 0 0;
+        font-size: 11px;
+        color: var(--soft-ink);
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px dashed rgba(25, 23, 15, 0.16);
+        border-radius: 8px;
+        padding: 8px 12px;
+        line-height: 1.5;
+      }
+
+      .dark .ai-embedding-note {
+        background: rgba(18, 24, 30, 0.7);
+      }

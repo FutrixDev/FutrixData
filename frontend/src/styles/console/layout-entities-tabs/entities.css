@@ -1,0 +1,1029 @@
+      .console-panel--entities {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+
+      .entity-list {
+        flex: 1;
+        min-height: 0;
+        max-height: none;
+        overflow: auto;
+        overscroll-behavior: contain;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .entity-item {
+        padding: 3px 6px;
+        min-height: 32px;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        font-size: 12px;
+        line-height: 16px;
+        color: var(--ink);
+      }
+
+      .entity-item:hover {
+        border-color: var(--edge);
+        background: var(--panel-soft);
+      }
+
+      .entity-item.active {
+        border-color: color-mix(in oklab, var(--primary) 46%, var(--edge));
+        background: color-mix(in oklab, var(--primary) 14%, var(--panel));
+      }
+
+      .console-panel--entities .entity-item.active {
+        border-left: 2px solid color-mix(in oklab, var(--primary) 75%, var(--edge));
+        padding-left: 5px;
+      }
+
+      .redis-tree-row {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .redis-tree-toggle {
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background: transparent;
+        color: var(--soft-ink);
+        cursor: pointer;
+        padding: 0;
+        border-radius: 8px;
+        flex: 0 0 auto;
+      }
+
+      .redis-tree-toggle:hover {
+        background: var(--panel);
+        color: var(--ink);
+      }
+
+      .redis-tree-toggle.placeholder {
+        visibility: hidden;
+      }
+
+      .redis-tree-folder {
+        color: var(--ink);
+      }
+
+      .redis-tree-key {
+        color: var(--soft-ink);
+        font-weight: 500;
+      }
+
+      .redis-tree-count {
+        margin-left: auto;
+        font-size: 10px;
+        padding: 1px 6px;
+        border-radius: 999px;
+        border: 1px solid var(--edge);
+        background: var(--panel-soft);
+        color: var(--soft-ink);
+      }
+
+      .entity-title {
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .es-index-meta {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        flex: 0 0 auto;
+      }
+
+      .es-health-pill {
+        font-size: 10px;
+        font-weight: 700;
+        padding: 1px 6px;
+        border-radius: 999px;
+        border: 1px solid var(--edge);
+        background: var(--panel);
+        color: var(--soft-ink);
+      }
+
+      .es-health-pill.green {
+        background: var(--success-bg);
+        border-color: color-mix(in oklab, var(--success) 45%, var(--edge));
+        color: color-mix(in oklab, var(--success) 92%, var(--ink));
+      }
+
+      .es-health-pill.yellow {
+        background: color-mix(in oklab, #ca8a04 14%, var(--panel));
+        border-color: color-mix(in oklab, #ca8a04 45%, var(--edge));
+        color: color-mix(in oklab, #ca8a04 92%, var(--ink));
+      }
+
+      .es-health-pill.red {
+        background: var(--danger-bg);
+        border-color: color-mix(in oklab, var(--danger) 45%, var(--edge));
+        color: color-mix(in oklab, var(--danger) 92%, var(--ink));
+      }
+
+      .entity-kind-pill {
+        font-size: 9px;
+        font-weight: 600;
+        padding: 0 4px;
+        border-radius: 3px;
+        line-height: 16px;
+        flex-shrink: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+
+      .entity-kind-pill.entity-kind--view {
+        background: color-mix(in oklab, var(--accent) 14%, var(--panel));
+        border: 1px solid color-mix(in oklab, var(--accent) 40%, var(--edge));
+        color: color-mix(in oklab, var(--accent) 85%, var(--ink));
+      }
+
+      .es-store-size {
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--soft-ink);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+
+      .entity-subtitle {
+        margin-top: 2px;
+        font-size: 12px;
+        color: var(--soft-ink);
+      }
+
+      #view-console .list-toolbar {
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .console-toolbar-title {
+        flex: 1 1 auto;
+        min-width: 0;
+        overflow: hidden;
+      }
+
+      .console-toolbar-title > #console-title,
+      .console-toolbar-title > #console-subtitle {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+      }
+
+      .console-actions {
+        display: flex;
+        gap: 6px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+        flex: 0 1 auto;
+        min-width: 0;
+      }
+
+      #view-console .list-toolbar .console-actions .btn {
+        min-height: 28px;
+        padding: 3px 10px;
+        font-size: 11.5px;
+        gap: 4px;
+      }
+
+      .console-datasource-dropdown {
+        position: relative;
+        width: clamp(200px, 24vw, 320px);
+        max-width: min(320px, 60vw);
+      }
+
+      .console-datasource-trigger {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 6px;
+        padding-inline: 6px 8px;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .console-datasource-trigger:disabled {
+        cursor: not-allowed;
+      }
+
+      .console-datasource-trigger-icon,
+      .console-datasource-option-icon {
+        width: 18px;
+        height: 18px;
+        border-radius: 6px;
+        padding: 2px;
+      }
+
+      .console-datasource-trigger-label {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: left;
+        font-size: 12px;
+        line-height: 1.35;
+        font-weight: 550;
+        letter-spacing: 0.01em;
+      }
+
+      .console-datasource-trigger-arrow {
+        font-size: 10px;
+        color: var(--soft-ink);
+      }
+
+      .console-datasource-menu {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        z-index: 6;
+        width: 100%;
+        min-width: 100%;
+        max-width: min(520px, calc(100vw - 28px));
+        max-height: 280px;
+        overflow: auto;
+        padding: 6px;
+        border: 1px solid color-mix(in oklab, var(--edge) 80%, var(--primary) 12%);
+        border-radius: 12px;
+        background: color-mix(in oklab, var(--panel-strong) 92%, #fff);
+        box-shadow: 0 14px 28px rgba(15, 23, 42, 0.16);
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .console-datasource-option {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        background: transparent;
+        color: var(--ink);
+        padding: 8px 10px;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      .console-datasource-option:hover {
+        background: color-mix(in oklab, var(--panel-soft) 84%, transparent);
+      }
+
+      .console-datasource-option.active {
+        border-color: color-mix(in oklab, var(--primary) 32%, var(--edge));
+        background: color-mix(in oklab, var(--primary) 12%, var(--panel));
+      }
+
+      .console-datasource-option-label {
+        flex: 1;
+        min-width: 0;
+        font-size: 13px;
+        font-weight: 550;
+        line-height: 1.25;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        letter-spacing: 0.01em;
+      }
+
+      .console-datasource-empty {
+        padding: 8px 10px;
+        color: var(--soft-ink);
+        font-size: 12px;
+      }
+
+      @media (max-width: 1200px) {
+        #view-console .list-toolbar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        #view-console .list-toolbar .console-actions {
+          width: 100%;
+          margin-top: 4px;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .console-datasource-dropdown {
+          min-width: 100%;
+          max-width: 100%;
+          width: 100%;
+        }
+
+        .console-datasource-trigger {
+          width: 100%;
+        }
+
+        .console-datasource-menu {
+          left: 0;
+          right: auto;
+          min-width: 100%;
+          max-width: 100%;
+        }
+      }
+
+      .entity-entry {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex: 0 0 auto;
+      }
+
+      .entity-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .entity-toggle {
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--soft-ink);
+        cursor: pointer;
+        padding: 0;
+        border-radius: 8px;
+        flex: 0 0 auto;
+      }
+
+      .entity-toggle-icon {
+        width: 7px;
+        height: 7px;
+        border-right: 1.5px solid currentColor;
+        border-bottom: 1.5px solid currentColor;
+        transform: rotate(-45deg);
+        transition: transform 0.16s ease;
+      }
+
+      .entity-toggle-icon.open {
+        transform: rotate(45deg) translateY(-1px);
+      }
+
+      .entity-toggle:hover {
+        border-color: var(--edge);
+        background: var(--panel);
+        color: var(--ink);
+      }
+
+      .entity-item.expanded .entity-toggle {
+        color: var(--ink);
+      }
+
+      .entity-expand {
+        margin-left: 18px;
+        padding: 6px;
+        border-radius: 10px;
+        border: 1px solid var(--edge);
+        background: var(--paper);
+        display: grid;
+        gap: 6px;
+      }
+
+      .entity-expand-tabs {
+        display: inline-flex;
+        gap: 4px;
+        align-items: center;
+      }
+
+      .entity-expand-tab {
+        border: 1px solid var(--edge);
+        background: var(--panel);
+        color: var(--soft-ink);
+        border-radius: 999px;
+        padding: 2px 8px;
+        font-size: 10px;
+        cursor: pointer;
+      }
+
+      .entity-expand-tab.active {
+        background: color-mix(in oklab, var(--primary) 14%, var(--panel));
+        border-color: color-mix(in oklab, var(--primary) 35%, var(--edge));
+        color: var(--ink);
+      }
+
+      .entity-expand-tab:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .entity-expand-panel {
+        display: grid;
+        gap: 4px;
+      }
+
+      .detail-list {
+        display: grid;
+        gap: 6px;
+      }
+
+      .detail-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 4px 6px;
+        border-radius: 10px;
+        border: 1px solid var(--edge);
+        background: var(--panel);
+        min-width: 0;
+      }
+
+      .detail-label {
+        flex: 0 0 auto;
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--soft-ink);
+      }
+
+      .detail-value {
+        flex: 1;
+        min-width: 0;
+        text-align: right;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--ink);
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+
+      .es-index-fields-panel {
+        display: grid;
+        gap: 6px;
+        border-radius: 10px;
+        border: 1px solid var(--edge);
+        background: color-mix(in oklab, var(--panel) 88%, transparent);
+        padding: 6px;
+      }
+
+      .es-index-fields-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .es-index-fields-label {
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--soft-ink);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .es-index-fields-count {
+        font-size: 10px;
+        color: var(--soft-ink);
+        border-radius: 999px;
+        border: 1px solid var(--edge);
+        background: var(--panel-soft);
+        padding: 1px 6px;
+      }
+
+      .es-index-fields-filter {
+        height: 26px;
+        min-height: 26px;
+        border-radius: 6px;
+        border: 1px solid var(--edge);
+        background: var(--panel);
+        color: var(--ink);
+        padding: 0 8px;
+        font-size: 11px;
+      }
+
+      .es-index-fields-list {
+        max-height: 188px;
+        overflow: auto;
+        display: grid;
+        gap: 2px;
+        padding-right: 2px;
+      }
+
+      .es-index-field-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        min-height: 24px;
+        border-radius: 6px;
+        padding: 2px 4px;
+        cursor: pointer;
+      }
+
+      .es-index-field-item:hover {
+        background: color-mix(in oklab, var(--panel-soft) 72%, transparent);
+      }
+
+      .es-index-field-item input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        min-height: 16px;
+        flex: 0 0 16px;
+        margin: 0;
+      }
+
+      .es-index-field-name {
+        flex: 1;
+        min-width: 0;
+        font-size: 11px;
+        color: var(--ink);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .es-index-field-type {
+        flex: 0 0 auto;
+        font-size: 9px;
+        line-height: 1.2;
+        text-transform: uppercase;
+        color: var(--soft-ink);
+        border: 1px solid var(--edge);
+        border-radius: 999px;
+        padding: 1px 5px;
+        letter-spacing: 0.04em;
+      }
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities {
+  background: #f8fafc;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .panel-head {
+  padding: 14px 12px 8px;
+}
+
+/*
+ * Direction A (TASK-20260513-195708): the entities title used to be 18px under
+ * elastic-stitch. The shared sql-editor-parity rule now sets 13px/600, and we
+ * intentionally drop the elastic-stitch override so Mongo/MySQL/Postgres/ES/
+ * DynamoDB/D1 share one panel-title metric.
+ */
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities #entity-pattern-label {
+  color: #64748b;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities #entity-pattern {
+  border-color: #cbd5e1;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities #entity-pattern-hint {
+  color: #64748b;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .entity-list {
+  gap: 0;
+  padding: 0 8px 8px;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .entity-entry {
+  gap: 0;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 32px;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .entity-item {
+  min-height: 32px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 0 8px;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .entity-item:hover {
+  background: #e2e8f0;
+  border-color: transparent;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .entity-item.active {
+  border-left: 0;
+  border-color: transparent;
+  background: #e2e8f0;
+  box-shadow: none;
+  padding-left: 8px;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .entity-toggle {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 10px;
+  color: #94a3b8;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .entity-toggle:hover {
+  color: #64748b;
+  background: transparent;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .entity-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-meta {
+  gap: 8px;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-health-pill {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  overflow: hidden;
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
+  background: #94a3b8;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-health-pill.green {
+  background: #22c55e;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-health-pill.yellow {
+  background: #eab308;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-health-pill.red {
+  background: #ef4444;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-store-size {
+  font-size: 11px;
+  color: #64748b;
+}
+
+@media (max-width: 760px) {
+  .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-meta {
+    gap: 4px;
+  }
+
+  .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-store-size {
+    display: none;
+  }
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .entity-expand {
+  margin-left: 18px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-fields-panel {
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  gap: 8px;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-fields-label {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-fields-count {
+  border-color: #cbd5e1;
+  background: #e2e8f0;
+  color: #64748b;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-fields-filter {
+  height: 30px;
+  min-height: 30px;
+  border-color: #cbd5e1;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #475569;
+  font-size: 12px;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-fields-list {
+  max-height: 200px;
+  gap: 3px;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-field-item {
+  min-height: 26px;
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-field-item:hover {
+  background: #f1f5f9;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-field-name {
+  font-size: 12px;
+  color: #475569;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-field-type {
+  border-color: #d1d5db;
+  background: #f8fafc;
+  color: #94a3b8;
+}
+
+/* ══════════════════════════════════════════════════════
+   Dark mode overrides — elastic-stitch entities panel
+   ══════════════════════════════════════════════════════ */
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities {
+  background: var(--background);
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities #entity-pattern-label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities #entity-pattern {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f1f5f9;
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities #entity-pattern-hint {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .entity-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .entity-item.active {
+  background: rgba(129, 140, 248, 0.1);
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .entity-toggle {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .entity-toggle:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .entity-title {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-store-size {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-fields-label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-fields-count {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-fields-filter {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-field-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-field-name {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--entities .es-index-field-type {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities {
+  background: #f8fafc;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .panel-head {
+  padding: 14px 12px 8px;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities #entity-pattern-label,
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities #entity-pattern-hint {
+  color: #64748b;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities #entity-pattern {
+  border-color: #cbd5e1;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .entity-list {
+  gap: 0;
+  padding: 0 8px 8px;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .entity-entry {
+  gap: 0;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .entity-item {
+  min-height: 32px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 0 8px;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .entity-item:hover {
+  background: #e2e8f0;
+  border-color: transparent;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .entity-item.active {
+  border-left: 0;
+  border-color: transparent;
+  background: #e2e8f0;
+  box-shadow: none;
+  padding-left: 8px;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .entity-toggle {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 10px;
+  color: #94a3b8;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .entity-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .chroma-collection-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .chroma-collection-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  min-height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  border: 1px solid #dbe4f0;
+  background: #eef4ff;
+  color: #475569;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .chroma-badge-icon {
+  font-size: 9px;
+  font-weight: 700;
+  color: #94a3b8;
+  font-family: 'JetBrains Mono', 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .entity-expand-panel--chroma,
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .entity-expand {
+  padding: 0;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .entity-expand {
+  margin-left: 18px;
+  border: 0;
+  background: transparent;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .chroma-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .chroma-detail-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .chroma-detail-row:last-child {
+  border-bottom: 0;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .chroma-detail-label {
+  flex: 0 0 auto;
+  min-width: 52px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .chroma-detail-value {
+  flex: 1 1 0;
+  min-width: 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: #1e293b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .chroma-detail-value.is-mono {
+  font-family: 'JetBrains Mono', 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  color: #475569;
+  user-select: all;
+}
+
+.dark .console-shell.sql-editor-parity.chroma-stitch .console-panel--entities {
+  background: var(--background);
+}
+
+.dark .console-shell.sql-editor-parity.chroma-stitch .console-panel--entities #entity-pattern-label,
+.dark .console-shell.sql-editor-parity.chroma-stitch .console-panel--entities #entity-pattern-hint {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .console-shell.sql-editor-parity.chroma-stitch .console-panel--entities #entity-pattern {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f1f5f9;
+}
+
+.dark .console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .entity-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.dark .console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .entity-item.active {
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.dark .console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .entity-toggle {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.dark .console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .entity-title {
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.dark .console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .chroma-collection-badge {
+  border-color: rgba(96, 165, 250, 0.22);
+  background: rgba(59, 130, 246, 0.12);
+  color: rgba(191, 219, 254, 0.92);
+}
+
+.dark .console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .chroma-detail-row {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark .console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .chroma-detail-label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .chroma-detail-value {
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.dark .console-shell.sql-editor-parity.chroma-stitch .console-panel--entities .chroma-detail-value.is-mono {
+  color: rgba(255, 255, 255, 0.6);
+}

@@ -1,0 +1,282 @@
+---
+name: futrixdata
+description: Inspect FutrixData datasources, list/describe entities, run policy-allowed queries (SQL/Mongo/Redis/ES/DynamoDB/D1), and save sensitivity reports via the futrixdata-cli.
+version: 1.2.4
+---
+<!-- futrixdata-skill: managed=true version=1.2.4 -->
+
+# FutrixData CLI
+
+Use `futrixdata-cli` to add datasources, inspect configured datasources, explore schema, run policy-allowed queries, and manage saved sensitivity reports.
+
+## Prerequisite
+
+The `futrixdata-cli` binary must be available in `PATH`.
+
+## Authentication
+
+Every agent tool call needs this install's access key. Prefer the session environment variable because it keeps the key out of repeated shell history:
+
+```bash
+export FUTRIXDATA_AGENT_ACCESS_KEY={{AGENT_ACCESS_KEY}}
+```
+
+`--agent-access-key` takes precedence over `FUTRIXDATA_AGENT_ACCESS_KEY`. `FUTRIXDATA_AGENT_KEY` is accepted as a shorter compatibility alias, but prefer `FUTRIXDATA_AGENT_ACCESS_KEY`. The key for this install is `{{AGENT_ACCESS_KEY}}` and is unique to this agent; do not share it.
+
+Verify the key works once. If environment propagation is unavailable, use the explicit flag form shown here:
+
+```bash
+futrixdata-cli {{AGENT_ACCESS_KEY_FLAG}} auth status
+```
+
+All commands below assume `FUTRIXDATA_AGENT_ACCESS_KEY` is set. Do not save keys in dotfiles, persistent credential files, or long-lived shell profiles.
+
+## Agent Access Model
+
+- Identity: this key identifies one installed agent or manual integration. It is not a separate FutrixData user account.
+- Datasource scope: by default, the key inherits the local user's configured datasource visibility. FutrixData also supports a per-identity datasource allowlist; if one is set, broad datasource listing and out-of-scope datasource tool calls fail before schema or data is read.
+- Expiry and rotation: installed keys do not expire automatically by default, so existing agent configs keep working. If FutrixData records an expiry on the identity, expired calls are rejected. Rotate a key by revoking it and creating or reinstalling a new identity.
+- Revocation: revoking the identity in FutrixData stops the key immediately. Revoked, expired, and out-of-scope attempts are recorded in the agent audit trail when they can be attributed to an identity.
+- Writes and approvals: agent calls cannot self-approve. Writes still go through datasource trust levels, built-in risk rules, user risk rules, and FutrixData approval prompts. Datasource creation, sensitivity-policy writes, and risk-rule writes also have explicit per-agent grants.
+- Audit: inspect agent tool activity in FutrixData's agent history. Audit statuses distinguish successful, approval-required, forbidden, revoked, and expired attempts.
+
+## Tool Discovery
+
+Always inspect the tool schema before calling a tool you have not used in the current session.
+
+```bash
+futrixdata-cli tool list --schema --json
+futrixdata-cli tool describe add_datasource --json
+futrixdata-cli tool describe save_sensitivity_report --json
+```
+
+Use `tool describe` when you need the full payload shape for one tool.
+
+## Adding A Datasource
+
+Use `add_datasource` when the user explicitly asks an agent to add a connection. `create_datasource` remains available as the older equivalent name. Never invent credentials or read local secret files; use only values the user supplied for this task, or ask the user to enter the connection in FutrixData Desktop.
+
+Safe add flow:
+
+1. Inspect the schemas:
+
+```bash
+futrixdata-cli tool describe test_datasource_payload --json
+futrixdata-cli tool describe add_datasource --json
+```
+
+2. Test the payload before saving:
+
+```bash
+printf '%s\n' '{"name":"local analytics pg","type":"postgresql","host":"127.0.0.1","port":5432,"database":"analytics","username":"readonly","password":"REPLACE_ME","options":{"sslEnabled":false,"trustLevel":"cautious","environment":"dev"}}' | futrixdata-cli tool call test_datasource_payload --stdin --json
+```
+
+3. Add the datasource:
+
+```bash
+printf '%s\n' '{"name":"local analytics pg","type":"postgresql","host":"127.0.0.1","port":5432,"database":"analytics","username":"readonly","password":"REPLACE_ME","options":{"sslEnabled":false,"trustLevel":"cautious","environment":"dev"}}' | futrixdata-cli tool call add_datasource --stdin --json
+```
+
+MCP clients call the same tool name with the same JSON arguments:
+
+```json
+{
+  "name": "local analytics pg",
+  "type": "postgresql",
+  "host": "127.0.0.1",
+  "port": 5432,
+  "database": "analytics",
+  "username": "readonly",
+  "password": "REPLACE_ME",
+  "options": {
+    "sslEnabled": false,
+    "trustLevel": "cautious",
+    "environment": "dev"
+  }
+}
+```
+
+If FutrixData rejects the call because third-party agents cannot approve FutrixData operations, ask the user to grant datasource creation to this agent in FutrixData or add the datasource manually in Desktop; do not pass `--approve` or an `approve` argument. If this agent has the datasource-management grant, FutrixData can create the datasource directly, but the payload must not set `options.trustLevel` to `trusted` or `danger`, and must not use the legacy `options.dangerous` flag.
+
+## Recommended Workflow
+
+1. Discover the datasource id:
+
+```bash
+futrixdata-cli datasource list --json
+```
+
+2. Inspect schema:
+
+```bash
+printf '%s\n' '{"datasourceId":"ds_123","database":"app"}' | futrixdata-cli tool call list_entities --stdin --json
+printf '%s\n' '{"datasourceId":"ds_123","database":"app","name":"users"}' | futrixdata-cli tool call describe_entity --stdin --json
+printf '%s\n' '{"datasourceId":"ds_123","database":"app","entity":"users"}' | futrixdata-cli tool call get_schema_knowledge --stdin --json
+```
+
+3. Read sensitivity settings before classifying:
+
+```bash
+futrixdata-cli tool describe get_sensitivity_config --json
+futrixdata-cli tool describe set_sensitivity_custom_rules --json
+```
+
+4. Save reviewed sensitivity results:
+
+```json
+{
+  "datasourceId": "ds_123",
+  "entities": [
+    {
+      "database": "app",
+      "entity": "users",
+      "fields": [
+        {
+          "name": "email",
+          "level": "L4",
+          "category": "contact",
+          "reason": "Direct contact data"
+        },
+        {
+          "name": "password",
+          "level": "L5",
+          "category": "credential",
+          "reason": "Secret used for authentication"
+        }
+      ]
+    }
+  ]
+}
+```
+
+Valid categories:
+
+- `pii`
+- `credential`
+- `financial`
+- `behavioral`
+- `medical`
+- `location`
+- `contact`
+- `identifier`
+- `none`
+
+Sensitivity levels use the current level keys from FutrixData. The default installation uses `L1` through `L5`.
+
+## Classification Workflow
+
+- Start with `get_sensitivity_config` to read the current mode, saved rules, and level definitions.
+- Use `set_sensitivity_custom_rules` only when the user gives reusable project-specific rules.
+- Classify with schema information first. Do not read live row data unless the user explicitly asks for it.
+- Write the final report with `save_sensitivity_report`.
+- Verify the saved result with `get_sensitivity_report`.
+
+## Classification Rules
+
+- Use field name and data type together.
+- Classify-up for unrestricted values applies only to `string`, `object`, and `array`.
+- Do not elevate `bool`, `int`, `double`, or `timestamp` fields by name alone.
+- Nested leaf fields are classified independently.
+- Parent object fields are container hints, not replacements for leaf decisions.
+- When both a parent path and a child path are classified, the effective protection should follow the more restrictive matching path.
+
+## Masking Behavior
+
+- Query results returned through agent tools are automatically masked when field levels fall outside `agentAccessFrom` to `agentAccessTo`.
+- `whitelist` mode treats unreviewed fields as sensitive by default.
+- `blacklist` mode only blocks reviewed sensitive fields by default.
+
+## Executing a Query
+
+Once schema and sensitivity are reviewed, run a policy-allowed query via `execute_statement`. Read its schema first with `tool describe execute_statement --json`.
+
+### Risk Action Semantics
+
+FutrixData risk actions use these canonical names:
+
+- `allow`: the statement can execute, usually without approval.
+- `warn`: medium-risk signal. Whether it waits for approval depends on the datasource trust level and gate policy.
+- `require_approval`: the statement must wait for explicit user approval before it can execute.
+- `block`: hard stop. Normal user approval cannot bypass it.
+
+If a response contains `approvalRequired`, the operation is waiting for the user to approve it in FutrixData. This is not the same as `block`; after approval, the user can continue the same operation. Do not pass `--approve`, add an `approve` parameter, or self-approve from an agent tool path. Explain the `approvalRequired.riskAttribution` reason to the user and ask them to approve in FutrixData.
+
+### Approval Layers
+
+| Layer | What can stop the call | What to do |
+| --- | --- | --- |
+| Datasource trust | `Approval` and `Cautious` trust levels can require user approval before execution. | Surface `approvalRequired` and ask the user to approve in FutrixData. |
+| Built-in risk rules | Shipped rules can warn, require approval, or block risky statements and probe failures. | Read `approvalRequired.riskAttribution` or the error; do not invent an override. |
+| User risk rules | User-authored non-allow matches require approval even on Trusted datasources. | Explain the matched rule code/reason to the user. |
+| Agent grants | Datasource creation and some policy-write tools can bypass approval only when this agent identity has explicit agent grants. | Ask the user to grant or revoke access in FutrixData; never self-approve. |
+
+Use datasource metadata from `list_datasources`, `get_datasource`, `describe_entity`, and `execute_statement`: `dialect` tells you the query language, and `environment` tells you whether IDs may be crossing dev/devint/prod boundaries. For DynamoDB, `dialect=partiql`: use double-quoted table/index names, prefer partition-key/GSI predicates, keep LIMIT/pageSize small, and do not use MySQL hints, SHOW, DESCRIBE, or EXPLAIN.
+
+```bash
+printf '%s\n' '{"datasourceId":"ds_123","database":"app","statement":"SELECT 1"}' | futrixdata-cli tool call execute_statement --stdin --json
+```
+
+### DynamoDB Bounded Pagination
+
+For DynamoDB PartiQL, pageSize maps to evaluated items, not guaranteed matched or returned rows. An empty or short page can still return nextToken. Prefer partition key equality or `IN`, optionally with sort key conditions; otherwise expect multiple pages. maxPages defaults to the risk policy cap, maxEvaluatedItems defaults to the risk policy evaluated-item cap, and responses expose requestedLimits, effectiveLimits, and clampedLimits. Set strictLimits to true when an agent/tool call should fail instead of accepting a risk-policy clamp.
+
+Bounded pagination has multiple cap layers:
+
+| Parameter | Layer | Default/effective cap | Notes |
+| --- | --- | --- | --- |
+| `pageSize` | Service/tool hard limit | `<= 500` | DynamoDB ExecuteStatement Limit; rejected before service execution if higher. |
+| `maxReturnedRows` | Adapter stop condition | caller supplied | Stops after returning this many matched rows. |
+| `maxPages` | Risk-policy effective cap | `20` | Clamped by the active risk policy unless the user changes rule thresholds. |
+| `maxEvaluatedItems` | Risk-policy effective cap | `5000` | Conservative requested evaluated-item budget; DynamoDB PartiQL does not return actual scanned count per page. |
+
+When bounded params are omitted, adapter defaults and risk-policy thresholds apply. `maxPages` and `maxEvaluatedItems` are not schema hard rejects today; they can be clamped during execution. Treat nextToken as opaque. Use JSON/stdin or a small script that reads and writes the full JSON payload; do not splice tokens into shell command strings. Do not hand-build opaque nextToken values in shell strings.
+
+Inline bounded example:
+
+```json
+{
+  "datasourceId": "ds_123",
+  "statement": "SELECT * FROM \"Orders\" WHERE status = 'pending'",
+  "pageSize": 50,
+  "maxReturnedRows": 100,
+  "maxPages": 20,
+  "maxEvaluatedItems": 5000
+}
+```
+
+Outer pagination loop:
+
+```bash
+node <<'NODE'
+const { spawnSync } = require("node:child_process");
+
+let nextToken = "";
+for (;;) {
+  const payload = {
+    datasourceId: "ds_123",
+    statement: "SELECT * FROM \"Orders\" WHERE status = 'pending'",
+    pageSize: 50,
+    maxReturnedRows: 100,
+    maxPages: 20,
+    maxEvaluatedItems: 5000,
+    strictLimits: true,
+  };
+  if (nextToken) payload.pagingToken = nextToken;
+
+  const run = spawnSync("futrixdata-cli", ["tool", "call", "execute_statement", "--stdin", "--json"], {
+    input: JSON.stringify(payload),
+    encoding: "utf8",
+  });
+  if (run.status !== 0) throw new Error(run.stderr || run.stdout);
+
+  const result = JSON.parse(run.stdout);
+  console.log(JSON.stringify(result.rows || []));
+  nextToken = result.nextToken || "";
+  if (!nextToken) break;
+}
+NODE
+```
+
+### Redis Dialect Quirks
+
+Redis command execution currently has a temporary limitation: quoted values with whitespace are not parsed like `redis-cli` yet. For example, `SET user:1 "Ada Lovelace"` may be split incorrectly before Redis receives it. Keep simple commands such as `GET key`, `DEL key`, and `HSET hash field value` in whitespace-safe form until TASK-20260511-204352 lands. Do not present base64 encoding as the final solution; if you mention it, label it only as a temporary workaround for values that cannot be represented safely today.

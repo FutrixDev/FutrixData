@@ -1,0 +1,1328 @@
+.console-panel--statement.sql-editor-parity .elastic-dsl-workspace {
+  border-bottom: 1px solid var(--edge);
+  background: var(--panel-strong, var(--panel));
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-head {
+  padding: 14px 20px 8px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-head h2 {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-head p {
+  margin: 2px 0 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--soft-ink);
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-chip-list {
+  padding: 0 20px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-unsupported-notice {
+  margin: 0 20px 10px;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in oklab, #f59e0b 30%, var(--edge));
+  border-radius: 8px;
+  background: color-mix(in oklab, #f59e0b 6%, var(--panel));
+  color: #92400e;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-unsupported-notice strong {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-unsupported-notice span {
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-chip {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  border: 1px solid color-mix(in oklab, var(--primary) 22%, var(--edge));
+  border-radius: var(--control-radius, 8px);
+  background: color-mix(in oklab, var(--primary) 6%, var(--panel-strong, var(--panel)));
+  color: var(--ink);
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-size: 12px;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-chip:hover {
+  border-color: color-mix(in oklab, var(--primary) 35%, var(--edge));
+  background: color-mix(in oklab, var(--primary) 10%, var(--panel-strong, var(--panel)));
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-chip.is-editing {
+  border-color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 12%, var(--panel-strong, var(--panel)));
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--primary) 14%, transparent);
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-chip .chip-field {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-chip .chip-operator {
+  color: var(--soft-ink);
+  font-size: 11px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-chip .chip-value {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-chip .chip-remove {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--soft-ink);
+  background: transparent;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-chip .chip-remove:hover {
+  color: var(--danger, #b91c1c);
+  background: color-mix(in oklab, var(--danger) 10%, transparent);
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-toolbar {
+  padding: 0 20px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-toolbar-left,
+.console-panel--statement.sql-editor-parity .elastic-dsl-toolbar-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-toolbar-left {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-toolbar-right {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-add-filter-btn {
+  min-height: 32px;
+  border: 1px solid color-mix(in oklab, var(--primary) 35%, var(--edge));
+  border-radius: var(--control-radius, 8px);
+  padding: 0 12px;
+  background: var(--panel-strong, var(--panel));
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-add-filter-btn:hover {
+  background: color-mix(in oklab, var(--primary) 8%, var(--panel-strong, var(--panel)));
+  border-color: color-mix(in oklab, var(--primary) 45%, var(--edge));
+}
+
+.console-panel--statement.sql-editor-parity .elastic-live-toggle {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  gap: 6px;
+  padding: 0 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--soft-ink);
+  white-space: nowrap;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-live-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid var(--edge);
+  background: var(--panel-soft, var(--panel));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--soft-ink);
+  font-size: 10px;
+  font-family: 'JetBrains Mono', 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-live-toggle input {
+  margin: 0;
+  width: 16px;
+  height: 16px;
+  min-height: 16px;
+  accent-color: var(--primary);
+}
+
+.console-panel--statement.sql-editor-parity .elastic-reset-btn {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--soft-ink);
+  font-size: 11px;
+  font-weight: 500;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-reset-btn:hover {
+  color: var(--ink);
+}
+
+.console-panel--statement.sql-editor-parity .elastic-run-btn {
+  height: 32px;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  padding: 0 14px;
+  background: var(--primary);
+  color: var(--primary-foreground, #fff);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 1px 2px color-mix(in oklab, var(--primary) 30%, transparent);
+  white-space: nowrap;
+  flex: 0 0 auto;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-run-btn:hover:not(:disabled) {
+  background: color-mix(in oklab, var(--primary) 88%, white 12%);
+  border-color: color-mix(in oklab, var(--primary) 80%, white 20%);
+}
+
+.console-panel--statement.sql-editor-parity .elastic-run-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor {
+  margin: 0 20px 12px;
+  padding: 10px;
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  background: var(--panel-soft, var(--panel));
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-picker {
+  position: relative;
+  flex: 0 0 236px;
+  min-width: 236px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-picker.is-open {
+  z-index: 5;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-field-select,
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-operator-select,
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor input[data-testid='elastic-dsl-filter-value']:not(.elastic-dsl-filter-value-input) {
+  height: 28px;
+  min-height: 28px;
+  border-radius: var(--control-radius, 8px);
+  border: 1px solid var(--edge);
+  background: var(--input-bg, var(--panel-strong, var(--panel)));
+  color: var(--ink);
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-field-select {
+  width: 100%;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-trigger:hover {
+  border-color: #94a3b8;
+  background: #f8fafc;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-trigger-main {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-trigger-type {
+  flex: 0 0 auto;
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #0f766e;
+  background: #dff7f1;
+  border: 1px solid #b7e8dc;
+  max-width: 92px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-trigger-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-trigger-chevron {
+  flex: 0 0 auto;
+  color: #64748b;
+  font-size: 11px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-popover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  width: min(236px, calc(100vw - 32px));
+  max-height: min(284px, calc(100vh - 32px));
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  border: 1px solid #d7e0ea;
+  background: color-mix(in oklab, #ffffff 96%, #f1f5f9 4%);
+  box-shadow:
+    0 18px 36px -28px rgba(15, 23, 42, 0.45),
+    0 10px 18px -16px rgba(15, 23, 42, 0.24);
+  overflow: hidden;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-search {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 8px;
+  border-bottom: 1px solid #e2e8f0;
+  background: rgba(248, 250, 252, 0.96);
+  backdrop-filter: blur(8px);
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-search input {
+  width: 100%;
+  height: 32px;
+  min-height: 32px;
+  border-radius: 7px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+  padding: 0 10px;
+  font-size: 11px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px;
+  overflow: auto;
+  max-height: 224px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-option {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #334155;
+  padding: 7px 8px;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 120ms ease, box-shadow 120ms ease;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-option:hover {
+  background: #ecfdf5;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-option.is-selected {
+  background: #e0f2fe;
+  box-shadow: inset 3px 0 0 #14b8a6;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-option .field-option-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-option .field-option-type {
+  font-size: 10px;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-empty {
+  padding: 10px;
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor .elastic-dsl-filter-operator-select {
+  --elastic-dsl-select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%2357687f' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  width: 118px;
+  flex: 0 0 118px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  padding-right: 30px;
+  border-color: var(--sql-editor-border);
+  background-color: var(--sql-editor-surface);
+  background-image: var(--elastic-dsl-select-chevron);
+  box-shadow: none;
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px 6px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor .elastic-dsl-filter-operator-select:hover {
+  border-color: color-mix(in oklab, var(--primary) 30%, var(--sql-editor-border) 70%);
+  background-color: color-mix(in oklab, var(--primary) 4%, var(--sql-editor-surface) 96%);
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor .elastic-dsl-filter-operator-select:focus-visible,
+.console-panel--statement.sql-editor-parity .elastic-dsl-field-trigger:focus-visible {
+  outline: none;
+  border-color: color-mix(in oklab, var(--primary) 34%, var(--sql-editor-border) 66%);
+  box-shadow:
+    0 0 0 3px color-mix(in oklab, var(--primary) 14%, transparent),
+    inset 0 1px 0 color-mix(in oklab, #fff 18%, transparent),
+    0 1px 2px color-mix(in oklab, var(--sql-editor-bg) 18%, transparent);
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor input[data-testid='elastic-dsl-filter-value']:not(.elastic-dsl-filter-value-input) {
+  width: 220px;
+  flex: 1 1 220px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-value-composer {
+  min-height: 28px;
+  min-width: 220px;
+  flex: 1 1 220px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  border-radius: var(--control-radius, 8px);
+  border: 1px solid var(--edge);
+  background: var(--input-bg, var(--panel-strong, var(--panel)));
+  padding: 3px 8px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-actions {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-value-token {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  border-radius: 999px;
+  padding: 2px 8px;
+  background: color-mix(in oklab, var(--primary) 8%, var(--panel));
+  border: 1px solid color-mix(in oklab, var(--primary) 18%, var(--edge));
+  color: var(--ink);
+  font-size: 11px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-value-composer .elastic-dsl-value-token-remove {
+  height: auto;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-value-input {
+  flex: 1 1 120px;
+  min-width: 120px;
+  height: 22px;
+  min-height: 22px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  padding: 0;
+  font-size: 12px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-value-input:focus {
+  outline: none;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor button {
+  height: 28px;
+  border-radius: var(--control-radius, 8px);
+  border: 1px solid var(--edge);
+  background: var(--panel-strong, var(--panel));
+  color: var(--ink);
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor button:hover {
+  background: color-mix(in oklab, var(--primary) 6%, var(--panel-strong, var(--panel)));
+  border-color: color-mix(in oklab, var(--primary) 22%, var(--edge));
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor button.ghost {
+  color: var(--soft-ink);
+  background: transparent;
+  border-color: color-mix(in oklab, var(--edge) 60%, transparent);
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-drawer {
+  border-top: 1px solid var(--sql-editor-border);
+  background: var(--sql-editor-surface);
+  margin: 0;
+  padding: 18px 20px 22px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-drawer-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex: 1 1 240px;
+  min-width: 0;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-drawer-status h4 {
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #52637a;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-drawer-status .sync-pill {
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid #a7f3d0;
+  color: #047857;
+  background: #ecfdf5;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-drawer-status .json-validity {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-drawer-status .json-validity.ok {
+  color: #16a34a;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-drawer-status .json-validity.error {
+  color: #dc2626;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-drawer-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  flex: 0 1 auto;
+  min-width: 0;
+  padding-bottom: 2px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-drawer-actions button {
+  height: 32px;
+  border-radius: 9px;
+  border: 1px solid #d8e4f4;
+  padding: 0 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(243, 248, 255, 0.92) 100%);
+  color: #344256;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  cursor: pointer;
+  box-shadow: 0 8px 18px -18px rgba(15, 23, 42, 0.4);
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-drawer-actions button:hover {
+  border-color: #bfd3ee;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(236, 244, 255, 0.95) 100%);
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-drawer-actions button.is-copy {
+  border-color: #bfdbfe;
+  color: #2563eb;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-editor-shell {
+  --elastic-dsl-code-font-family: 'JetBrains Mono', 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+  --elastic-dsl-code-font-size: 13px;
+  --elastic-dsl-code-line-height: 18px;
+  --elastic-dsl-code-padding: 14px 20px 16px;
+  border: 1px solid #d8e4f4;
+  border-radius: 18px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  height: var(--elastic-dsl-editor-height, 320px);
+  min-height: var(--elastic-dsl-editor-height, 320px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(247, 250, 255, 0.94) 100%);
+  box-shadow:
+    0 1px 3px rgba(15, 23, 42, 0.06),
+    0 24px 46px -34px rgba(15, 23, 42, 0.45);
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-editor-shell:focus-within {
+  border-color: #93c5fd;
+  box-shadow:
+    0 0 0 1px rgba(147, 197, 253, 0.9),
+    0 24px 46px -34px rgba(15, 23, 42, 0.45);
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-line-numbers {
+  position: relative;
+  border-right: 1px solid rgba(203, 213, 225, 0.76);
+  background:
+    linear-gradient(180deg, rgba(239, 245, 255, 0.92) 0%, rgba(231, 238, 249, 0.9) 100%);
+  color: #7f8ea3;
+  font-family: var(--elastic-dsl-code-font-family);
+  overflow: hidden;
+  user-select: none;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-line-numbers-inner {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  padding: 14px 8px 16px;
+  will-change: transform;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-line-number {
+  display: block;
+  height: 18px;
+  padding-right: 8px;
+  text-align: right;
+  line-height: 18px;
+  font-size: 11px;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-editor-pane {
+  --elastic-dsl-scrollbar-opacity: 0;
+  --elastic-dsl-scrollbar-thumb-height: 0px;
+  --elastic-dsl-scrollbar-thumb-offset: 0px;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(246, 250, 255, 0.94) 100%);
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-editor-pane::before {
+  content: '';
+  position: absolute;
+  inset: 12px 6px 12px auto;
+  width: 6px;
+  border-radius: 999px;
+  background: rgba(226, 232, 240, 0.86);
+  opacity: var(--elastic-dsl-scrollbar-opacity);
+  pointer-events: none;
+  z-index: 3;
+  transition: opacity 140ms ease;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-editor-pane::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: 6px;
+  width: 6px;
+  height: var(--elastic-dsl-scrollbar-thumb-height);
+  border-radius: 999px;
+  background: rgba(96, 124, 159, 0.94);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38);
+  transform: translateY(var(--elastic-dsl-scrollbar-thumb-offset));
+  opacity: var(--elastic-dsl-scrollbar-opacity);
+  pointer-events: none;
+  z-index: 3;
+  transition: opacity 140ms ease, transform 80ms linear;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-editor-highlight {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  margin: 0;
+  padding: 14px 20px 16px;
+  padding: var(--elastic-dsl-code-padding);
+  font-family: var(--elastic-dsl-code-font-family);
+  font-size: 13px;
+  font-size: var(--elastic-dsl-code-font-size);
+  line-height: 18px;
+  line-height: var(--elastic-dsl-code-line-height);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  tab-size: 2;
+  position: absolute;
+  inset: 0 auto auto 0;
+  pointer-events: none;
+  overflow: visible;
+  color: #203246;
+  z-index: 1;
+  will-change: transform;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-editor-scrollbar-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 18px;
+  background:
+    linear-gradient(90deg, rgba(246, 250, 255, 0) 0%, rgba(246, 250, 255, 0.94) 38%, rgba(246, 250, 255, 0.98) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-editor {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: var(--elastic-dsl-editor-height, 320px);
+  min-height: var(--elastic-dsl-editor-height, 320px);
+  margin: 0;
+  padding: 14px 20px 16px;
+  padding: var(--elastic-dsl-code-padding);
+  font-family: var(--elastic-dsl-code-font-family);
+  font-size: 13px;
+  font-size: var(--elastic-dsl-code-font-size);
+  line-height: 18px;
+  line-height: var(--elastic-dsl-code-line-height);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  tab-size: 2;
+  border: 0;
+  resize: none;
+  color: transparent;
+  caret-color: #0f172a;
+  background: transparent;
+  overflow: auto;
+  scrollbar-width: none;
+  z-index: 1;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-editor::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-json-token {
+  font-family: var(--elastic-dsl-code-font-family);
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  line-height: inherit;
+}
+
+/* JSON token colors: see elastic-json-tokens.css */
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-editor:focus {
+  outline: none;
+}
+
+.console-panel--statement.sql-editor-parity .elastic-dsl-editor::selection {
+  background: rgba(59, 130, 246, 0.18);
+}
+
+@media (max-width: 980px) {
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-head,
+  .console-panel--statement.sql-editor-parity .elastic-dsl-chip-list,
+  .console-panel--statement.sql-editor-parity .elastic-dsl-toolbar {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-unsupported-notice {
+    margin: 0 12px 14px;
+  }
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    overflow-x: auto;
+  }
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-toolbar-left {
+    justify-content: flex-start;
+  }
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-toolbar-right {
+    width: 100%;
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-drawer {
+    margin-left: -12px;
+    margin-right: -12px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-editor-shell {
+    grid-template-columns: 48px minmax(0, 1fr);
+    height: var(--elastic-dsl-editor-height, 320px);
+    min-height: var(--elastic-dsl-editor-height, 320px);
+  }
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-editor-highlight,
+  .console-panel--statement.sql-editor-parity .elastic-dsl-editor {
+    height: var(--elastic-dsl-editor-height, 320px);
+    min-height: var(--elastic-dsl-editor-height, 320px);
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 840px) {
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-field-picker,
+  .console-panel--statement.sql-editor-parity .elastic-dsl-filter-operator-select,
+  .console-panel--statement.sql-editor-parity .elastic-dsl-filter-value-composer,
+  .console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor input[data-testid='elastic-dsl-filter-value']:not(.elastic-dsl-filter-value-input) {
+    width: 100%;
+    min-width: 0;
+    flex: auto;
+  }
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-filter-actions {
+    margin-left: 0;
+    justify-content: flex-end;
+  }
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-field-popover {
+    max-height: min(240px, calc(100vh - 120px));
+  }
+
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--statement.sql-editor-parity .console-editor-results-shell.sql-editor-parity {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--statement.sql-editor-parity .console-editor-results-splitter {
+  display: none;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-statement-panel--elastic-stitch {
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: max-content;
+  background: #f5f7fa;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-statement-panel--elastic-stitch .statement-shell--sql-editor {
+  max-height: 0;
+  min-height: 0;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-statement-panel--elastic-stitch .statement-monaco {
+  height: 0;
+  min-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--statement.sql-editor-parity .elastic-dsl-workspace {
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid #e2e8f0;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--statement.sql-editor-parity .elastic-dsl-head,
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--statement.sql-editor-parity .elastic-dsl-chip-list,
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--statement.sql-editor-parity .elastic-dsl-toolbar,
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor,
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--statement.sql-editor-parity .elastic-dsl-drawer,
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--statement.sql-editor-parity .elastic-dsl-unsupported-notice {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--statement.sql-editor-parity .elastic-dsl-editor-shell {
+  --elastic-dsl-code-font-family: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+}
+
+@media (max-width: 840px) {
+
+  .console-shell.sql-editor-parity.elastic-stitch .console-statement-panel--elastic-stitch {
+    min-height: 0;
+  }
+
+  .console-shell.sql-editor-parity.elastic-stitch .console-panel--statement.sql-editor-parity .elastic-dsl-workspace {
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+
+  .console-shell.sql-editor-parity.elastic-stitch .console-panel--statement.sql-editor-parity .console-editor-results-shell.sql-editor-parity {
+    grid-template-rows: auto minmax(220px, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-drawer-head {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-drawer-status {
+    width: 100%;
+  }
+
+  .console-panel--statement.sql-editor-parity .elastic-dsl-drawer-actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+
+  .console-shell.sql-editor-parity.elastic-stitch .console-panel--statement.sql-editor-parity .console-editor-results-shell.sql-editor-parity {
+    grid-template-rows: auto minmax(240px, 1fr);
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   Dark mode overrides
+   ══════════════════════════════════════════════════════ */
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-workspace {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  background: var(--background);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-head h2 {
+  color: #f1f5f9;
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-head p {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-unsupported-notice {
+  border-color: rgba(252, 211, 77, 0.3);
+  background: linear-gradient(180deg, rgba(252, 211, 77, 0.1) 0%, rgba(252, 211, 77, 0.06) 100%);
+  color: #fcd34d;
+}
+
+/* chips */
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-chip {
+  border-color: rgba(129, 140, 248, 0.2);
+  background: rgba(129, 140, 248, 0.08);
+  color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-chip:hover {
+  border-color: rgba(129, 140, 248, 0.3);
+  background: rgba(129, 140, 248, 0.14);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-chip .chip-field {
+  color: #a5b4fc;
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-chip .chip-operator {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-chip .chip-remove {
+  color: #a5b4fc;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* toolbar buttons */
+.dark .console-panel--statement.sql-editor-parity .elastic-add-filter-btn {
+  border-color: rgba(129, 140, 248, 0.4);
+  background: rgba(129, 140, 248, 0.08);
+  color: #a5b4fc;
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-add-filter-btn:hover {
+  background: rgba(129, 140, 248, 0.16);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-live-toggle {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-live-icon {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-live-toggle input {
+  accent-color: #818cf8;
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-reset-btn {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-reset-btn:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-run-btn {
+  background: #14b8a6;
+  box-shadow: 0 4px 10px rgba(20, 184, 166, 0.2);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-run-btn:hover:not(:disabled) {
+  background: #0d9488;
+}
+
+/* filter editor */
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-filter-field-select,
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-filter-operator-select,
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor input[data-testid='elastic-dsl-filter-value']:not(.elastic-dsl-filter-value-input) {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f1f5f9;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-field-trigger:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-field-trigger-type {
+  color: #5eead4;
+  background: rgba(94, 234, 212, 0.1);
+  border-color: rgba(94, 234, 212, 0.2);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-field-trigger-chevron {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* field popover */
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-field-popover {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: #12121a;
+  box-shadow:
+    0 18px 36px -28px rgba(0, 0, 0, 0.8),
+    0 10px 18px -16px rgba(0, 0, 0, 0.5);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-field-search {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  background: rgba(18, 18, 26, 0.96);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-field-search input {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f1f5f9;
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-field-option {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-field-option:hover {
+  background: rgba(129, 140, 248, 0.1);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-field-option.is-selected {
+  background: rgba(129, 140, 248, 0.14);
+  box-shadow: inset 3px 0 0 #818cf8;
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-field-option .field-option-type {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-field-empty {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* value composer */
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-filter-value-composer {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-value-token {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-filter-value-composer .elastic-dsl-value-token-remove {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-filter-value-input {
+  color: #f1f5f9;
+}
+
+/* filter editor buttons */
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor button {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-filter-editor button.ghost {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* drawer (DSL editor area) */
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-drawer {
+  border-top-color: rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at top right, rgba(99, 102, 241, 0.08) 0%, transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-drawer-status h4 {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-drawer-status .sync-pill {
+  border-color: rgba(167, 243, 208, 0.3);
+  color: #5eead4;
+  background: rgba(94, 234, 212, 0.1);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-drawer-actions button {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 18px -18px rgba(0, 0, 0, 0.6);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-drawer-actions button:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-drawer-actions button.is-copy {
+  border-color: rgba(129, 140, 248, 0.3);
+  color: #a5b4fc;
+}
+
+/* code editor shell */
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-editor-shell {
+  border-color: rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    0 24px 46px -34px rgba(0, 0, 0, 0.6);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-editor-shell:focus-within {
+  border-color: rgba(129, 140, 248, 0.4);
+  box-shadow:
+    0 0 0 1px rgba(129, 140, 248, 0.3),
+    0 24px 46px -34px rgba(0, 0, 0, 0.6);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-line-numbers {
+  border-right-color: rgba(255, 255, 255, 0.06);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.02) 100%);
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-editor-pane {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-editor-pane::before {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-editor-pane::after {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-editor-scrollbar-mask {
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(10, 10, 15, 0.94) 38%, rgba(10, 10, 15, 0.98) 100%);
+}
+
+/* code syntax colors (dark) */
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-editor-highlight {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-editor {
+  caret-color: #f1f5f9;
+}
+
+/* Dark JSON token colors: see elastic-json-tokens.css */
+
+.dark .console-panel--statement.sql-editor-parity .elastic-dsl-editor::selection {
+  background: rgba(129, 140, 248, 0.25);
+}
+
+/* elastic-stitch overrides */
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-statement-panel--elastic-stitch {
+  background: var(--background);
+}
+
+.dark .console-shell.sql-editor-parity.elastic-stitch .console-panel--statement.sql-editor-parity .elastic-dsl-workspace {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
