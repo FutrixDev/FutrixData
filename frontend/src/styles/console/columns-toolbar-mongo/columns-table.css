@@ -1,0 +1,46 @@
+      .column-picker {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: flex-end;
+      }
+
+      .column-picker select {
+        min-width: 160px;
+      }
+
+      .btn.small {
+        min-height: 26px;
+        padding: 4px 10px;
+        font-size: 11px;
+        box-shadow: none;
+      }
+
+      .columns-table.compact {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+      }
+
+      .columns-table.compact th,
+      .columns-table.compact td {
+        padding: 4px 6px;
+        vertical-align: top;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+
+      .columns-table.compact td {
+        font-size: 11px;
+      }
+
+      .columns-table.compact td.col-name {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-weight: 600;
+        color: var(--ink);
+        width: 48%;
+      }
+
+      .columns-table.compact th {
+        font-size: 9px;
+      }

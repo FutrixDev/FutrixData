@@ -1,0 +1,69 @@
+name: release-futrixdata-cli
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Release tag to publish, for example v1.2.3
+        required: true
+        type: string
+      publish_npm:
+        description: Publish the generated npm package when NPM_TOKEN is configured
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      RELEASE_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.version || github.ref_name }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Build CLI release assets
+        run: |
+          sh scripts/release-futrixdata-cli.sh \
+            --version "${RELEASE_VERSION}" \
+            --output dist/cli
+
+      - name: Create or update GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          mapfile -t assets < <(find dist/cli -type f | sort)
+          if [ "${#assets[@]}" -eq 0 ]; then
+            echo "no release assets found" >&2
+            exit 1
+          fi
+          if gh release view "${RELEASE_VERSION}" >/dev/null 2>&1; then
+            gh release upload "${RELEASE_VERSION}" "${assets[@]}" --clobber
+          else
+            gh release create "${RELEASE_VERSION}" "${assets[@]}"
+          fi
+
+      - name: Publish npm package
+        if: ${{ (github.event_name == 'push' || inputs.publish_npm) && secrets.NPM_TOKEN != '' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm publish dist/cli/npm/*.tgz --access public

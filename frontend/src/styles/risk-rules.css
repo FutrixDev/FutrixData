@@ -1,0 +1,1007 @@
+/* ── Risk Rules list view ──────────────────────────────── */
+
+.view.active.risk-rules-view {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ── Risk Rules top tabs ───────────────────────────────── */
+
+.risk-rules-view .risk-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  margin: 0 24px 14px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  flex-shrink: 0;
+}
+
+.risk-rules-view .risk-tabs__btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--soft-ink);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.risk-rules-view .risk-tabs__btn:hover {
+  color: var(--ink);
+  background: color-mix(in oklab, var(--primary) 5%, transparent);
+}
+
+.risk-rules-view .risk-tabs__btn--active {
+  background: var(--panel);
+  color: var(--primary);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.risk-rules-view .risk-panel {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 24px 24px;
+}
+
+.risk-rules-view .list-toolbar {
+  flex-shrink: 0;
+}
+
+.risk-rules-view .list-controls {
+  flex-shrink: 0;
+}
+
+.risk-rules-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 24px 24px;
+}
+
+.risk-rules-section {
+  margin-bottom: 20px;
+}
+
+.risk-rules-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  padding: 8px 2px 6px;
+}
+
+/* ── Type filter tabs ─────────────────────────────────── */
+
+.risk-type-tabs {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.risk-type-tab {
+  font-size: 12px;
+  font-weight: 600;
+  min-height: 32px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--edge);
+  background: transparent;
+  color: var(--ink-faint);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.15s ease;
+}
+
+.risk-type-tab:hover {
+  background: var(--muted);
+  color: var(--ink);
+}
+
+.risk-type-tab.active {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border-color: var(--primary);
+}
+
+/* ── Rule card (list item) ────────────────────────────── */
+
+.risk-rule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.risk-rule-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  cursor: default;
+}
+
+.risk-rule-item:hover {
+  background: var(--muted);
+  border-color: var(--edge);
+}
+
+.risk-rule-item.dragging {
+  opacity: 0.5;
+  background: var(--muted);
+  border-color: var(--primary);
+}
+
+.risk-rule-item.drag-over {
+  border-top: 2px solid var(--primary);
+}
+
+.risk-rule-item--highlight {
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  border-color: var(--primary);
+  animation: risk-rule-flash 2.4s ease-out;
+}
+
+@keyframes risk-rule-flash {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 60%, transparent); }
+  20%  { box-shadow: 0 0 0 6px color-mix(in srgb, var(--primary) 30%, transparent); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+.risk-rule-drag-handle {
+  cursor: grab;
+  color: var(--ink-faint);
+  opacity: 0.4;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.risk-rule-drag-handle:hover {
+  opacity: 1;
+}
+
+.risk-rule-drag-handle:active {
+  cursor: grabbing;
+}
+
+.risk-rule-action-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.risk-rule-action-dot.action-block { background: var(--destructive, #ef4444); }
+.risk-rule-action-dot.action-require_approval { background: #f97316; }
+.risk-rule-action-dot.action-warn { background: #eab308; }
+.risk-rule-action-dot.action-allow { background: #22c55e; }
+
+.risk-rule-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.risk-rule-info-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.risk-rule-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.risk-rule-code {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.risk-rule-reason {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  white-space: normal;
+  line-height: 1.4;
+  margin-top: 1px;
+}
+
+.risk-rule-trigger {
+  font-size: 11px;
+  color: var(--ink-muted, var(--ink-faint));
+  margin-top: 3px;
+  line-height: 1.4;
+}
+
+.risk-rule-thresholds {
+  font-size: 11px;
+  color: var(--ink-faint);
+  margin-top: 4px;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.risk-rule-badges {
+  display: flex;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.risk-rule-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--muted);
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.risk-rule-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.risk-rule-actions .btn.mini {
+  min-height: 32px;
+  padding: 4px 10px;
+}
+
+.risk-rule-readonly {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--muted) 80%, transparent);
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+/* ── Toggle switch ────────────────────────────────────── */
+
+.risk-toggle {
+  position: relative;
+  width: 44px;
+  height: 32px;
+  padding: 0;
+  border-radius: 16px;
+  background: var(--muted);
+  border: 1px solid var(--edge);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  appearance: none;
+}
+
+.risk-toggle.on {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.risk-toggle::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.risk-toggle.on::after {
+  transform: translateX(12px);
+}
+
+.risk-toggle:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+/* ── Import/Export bar ────────────────────────────────── */
+
+.risk-import-export {
+  display: flex;
+  gap: 6px;
+}
+
+.risk-import-export .btn.small {
+  min-height: 32px;
+  padding: 5px 12px;
+}
+
+/* ── Form view ────────────────────────────────────────── */
+
+.view.active.risk-rules-form-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.risk-rules-form-view .list-toolbar {
+  flex-shrink: 0;
+}
+
+.risk-form-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 24px 120px;
+}
+
+.risk-form-section {
+  margin-bottom: 18px;
+}
+
+.risk-form-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.risk-form-section-title .section-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ── Action selector (big cards) ──────────────────────── */
+
+.risk-action-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.risk-action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border-radius: 10px;
+  border: 2px solid var(--edge);
+  background: var(--panel);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.risk-action-card:hover {
+  border-color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 5%, var(--panel));
+}
+
+.risk-action-card.selected {
+  border-color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 10%, var(--panel));
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.risk-action-card .action-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.risk-action-card .action-desc {
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  line-height: 1.3;
+}
+
+@media (max-width: 640px) {
+  .risk-action-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .risk-action-card {
+    flex-direction: row;
+    padding: 10px 12px;
+    gap: 8px;
+    text-align: left;
+  }
+  .risk-action-card .action-desc {
+    display: none;
+  }
+  .risk-entity-search {
+    flex: 1 1 100%;
+  }
+  .risk-field-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Chip selector (multi-select) ─────────────────────── */
+
+.risk-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.risk-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--edge);
+  background: transparent;
+  color: var(--ink-faint);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.risk-chip:hover {
+  background: var(--muted);
+  color: var(--ink);
+}
+
+.risk-chip.selected {
+  background: color-mix(in oklab, var(--primary) 15%, var(--panel));
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* ── Form field ───────────────────────────────────────── */
+
+.risk-field {
+  margin-bottom: 10px;
+}
+
+.risk-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-faint);
+  margin-bottom: 5px;
+}
+
+.risk-field input[type="text"],
+.risk-field input[type="number"],
+.risk-field select,
+.risk-field textarea {
+  width: 100%;
+  font-size: 13px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--edge);
+  background: var(--panel);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.risk-field input:focus,
+.risk-field select:focus,
+.risk-field textarea:focus {
+  border-color: var(--primary);
+}
+
+.risk-field .hint {
+  font-size: 11px;
+  color: var(--ink-faint);
+  margin-top: 3px;
+}
+
+.risk-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ── Thresholds section (collapsible) ─────────────────── */
+
+.risk-thresholds-toggle {
+  min-height: 32px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-faint);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 0;
+  border: none;
+  background: none;
+}
+
+.risk-thresholds-toggle:hover {
+  color: var(--ink);
+}
+
+.risk-thresholds-body {
+  padding-top: 8px;
+}
+
+/* ── Entity picker ────────────────────────────────────── */
+
+.risk-entity-picker {
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  overflow: hidden;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.risk-entity-picker-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  font-size: 12px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.1s;
+  border-bottom: 1px solid color-mix(in oklab, var(--edge) 50%, transparent);
+}
+
+.risk-entity-picker-item:last-child {
+  border-bottom: none;
+}
+
+.risk-entity-picker-item:hover {
+  background: var(--muted);
+}
+
+.risk-entity-picker-item:has(input:checked) {
+  background: color-mix(in oklab, var(--primary) 8%, transparent);
+}
+
+.risk-entity-picker-item input[type="checkbox"] {
+  accent-color: var(--primary);
+}
+
+.risk-entity-picker-empty {
+  padding: 12px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+/* ── Preview card ─────────────────────────────────────── */
+
+.risk-preview {
+  background: color-mix(in oklab, var(--muted) 50%, transparent);
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 12.5px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.risk-preview strong {
+  font-weight: 700;
+}
+
+/* ── Form actions bar ─────────────────────────────────── */
+
+.risk-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--edge);
+  margin-top: 8px;
+}
+
+/* ── Import/export dialog ─────────────────────────────── */
+
+.risk-import-textarea {
+  width: 100%;
+  min-height: 200px;
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--edge);
+  background: var(--panel);
+  color: var(--ink);
+  resize: vertical;
+}
+
+/* ── Condition category groups (Redis) ────────────────── */
+
+.risk-cmd-group {
+  margin-bottom: 10px;
+}
+
+.risk-cmd-group-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-faint);
+  margin-bottom: 6px;
+}
+
+/* ── Custom dropdown (theme-matched) ─────────────────── */
+
+.risk-dropdown {
+  position: relative;
+}
+
+.risk-dropdown-trigger {
+  width: 100%;
+  min-height: 36px;
+  padding: 6px 10px;
+  border-radius: var(--control-radius, 8px);
+  border: 1px solid var(--edge);
+  background: var(--input-bg, var(--panel));
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  transition: border-color 0.15s;
+}
+
+.risk-dropdown-trigger:hover {
+  border-color: color-mix(in oklab, var(--primary) 40%, var(--edge));
+}
+
+.risk-dropdown-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.risk-dropdown-chevron {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  opacity: 0.55;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--ink-faint) 50%),
+    linear-gradient(135deg, var(--ink-faint) 50%, transparent 50%);
+  background-position: center calc(50% - 1px), center calc(50% - 1px);
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.risk-dropdown-menu {
+  position: absolute;
+  inset: calc(100% + 4px) 0 auto 0;
+  z-index: 30;
+  background: #fff;
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  padding: 4px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.14);
+  max-height: 220px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dark .risk-dropdown-menu {
+  background: #1e1e2e;
+}
+
+.risk-dropdown-option {
+  width: 100%;
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: 8px;
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 13px;
+  text-align: left;
+  transition: background 0.1s;
+}
+
+.risk-dropdown-option:hover {
+  background: color-mix(in oklab, var(--panel-strong, var(--muted)) 70%, var(--panel));
+  border-color: color-mix(in oklab, var(--primary) 15%, var(--edge));
+}
+
+.risk-dropdown-option.active {
+  background: color-mix(in oklab, var(--primary) 10%, var(--panel));
+  border-color: color-mix(in oklab, var(--primary) 25%, var(--edge));
+}
+
+.risk-dropdown-option-hint {
+  font-size: 11px;
+  color: var(--ink-faint);
+  margin-left: auto;
+}
+
+/* ── dsType chip count badge ─────────────────────────── */
+
+.risk-chip-count {
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  border-radius: 8px;
+  background: var(--edge);
+  color: var(--ink-faint);
+  margin-left: 3px;
+  padding: 0 4px;
+}
+
+.risk-chip.selected .risk-chip-count {
+  background: color-mix(in oklab, var(--primary) 30%, transparent);
+  color: var(--primary);
+}
+
+/* ── Field label with action link ─────────────────────── */
+
+.risk-field-label-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.risk-field-label-row label {
+  margin-bottom: 0;
+}
+
+.risk-entity-browse-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  opacity: 0.85;
+  transition: opacity 0.15s;
+}
+
+.risk-entity-browse-link:hover {
+  opacity: 1;
+}
+
+/* ── Selected entity chips ───────────────────────────── */
+
+.risk-selected-entities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.risk-entity-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 6px 3px 8px;
+  border-radius: 6px;
+  background: color-mix(in oklab, var(--primary) 12%, var(--panel));
+  color: var(--primary);
+  border: 1px solid color-mix(in oklab, var(--primary) 25%, transparent);
+}
+
+.risk-entity-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--primary);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.1s;
+}
+
+.risk-entity-chip-remove:hover {
+  background: color-mix(in oklab, var(--primary) 20%, transparent);
+}
+
+.risk-entity-chip.overflow {
+  background: var(--muted);
+  color: var(--ink-faint);
+  border-color: var(--edge);
+  padding: 3px 8px;
+  cursor: default;
+}
+
+.risk-entity-chip-clear {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-faint);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 3px 4px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.risk-entity-chip-clear:hover {
+  color: var(--destructive, #ef4444);
+}
+
+/* ── Entity search ───────────────────────────────────── */
+
+.risk-entity-search {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--edge);
+  background: var(--panel);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.risk-entity-search:focus {
+  border-color: var(--primary);
+}
+
+/* ── Entity picker list ──────────────────────────────── */
+
+.risk-entity-picker-item input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  accent-color: var(--primary);
+  flex-shrink: 0;
+}
+
+.risk-entity-name {
+  font-size: 12.5px;
+  font-family: var(--font-mono, monospace);
+  color: var(--ink);
+}
+
+/* ── Entity picker dialog ────────────────────────────── */
+
+.risk-entity-dialog {
+  max-width: 520px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+}
+
+.risk-entity-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.risk-entity-dialog-header h3 {
+  margin: 0;
+}
+
+.risk-entity-dialog-toolbar {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.risk-entity-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--edge);
+}
+
+.risk-entity-dialog-count {
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.risk-redis-specific-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.risk-redis-specific-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.risk-redis-picker {
+  max-height: 420px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px 2px;
+}
+
+.risk-redis-picker-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--edge);
+  background: color-mix(in oklab, var(--panel) 92%, transparent);
+}
+
+.risk-redis-picker-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.risk-redis-picker-group-name {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--soft-ink);
+}

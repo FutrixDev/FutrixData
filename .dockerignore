@@ -1,0 +1,12 @@
+.git
+.gocache
+.gomodcache
+.gopath
+bug
+data
+design
+dev-docs
+docs
+TODO
+*.iml
+*.md

@@ -1,142 +1,172 @@
+# FutrixData
+
 <p align="center">
-  <img src="docs/assets/futrixdata-gateway.svg" alt="FutrixData Gateway connecting AI agents to governed data sources" width="1000">
+  <img src="docs/assets/futrixdata-gateway.svg" alt="FutrixData gateway connecting AI agents to governed data sources" width="1000">
 </p>
 
-<h1 align="center">FutrixData Security Package</h1>
-
 <p align="center">
-  Public security specifications, verifiers, protocol types, masking code, and a partial risk-engine core for FutrixData.
+  <strong>An open-source AI data gateway for governed agent access to real databases.</strong>
 </p>
 
 <p align="center">
   <a href="LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-blue"></a>
   <a href="go.mod"><img alt="Go 1.23+" src="https://img.shields.io/badge/go-1.23%2B-00ADD8"></a>
-  <a href="https://futrixdata.com/doc"><img alt="FutrixData docs" src="https://img.shields.io/badge/docs-futrixdata.com-4f46e5"></a>
-  <a href="docs/assurance-matrix.md"><img alt="Assurance matrix" src="https://img.shields.io/badge/assurance-matrix-0f766e"></a>
+  <a href="frontend/package.json"><img alt="Vue 3" src="https://img.shields.io/badge/frontend-Vue%203-42b883"></a>
+  <a href="wails.json"><img alt="Wails desktop app" src="https://img.shields.io/badge/desktop-Wails-8b5cf6"></a>
 </p>
 
-FutrixData is an AI data gateway for teams that want agents to work with real databases without handing raw credentials or unrestricted execution power to the agent. This repository is the **inspectable public security package**: the pieces a security reviewer, procurement team, or integrator can read, run, and compare against FutrixData product behavior during evaluation.
+FutrixData sits between AI agents and production data systems. Agents get a consistent tool surface for querying and analyzing data, while teams keep credentials, risk checks, masking, approvals, and audit trails under one local control plane.
 
-> **Scope:** this repository is Apache-2.0. The FutrixData desktop application and FutrixData Enterprise Edition remain commercial, proprietary products under their own license terms.
+The goal is simple: let agents work with useful data without handing them raw database credentials or unlimited execution power.
 
-## Product References
+## Why FutrixData
 
-Start with the official product docs when evaluating what this package supports:
+AI agents are moving from text assistants into operational workflows. Direct database access creates several hard problems:
 
-- [FutrixData product site](https://futrixdata.com/)
-- [Technical overview](https://futrixdata.com/doc/futrixdata-technical-overview)
-- [Database risk control engine](https://futrixdata.com/doc/database-risk-control-engine)
-- [Data sensitivity classification](https://futrixdata.com/doc/data-sensitivity-classification)
-- [FutrixData Enterprise Edition](https://futrixdata.com/doc/futrixdata-enterprise-edition)
+- **Credential sprawl:** every agent, IDE, script, and workflow can end up holding its own database password or cloud token.
+- **Unsafe execution:** generated SQL, Redis commands, or datasource requests may delete data, run expensive scans, or bypass review.
+- **Sensitive output:** agent responses can leak emails, phone numbers, tokens, addresses, payment fields, or internal identifiers.
+- **Weak accountability:** without a gateway, it is hard to answer who asked for a query, which tool executed it, and what policy decision was made.
+
+FutrixData centralizes that boundary. The database stays behind a governed local runtime; agents interact through FutrixData's CLI, MCP-compatible tool layer, HTTP service, or desktop UI.
+
+## Core Features
+
+| Area | What FutrixData provides |
+| --- | --- |
+| Data gateway | One runtime for desktop UI, CLI, HTTP, daemon handoff, and agent tool execution. |
+| Datasource adapters | MySQL, PostgreSQL, MongoDB, Redis, Elasticsearch, DynamoDB, ChromaDB, and Cloudflare D1 surfaces. |
+| Risk controls | Statement analysis, dangerous-operation detection, approval-aware tool execution, and rule-driven decisions. |
+| Sensitivity controls | Schema-aware classification, masking policies, deterministic local masking, and no raw data in classification prompts. |
+| Agent identity | Access-key based attribution for agent calls, local authorization flows, revocation, and audit-friendly request envelopes. |
+| AI workspace | Built-in chat, tool calling, streaming responses, knowledge retrieval, visualization output, and configurable datasource-aware prompting. |
+| Local-first operations | Runtime files, datasource state, logs, key material, and agent audit state are kept in the user's local data directory by default. |
+
+## Supported Data Sources
+
+| Datasource | Connect | Query / command | Schema discovery | Risk checks |
+| --- | --- | --- | --- | --- |
+| MySQL | Yes | SQL | Yes | Yes |
+| PostgreSQL | Yes | SQL | Yes | Yes |
+| MongoDB | Yes | Mongo shell-like operations | Yes | Yes |
+| Redis | Yes | Redis commands | Key and command context | Yes |
+| Elasticsearch | Yes | DSL / index operations | Yes | Yes |
+| DynamoDB | Yes | Table operations | Yes | Yes |
+| ChromaDB | Yes | Collection requests | Yes | Yes |
+| Cloudflare D1 | Yes | SQL / REST-backed operations | Yes | Yes |
+
+## How It Works
+
+```text
+AI agent / CLI / UI
+        |
+        v
+FutrixData runtime
+  - agent identity and authorization
+  - datasource secret resolution
+  - statement parsing and risk checks
+  - sensitivity classification and masking
+  - execution audit trail
+        |
+        v
+Databases, caches, indexes, warehouses, and vector stores
+```
+
+The same runtime backs the Wails desktop app, the `futrixdata-cli` command, the local daemon, and the optional HTTP server. This keeps policy behavior consistent across human and agent entry points.
 
 ## Quick Start
 
-Run the public verification suite:
+### Requirements
+
+- Go 1.23 or newer. The repository currently pins the Go toolchain to `go1.24.3`.
+- Node.js 20 or newer.
+- Wails v2.11 for desktop development.
+
+Install Wails if it is not already available:
 
 ```bash
-go test ./...
+go install github.com/wailsapp/wails/v2/cmd/wails@v2.11.0
 ```
 
-Verify the sanitized product-export evidence bundle:
+Install frontend dependencies:
 
 ```bash
-go run ./cmd/futrix-evidence-verify ./examples/product-export
+cd frontend
+npm install
+cd ..
 ```
 
-Verify an audit log hash chain:
+Run the desktop app in development mode:
 
 ```bash
-go run ./cmd/futrix-audit-verify ./examples/audit-log/valid.jsonl
+wails dev
 ```
 
-Verify downloaded release artifacts when a `SHA256SUMS.txt` file is present:
+Build the frontend and run backend tests:
 
 ```bash
-bash ./release-verification/verify-checksums.sh /path/to/downloads
+npm --prefix frontend run build
+go test $(go list ./... | grep -v '/frontend/node_modules/')
+node --test packaging/cli/tests/*.test.mjs
 ```
 
-## What You Can Inspect
+Build the desktop app:
 
-| Area | Public path | What it proves |
-| --- | --- | --- |
-| Audit chain | `pkg/auditchain`, `cmd/futrix-audit-verify` | Local hash-chain audit format and verifier behavior. |
-| PII masking | `pkg/masking` | L1-L5 sensitivity model and deterministic `masked:v1:` HMAC output. |
-| Partial risk engine | `pkg/riskengine` | Rule model, lightweight parser, matching priority, and allow/warn/approval/block decisions. |
-| Agent protocol | `pkg/protocol` | Tool names, response envelopes, approval payloads, errors, audit IDs, and risk attribution. |
-| Evidence verifier | `pkg/evidence`, `cmd/futrix-evidence-verify` | End-to-end checks for audit, masking, block, and approval examples. |
-| Release verification | `release-verification/verify-checksums.sh` | Checksum validation for published release assets. |
+```bash
+wails build
+```
 
-## Buyer Evaluation Workflow
+Run the optional HTTP service:
 
-Use this repository as the public part of an Enterprise security review:
+```bash
+go run ./cmd/http
+```
 
-1. Read the [assurance matrix](docs/assurance-matrix.md) to map product claims to code and verification steps.
-2. Run `go test ./...` to confirm the public packages compile and pass.
-3. Run `go run ./cmd/futrix-evidence-verify ./examples/product-export` to validate the evidence bundle.
-4. During POC, ask FutrixData for equivalent exports from a disposable datasource:
-   - an agent query with masked columns;
-   - a destructive statement that is blocked;
-   - a statement held for approval with `riskAttribution`;
-   - an exported agent audit log that can be checked with `futrix-audit-verify`.
+Build and run the CLI during development:
 
-## How FutrixData Uses These Concepts
-
-Agents call FutrixData over MCP, Skill, CLI, or HTTP instead of holding database credentials directly. FutrixData attributes each call to an agent identity, evaluates risk before execution, applies approval gates when needed, masks sensitive fields before agent egress, and records activity in an audit log with a local hash chain.
-
-This repository exposes the reviewable contracts behind that flow. The commercial products provide the full runtime: datasource adapters, richer parser integrations, EXPLAIN probes, trust-mode storage, approval routing, daemon behavior, UI, Enterprise deployment, SSO/RBAC, and operational controls.
+```bash
+go run ./cmd/futrixdata-cli --help
+```
 
 ## Repository Layout
 
 ```text
-cmd/futrix-audit-verify/     Standalone audit-log verifier
-cmd/futrix-evidence-verify/  Evidence-bundle verifier CLI
-pkg/auditchain/              Local audit hash-chain verifier
-pkg/masking/                 Deterministic field masking
-pkg/riskengine/              Portable risk-engine core
-pkg/protocol/                Public agent tool protocol types
-pkg/evidence/                Evidence-bundle verifier package
-docs/                        Specs, assurance matrix, and scope notes
-examples/                    Audit, risk-rule, and product-export fixtures
-release-verification/        Checksum verification helper
+frontend/                 Vue 3 desktop UI, Vite build, Vitest tests
+internal/                 Core runtime, datasource adapters, risk, masking, IPC, daemon, MCP, auth
+cmd/futrixdata-cli/       CLI entry point for agent and operator workflows
+cmd/http/                 Optional HTTP server entry point
+packaging/                CLI and npm packaging helpers
+scripts/                  Release and install helper scripts
+build/                    Wails application icons and static build metadata
+docs/assets/              README media assets
 ```
 
-## What Is Not Open
+The repository intentionally excludes the root `data/` directory and other local runtime files such as datasource records, logs, auth sessions, schema caches, generated chat history, local prompts, agent-specific skills, internal task notes, and temporary build outputs.
 
-This repository does not include the complete FutrixData product. The following remain proprietary:
+## Development Notes
 
-- desktop UI, datasource adapters, and credential storage;
-- account, license, billing, and entitlement flows;
-- Enterprise deployment, RBAC, SSO, and tenant administration;
-- signing, notarization, release credentials, and private build systems.
+FutrixData is a local-first desktop project. During development, the app may create ignored files under `data/`, `frontend/dist/`, `frontend/wailsjs/`, and `build/bin/`. These are runtime or generated artifacts and must not be committed.
 
-The boundary is intentional: the public package supports review and verification of key security claims without making the full commercial product reconstructable from this repository alone.
+Common checks:
 
-## Known Limits
+```bash
+go test $(go list ./... | grep -v '/frontend/node_modules/')
+node --test packaging/cli/tests/*.test.mjs
+npm --prefix frontend run build
+```
 
-- **Local audit hash chains are not remote notarization.** They detect changes to the current file, but a fully privileged local attacker can rewrite the file and recompute hashes unless an external anchor is used.
-- **Deterministic masking is not anonymization.** It preserves equality for agent analysis, but low-cardinality values remain guessable by enumeration.
-- **The public risk engine is a portable subset.** The commercial product adds live datasource execution, EXPLAIN probes, trust modes, approval routing, and Enterprise policy controls.
+For UI changes, run the relevant Vitest files with `npm --prefix frontend run test -- <test-file>` and validate the Wails desktop runtime, not only the Vite browser preview. The desktop shell, IPC daemon, packaged assets, and frontend bindings are part of the product surface.
 
-## Specifications
+## Contributing
 
-- [Open-source scope analysis](docs/open-source-scope.md)
-- [Assurance matrix](docs/assurance-matrix.md)
-- [Production consistency statement](docs/production-consistency.md)
-- [Evidence bundle](docs/evidence-bundle.md)
-- [Threat model](docs/threat-model.md)
-- [Audit-chain specification](docs/audit-chain.md)
-- [Masking specification](docs/masking.md)
-- [Partial risk-engine specification](docs/risk-engine.md)
-- [Agent protocol](docs/agent-protocol.md)
+Issues and pull requests are welcome. Useful contributions include datasource adapter fixes, risk-rule coverage, masking behavior improvements, desktop workflow polish, tests, packaging fixes, and documentation that helps operators run FutrixData safely.
 
-## Contributing and Security
+Before contributing, read [CONTRIBUTING.md](CONTRIBUTING.md) and keep secrets, credentials, private logs, customer data, and local runtime files out of public issues and pull requests.
 
-- Contribution guidelines: [CONTRIBUTING.md](CONTRIBUTING.md)
-- Security policy: [SECURITY.md](SECURITY.md)
-- Attribution notice: [NOTICE](NOTICE)
+## Security
+
+FutrixData is a security-sensitive project. Please do not disclose exploitable details, credentials, customer data, or private logs in public issues. Follow [SECURITY.md](SECURITY.md) for responsible reporting.
 
 ## License
 
-This repository is licensed under Apache-2.0. See [LICENSE](LICENSE).
-
-The FutrixData desktop application and FutrixData Enterprise Edition remain commercial products under their own license terms.
+FutrixData is licensed under the Apache License 2.0. See [LICENSE](LICENSE).

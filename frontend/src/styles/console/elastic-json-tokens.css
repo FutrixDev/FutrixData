@@ -1,0 +1,27 @@
+/* Shared JSON syntax-highlight token colors for Elasticsearch views.
+   Used by both the DSL editor overlay and the results expanded-row / raw JSON. */
+
+:root {
+  --elastic-json-key: #2f71ae;
+  --elastic-json-string: #128562;
+  --elastic-json-number: #b77512;
+  --elastic-json-literal: #1f68a9;
+  --elastic-json-brace: #5e738a;
+  --elastic-json-punctuation: #8da0b4;
+}
+
+.dark {
+  --elastic-json-key: #93c5fd;
+  --elastic-json-string: #5eead4;
+  --elastic-json-number: #fbbf24;
+  --elastic-json-literal: #a5b4fc;
+  --elastic-json-brace: rgba(255, 255, 255, 0.5);
+  --elastic-json-punctuation: rgba(255, 255, 255, 0.35);
+}
+
+.elastic-dsl-json-token-key { color: var(--elastic-json-key); }
+.elastic-dsl-json-token-string { color: var(--elastic-json-string); }
+.elastic-dsl-json-token-number { color: var(--elastic-json-number); }
+.elastic-dsl-json-token-literal { color: var(--elastic-json-literal); }
+.elastic-dsl-json-token-brace { color: var(--elastic-json-brace); }
+.elastic-dsl-json-token-punctuation { color: var(--elastic-json-punctuation); }

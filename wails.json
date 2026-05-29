@@ -1,0 +1,32 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "FutrixData",
+  "outputfilename": "FutrixData",
+  "frontend:install": "npm install",
+  "frontend:build": "npm run build",
+  "frontend:dev:watcher": "npm run dev",
+  "frontend:dev:serverUrl": "auto",
+  "author": {
+    "name": "wangqianjun",
+    "email": "wangqianqianjun@gmail.com"
+  },
+  "info": {
+    "productName": "FutrixData",
+    "productVersion": "1.0.27",
+    "copyright": "Copyright 2026 FutrixData",
+    "comments": "AI Data Gateway",
+    "companyName": "FutrixDev",
+    "protocols": [
+      {
+        "scheme": "futrix",
+        "description": "FutrixData Auth Callback",
+        "role": "Editor"
+      },
+      {
+        "scheme": "futrixdata",
+        "description": "FutrixData Plugin Connect",
+        "role": "Editor"
+      }
+    ]
+  }
+}

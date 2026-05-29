@@ -1,0 +1,127 @@
+.notice {
+  background: var(--notice-bg);
+  border-color: var(--notice-border);
+  color: var(--ink);
+}
+
+.card,
+.panel,
+.entity-detail,
+.result,
+.mongo-item,
+.history-item {
+  background: var(--panel);
+  border-color: var(--edge);
+}
+
+.ai-panel-shell,
+.ai-card {
+  background: var(--panel-strong);
+  border-color: var(--edge);
+}
+
+.result,
+.entity-detail,
+.history-item {
+  color: var(--ink);
+}
+
+input,
+select,
+textarea {
+  background: var(--input-bg);
+  color: var(--ink);
+  border-color: var(--edge);
+}
+
+.btn.secondary {
+  color: var(--ink);
+  border-color: var(--edge);
+}
+
+.btn.ghost {
+  color: var(--soft-ink);
+  border-color: var(--edge);
+}
+
+.status.connected {
+  background: var(--success-bg);
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.status.failed {
+  background: var(--danger-bg);
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.statement-status.success {
+  border-color: rgba(74, 222, 128, 0.35);
+  background: rgba(74, 222, 128, 0.12);
+  color: var(--success);
+}
+
+.statement-status.failed {
+  border-color: rgba(248, 113, 113, 0.4);
+  background: rgba(248, 113, 113, 0.12);
+  color: var(--danger);
+}
+
+.statement-status.warning {
+  border-color: rgba(234, 179, 8, 0.4);
+  background: rgba(234, 179, 8, 0.16);
+  color: #b45309;
+}
+
+.mongo-item-action {
+  border-color: var(--edge);
+  color: var(--ink);
+}
+
+.ai-panel {
+  background: linear-gradient(
+    160deg,
+    color-mix(in oklab, var(--panel-strong) 80%, transparent) 0%,
+    color-mix(in oklab, var(--panel) 85%, transparent) 100%
+  );
+}
+
+.ai-panel-shell {
+  background: var(--panel-strong);
+}
+
+.ai-form-grid input,
+.ai-form-grid select {
+  background: var(--input-bg);
+  color: var(--ink);
+  border-color: var(--edge);
+}
+
+.ai-visibility-toggle {
+  border-color: var(--edge);
+}
+
+.ai-card-title,
+.ai-card-model {
+  color: var(--soft-ink);
+}
+
+.dark .btn.secondary:hover,
+.dark .btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.dark .entity-item:hover,
+.dark .history-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.dark .result,
+.dark .entity-detail {
+  background: rgba(18, 24, 30, 0.7);
+}
+
+.dark .ai-form-note {
+  background: rgba(18, 24, 30, 0.7);
+}

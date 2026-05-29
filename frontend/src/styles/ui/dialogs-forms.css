@@ -1,0 +1,810 @@
+      .dialog-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 14, 23, 0.5);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        display: grid;
+        place-items: center;
+        z-index: 50;
+        padding: 16px;
+        animation: dialog-fade-in 0.2s ease;
+      }
+
+      @keyframes dialog-fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes dialog-slide-up {
+        from { opacity: 0; transform: translateY(12px) scale(0.97); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      .dialog-card {
+        width: min(440px, 92vw);
+        background: var(--panel-strong, var(--panel));
+        border: 1px solid var(--edge);
+        border-radius: 18px;
+        padding: 22px;
+        box-shadow:
+          0 4px 12px rgba(0, 0, 0, 0.08),
+          0 24px 60px rgba(0, 0, 0, 0.2);
+        display: grid;
+        gap: 16px;
+        animation: dialog-slide-up 0.25s ease;
+      }
+
+      .dialog-card--scrollable {
+        max-height: calc(100vh - 32px);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .dialog-backdrop--results {
+        padding: 12px;
+      }
+
+      .dialog-card--results {
+        width: min(1280px, calc(100vw - 24px));
+        height: min(940px, calc(100vh - 24px));
+        min-width: min(720px, calc(100vw - 24px));
+        min-height: min(520px, calc(100vh - 24px));
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        background: var(--paper);
+        border: 1px solid color-mix(in oklab, var(--edge) 62%, var(--ink));
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
+        resize: both;
+      }
+
+      .dialog-card--results .dialog-head {
+        cursor: grab;
+        user-select: none;
+      }
+
+      .dialog-card--results .dialog-head:active {
+        cursor: grabbing;
+      }
+
+      .dialog-body {
+        min-height: 0;
+      }
+
+      .dialog-body--results {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .dialog-card h4 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--ink);
+      }
+
+      .dialog-head .meta {
+        margin-top: 2px;
+      }
+
+      .dialog-card--danger {
+        width: min(420px, 92vw);
+        padding: 20px;
+        gap: 14px;
+        border-color: color-mix(in oklab, var(--danger) 18%, var(--edge));
+        background: var(--panel-strong, var(--panel));
+        box-shadow:
+          0 4px 12px rgba(0, 0, 0, 0.08),
+          0 24px 60px rgba(0, 0, 0, 0.18);
+      }
+
+      .dialog-card--warning {
+        width: min(420px, 92vw);
+        padding: 20px;
+        gap: 14px;
+        border-color: color-mix(in oklab, var(--warning, #d97706) 18%, var(--edge));
+        background: var(--panel-strong, var(--panel));
+        box-shadow:
+          0 4px 12px rgba(0, 0, 0, 0.08),
+          0 24px 60px rgba(0, 0, 0, 0.18);
+      }
+
+      .dialog-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .dialog-head-main {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .dialog-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        font-size: 15px;
+        letter-spacing: 0.02em;
+        background: color-mix(in oklab, var(--primary) 12%, var(--surface, var(--panel)));
+        color: var(--primary);
+        border: 1px solid color-mix(in oklab, var(--primary) 18%, var(--edge));
+        flex-shrink: 0;
+      }
+
+      .dialog-icon.danger {
+        background: color-mix(in oklab, var(--danger) 10%, var(--panel));
+        color: var(--danger, #b91c1c);
+        border: 1px solid color-mix(in oklab, var(--danger) 20%, var(--edge));
+      }
+
+      .dialog-icon.warning {
+        background: color-mix(in oklab, var(--warning, #d97706) 10%, var(--panel));
+        color: var(--warning, #d97706);
+        border: 1px solid color-mix(in oklab, var(--warning, #d97706) 20%, var(--edge));
+      }
+
+      .pill-danger {
+        border-color: color-mix(in oklab, var(--danger) 25%, var(--edge));
+        color: #b91c1c;
+        background: color-mix(in oklab, var(--danger) 8%, var(--panel-strong));
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+
+      .pill-warning {
+        border-color: color-mix(in oklab, var(--warning, #d97706) 25%, var(--edge));
+        color: #d97706;
+        background: color-mix(in oklab, var(--warning, #d97706) 8%, var(--panel-strong));
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+
+      .dialog-command {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 12px;
+        line-height: 1.5;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid var(--edge);
+        background: color-mix(in oklab, var(--panel-soft, var(--panel)) 70%, var(--paper, #fff));
+        color: var(--ink);
+        word-break: break-word;
+        white-space: pre-wrap;
+        max-height: 160px;
+        overflow: auto;
+      }
+
+      .dialog-code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 12px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid var(--edge);
+        background: var(--panel-strong);
+        color: var(--ink);
+        white-space: pre-wrap;
+        word-break: break-word;
+        max-height: min(52vh, 420px);
+        overflow: auto;
+      }
+
+      .dialog-stages {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--soft-ink);
+      }
+
+      .dialog-stages svg {
+        flex-shrink: 0;
+        opacity: 0.5;
+      }
+
+      .dialog-highlight {
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: 1px dashed color-mix(in oklab, var(--danger) 28%, var(--edge));
+        background: color-mix(in oklab, var(--danger) 6%, var(--panel));
+        color: var(--ink);
+        font-weight: 600;
+        font-size: 13px;
+        word-break: break-word;
+      }
+
+      .dialog-actions {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+        padding-top: 4px;
+        border-top: 1px solid color-mix(in oklab, var(--edge) 50%, transparent);
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+
+      .form-grid .span-2 {
+        grid-column: 1 / -1;
+      }
+
+      .install-details {
+        margin-top: 10px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px dashed var(--edge);
+        background: var(--panel-soft);
+      }
+
+      .install-details > summary {
+        cursor: pointer;
+        font-weight: 700;
+        color: var(--ink);
+        list-style: none;
+      }
+
+      .install-details > summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .install-grid {
+        margin-top: 10px;
+        display: grid;
+        gap: 12px;
+      }
+
+      .install-block {
+        display: grid;
+        gap: 6px;
+      }
+
+      .install-block .btn.mini {
+        justify-self: start;
+        min-height: 32px;
+        padding: 5px 10px;
+      }
+
+      .inline-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .ai-provider-line {
+        font-size: 13px;
+        color: var(--soft-ink);
+      }
+
+      .provider-warning {
+        margin-top: 6px;
+        font-size: 12px;
+        color: #b3261e;
+      }
+
+      .ai-provider-row {
+        flex: 1;
+      }
+
+      .ai-provider-row select {
+        flex: 1;
+        min-width: 0;
+      }
+
+      #ds-ai-provider-clear:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+
+      .ai-provider-meta {
+        margin-top: 6px;
+      }
+
+      .btn.mini {
+        width: auto;
+        min-height: 24px;
+        padding: 3px 8px;
+        border-radius: var(--control-radius);
+        font-size: 11px;
+        box-shadow: none;
+      }
+
+      .stack {
+        margin-top: 4px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .dialog-scroll {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        padding: 2px 0;
+      }
+
+      .form-errors {
+        margin-bottom: 12px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(208, 75, 26, 0.4);
+        background: rgba(208, 75, 26, 0.08);
+        color: var(--accent-dark);
+        font-size: 13px;
+        display: none;
+      }
+
+      .form-errors.show {
+        display: block;
+      }
+
+      .field-error {
+        border-color: rgba(208, 75, 26, 0.6);
+        background: #fff3ee;
+      }
+
+      label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--soft-ink);
+        margin-bottom: 6px;
+        letter-spacing: 0.01em;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        min-height: var(--control-height);
+        padding: 8px 12px;
+        border-radius: var(--control-radius);
+        border: 1px solid var(--edge);
+        background: var(--input-bg);
+        font-family: inherit;
+        font-size: var(--control-font);
+        color: var(--ink);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 12%, transparent);
+      }
+
+      select {
+        cursor: pointer;
+        appearance: none;
+        background-image:
+          linear-gradient(45deg, transparent 50%, color-mix(in oklab, var(--ink) 55%, var(--soft-ink)) 50%),
+          linear-gradient(135deg, color-mix(in oklab, var(--ink) 55%, var(--soft-ink)) 50%, transparent 50%);
+        background-position:
+          calc(100% - 16px) calc(50% - 2px),
+          calc(100% - 11px) calc(50% - 2px);
+        background-size: 5px 5px;
+        background-repeat: no-repeat;
+        padding-right: 30px;
+      }
+
+      .ds-type-select {
+        position: relative;
+      }
+
+      .ds-type-select-trigger {
+        width: 100%;
+        min-height: var(--control-height);
+        padding: 6px 10px;
+        border-radius: var(--control-radius);
+        border: 1px solid var(--edge);
+        background: var(--input-bg);
+        font-family: inherit;
+        font-size: var(--control-font);
+        color: var(--ink);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-align: left;
+      }
+
+      .ds-type-select-trigger:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .ds-type-select-trigger.field-error {
+        border-color: rgba(208, 75, 26, 0.6);
+        background: #fff3ee;
+      }
+
+      .ds-type-select-trigger-icon {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+        object-fit: contain;
+      }
+
+      .ds-type-select-trigger-label {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .ds-type-select-chevron {
+        width: 10px;
+        height: 10px;
+        flex-shrink: 0;
+        opacity: 0.7;
+        background-image:
+          linear-gradient(45deg, transparent 50%, color-mix(in oklab, var(--ink) 55%, var(--soft-ink)) 50%),
+          linear-gradient(135deg, color-mix(in oklab, var(--ink) 55%, var(--soft-ink)) 50%, transparent 50%);
+        background-position:
+          center calc(50% - 1px),
+          center calc(50% - 1px);
+        background-size: 5px 5px;
+        background-repeat: no-repeat;
+      }
+
+      .ds-type-select-menu {
+        position: absolute;
+        inset: calc(100% + 6px) 0 auto 0;
+        z-index: 30;
+        background: var(--panel);
+        border: 1px solid var(--edge);
+        border-radius: 12px;
+        padding: 6px;
+        box-shadow: 0 18px 36px rgba(15, 23, 42, 0.14);
+        display: grid;
+        gap: 4px;
+      }
+
+      .ds-type-select-option {
+        width: 100%;
+        border: 1px solid transparent;
+        background: transparent;
+        border-radius: 10px;
+        padding: 8px 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        color: var(--ink);
+        font-family: inherit;
+        font-size: var(--control-font);
+        text-align: left;
+      }
+
+      .ds-type-select-option:hover {
+        background: color-mix(in oklab, var(--panel-strong) 70%, var(--panel));
+        border-color: color-mix(in oklab, var(--primary) 22%, var(--edge));
+      }
+
+      .ds-type-select-option[aria-selected="true"] {
+        background: color-mix(in oklab, var(--primary) 10%, var(--panel));
+        border-color: color-mix(in oklab, var(--primary) 28%, var(--edge));
+      }
+
+      .ds-type-select-option-icon {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+        object-fit: contain;
+      }
+
+      input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        min-height: 16px;
+        padding: 0;
+        margin: 0;
+        vertical-align: middle;
+        flex: 0 0 auto;
+      }
+
+      .checkbox-inline-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0;
+        color: var(--soft-ink);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      .checkbox-inline-label input[type="checkbox"] {
+        margin: 0;
+      }
+
+      .dynamo-config-path-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: nowrap;
+      }
+
+      .dynamo-config-path-row input {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+
+      .dynamo-config-path-row .btn {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        margin-top: 0;
+      }
+
+      .dynamo-sensitive-inline {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: nowrap;
+      }
+
+      .dynamo-sensitive-inline input {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+
+      .dynamo-sensitive-inline .btn {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        margin-top: 0;
+      }
+
+      .password-toggle-wrapper {
+        position: relative;
+      }
+
+      .password-toggle-wrapper input {
+        width: 100%;
+        padding-right: 36px;
+      }
+
+      .password-toggle-btn {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 2px;
+        color: var(--fg-muted, #888);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.6;
+        transition: opacity 0.15s;
+      }
+
+      .password-toggle-btn:hover {
+        opacity: 1;
+      }
+
+      .dynamo-sensitive-token {
+        position: relative;
+      }
+
+      .dynamo-sensitive-token textarea {
+        padding-right: 72px;
+      }
+
+      .dynamo-sensitive-token-copy {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        margin-top: 0;
+        z-index: 1;
+      }
+
+      .pg-cert-meta.pg-cert-meta-success {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid #2e7d32;
+        background: #e8f5e9;
+        color: #1b5e20;
+      }
+
+      .pg-cert-link {
+        color: #1b5e20;
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        white-space: nowrap;
+      }
+
+      .pg-cert-link:hover,
+      .pg-cert-link:focus-visible {
+        color: #155421;
+      }
+
+      textarea {
+        min-height: 96px;
+        resize: vertical;
+        line-height: 1.4;
+      }
+
+      .toggle-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .toggle-row label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0;
+        color: var(--ink);
+        font-size: 13px;
+      }
+
+      .test-connection-block {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        max-width: min(720px, 100%);
+      }
+
+      .test-connection-status {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .test-connection-status .status {
+        margin-top: 0;
+      }
+
+      .test-connection-detail {
+        font-size: 12px;
+        line-height: 1.35;
+        color: var(--soft-ink);
+        word-break: break-word;
+      }
+
+      .test-connection-status.connected .test-connection-detail {
+        color: #1b5e20;
+      }
+
+      .test-connection-status.failed .test-connection-detail {
+        color: #8e1b1b;
+      }
+
+      .d1-oauth-warning {
+        color: #8e1b1b;
+      }
+
+      /* ── Dark mode overrides ── */
+      .dark .dialog-backdrop {
+        background: rgba(5, 4, 20, 0.6);
+      }
+
+      .dark .dialog-card {
+        background: var(--popover, #100f1e);
+        border-color: rgba(129, 140, 248, 0.12);
+        box-shadow:
+          0 4px 16px rgba(0, 0, 0, 0.3),
+          0 24px 60px rgba(0, 0, 0, 0.4),
+          0 0 0 1px rgba(129, 140, 248, 0.06);
+      }
+
+      .dark .dialog-card--danger {
+        border-color: rgba(248, 113, 113, 0.12);
+        background: var(--popover, #100f1e);
+        box-shadow:
+          0 4px 16px rgba(0, 0, 0, 0.3),
+          0 24px 60px rgba(0, 0, 0, 0.4),
+          inset 0 0 0 1px rgba(248, 113, 113, 0.06);
+      }
+
+      .dark .dialog-card--warning {
+        border-color: rgba(217, 119, 6, 0.12);
+        background: var(--popover, #100f1e);
+        box-shadow:
+          0 4px 16px rgba(0, 0, 0, 0.3),
+          0 24px 60px rgba(0, 0, 0, 0.4),
+          inset 0 0 0 1px rgba(217, 119, 6, 0.06);
+      }
+
+      .dark .dialog-icon {
+        background: color-mix(in oklab, var(--primary) 14%, transparent);
+        border-color: rgba(129, 140, 248, 0.15);
+      }
+
+      .dark .dialog-icon.danger {
+        background: rgba(248, 113, 113, 0.12);
+        color: #f87171;
+        border-color: rgba(248, 113, 113, 0.2);
+      }
+
+      .dark .dialog-icon.warning {
+        background: rgba(217, 119, 6, 0.12);
+        color: #fbbf24;
+        border-color: rgba(217, 119, 6, 0.2);
+      }
+
+      .dark .dialog-highlight {
+        border-color: rgba(248, 113, 113, 0.2);
+        background: rgba(248, 113, 113, 0.06);
+      }
+
+      .dark .pill-danger {
+        color: #f87171;
+        border-color: rgba(248, 113, 113, 0.25);
+        background: rgba(248, 113, 113, 0.1);
+      }
+
+      .dark .pill-warning {
+        color: #fbbf24;
+        border-color: rgba(217, 119, 6, 0.25);
+        background: rgba(217, 119, 6, 0.1);
+      }
+
+      .dark .dialog-actions {
+        border-top-color: rgba(129, 140, 248, 0.08);
+      }
+
+      .dark .dialog-command {
+        border-color: rgba(129, 140, 248, 0.12);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+      }
+
+      .dark .field-error {
+        background: rgba(239, 68, 68, 0.08);
+      }
+
+      .dark .ds-type-select-trigger.field-error {
+        background: rgba(239, 68, 68, 0.08);
+      }
+
+      .dark .pg-cert-pill {
+        border-color: rgba(74, 222, 128, 0.3);
+        background: rgba(74, 222, 128, 0.08);
+        color: #4ade80;
+      }
+
+      .dark .pg-cert-link {
+        color: #4ade80;
+      }
+
+      .dark .pg-cert-link:hover,
+      .dark .pg-cert-link:focus-visible {
+        color: #86efac;
+      }
+
+      .dark .test-connection-status.connected .test-connection-detail {
+        color: #4ade80;
+      }
+
+      .dark .test-connection-status.failed .test-connection-detail {
+        color: #f87171;
+      }
+
+      .dark .d1-oauth-warning {
+        color: #f87171;
+      }

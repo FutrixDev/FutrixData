@@ -1,0 +1,401 @@
+      .template-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: flex-end;
+        margin-bottom: 12px;
+      }
+
+      .template-target-display {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+      }
+
+      .template-target-title {
+        color: var(--soft-ink);
+        font-weight: 600;
+      }
+
+      .template-target-value {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 12px;
+        color: var(--ink);
+        background: var(--panel-strong);
+        border: 1px solid var(--edge);
+        border-radius: 8px;
+        padding: 2px 8px;
+      }
+
+      .template-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .template-group .btn {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+
+      .template-extra {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .template-extra input {
+        min-width: 140px;
+      }
+
+      .redis-detail-card {
+        margin-bottom: 16px;
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid var(--edge);
+        background: var(--panel-soft);
+        display: grid;
+        gap: 10px;
+      }
+
+      .redis-detail-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .redis-detail-title {
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .redis-detail-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .redis-detail-body {
+        display: grid;
+        gap: 10px;
+      }
+
+      .redis-inspector {
+        display: grid;
+        gap: 10px;
+      }
+
+      .redis-inspector-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .redis-inspector-tab {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 11px;
+        border: 1px solid var(--edge);
+        background: var(--panel-soft);
+        color: var(--soft-ink);
+        cursor: pointer;
+        max-width: 100%;
+      }
+
+      .redis-inspector-tab:hover {
+        background: var(--panel);
+        color: var(--ink);
+      }
+
+      .redis-inspector-tab.active {
+        background: color-mix(in oklab, var(--primary) 12%, var(--panel));
+        border-color: color-mix(in oklab, var(--primary) 35%, var(--edge));
+        color: var(--ink);
+      }
+
+      .redis-inspector-tab.disabled,
+      .redis-inspector-tab.disabled:hover {
+        opacity: 0.45;
+        cursor: not-allowed;
+        background: var(--panel-soft);
+        color: var(--soft-ink);
+      }
+
+      .redis-inspector-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--soft-ink);
+        flex: 0 0 auto;
+      }
+
+      .redis-inspector-dot.success {
+        background: var(--success);
+      }
+
+      .redis-inspector-dot.failed {
+        background: var(--danger);
+      }
+
+      .redis-inspector-dot.warning {
+        background: rgba(234, 179, 8, 0.95);
+      }
+
+      .redis-inspector-clear {
+        margin-left: auto;
+      }
+
+      .redis-key-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .redis-key-label {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--soft-ink);
+        font-weight: 700;
+      }
+
+      .redis-key-value {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+          monospace;
+        font-size: 12px;
+        border-radius: 8px;
+        padding: 2px 8px;
+        border: 1px solid var(--edge);
+        background: #fffaf3;
+      }
+
+      .redis-key-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .pill.redis-pill {
+        cursor: default;
+        background: color-mix(in oklab, var(--panel-soft) 70%, #ffffff);
+      }
+
+      .redis-preview {
+        display: grid;
+        gap: 8px;
+      }
+
+      .redis-command-output .result-tabs {
+        margin-top: 0;
+      }
+
+      .redis-preview-body {
+        display: grid;
+        gap: 8px;
+        min-height: 120px;
+        max-height: 260px;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .redis-preview table {
+        width: 100%;
+        table-layout: fixed;
+      }
+
+      .redis-preview th,
+      .redis-preview td {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+
+      .redis-preview-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .redis-preview-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+      }
+
+      .redis-preview-actions .statement-status {
+        max-width: 240px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .redis-string-preview {
+        border-radius: 10px;
+        border: 1px solid var(--edge);
+        background: #fffaf3;
+        padding: 10px;
+      }
+
+      .redis-value {
+        margin: 0;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+          monospace;
+        font-size: 12px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+
+      .redis-value--hex {
+        white-space: pre;
+        overflow-x: auto;
+        word-break: normal;
+        overflow-wrap: normal;
+      }
+
+      .redis-string-chip--binary {
+        background: color-mix(in oklab, #b45309 14%, transparent);
+        color: #b45309;
+        border: 1px solid color-mix(in oklab, #b45309 35%, transparent);
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      .redis-string-view-toggle {
+        display: inline-flex;
+        gap: 2px;
+        margin-left: auto;
+      }
+
+      .redis-string-view-toggle .btn.is-active {
+        background: color-mix(in oklab, var(--primary) 14%, transparent);
+        color: var(--primary);
+      }
+
+      .redis-command-hint {
+        margin-top: 8px;
+        padding: 6px 8px;
+        border-radius: 8px;
+        border: 1px dashed var(--edge);
+        background: var(--panel-soft);
+        font-size: 11px;
+        color: var(--ink);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+          monospace;
+      }
+
+      .redis-command-hint.muted {
+        color: var(--soft-ink);
+      }
+
+      .redis-result {
+        border-radius: 12px;
+        border: 1px solid var(--edge);
+        background: var(--panel-soft);
+        padding: 12px;
+      }
+
+      .redis-result-output {
+        margin: 0;
+        font-size: 12px;
+        white-space: pre-wrap;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+          monospace;
+      }
+
+      .suggestions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+        padding: 8px 10px;
+        border: 1px dashed var(--edge);
+        border-radius: 12px;
+        background: var(--panel-soft);
+      }
+
+      .suggestions .meta {
+        width: 100%;
+      }
+
+      .suggestion-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        width: 100%;
+        min-width: 0;
+      }
+
+      .suggestion-actions input {
+        flex: 1;
+        min-width: 160px;
+      }
+
+      .suggestions code {
+        padding: 2px 6px;
+        border-radius: 8px;
+        background: #fff0e1;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 12px;
+      }
+
+      .mongo-field-menu {
+        position: fixed;
+        z-index: 1200;
+        min-width: 180px;
+        max-width: 240px;
+        background: #fffaf4;
+        border: 1px solid var(--edge);
+        border-radius: 12px;
+        padding: 8px;
+        box-shadow: 0 18px 35px rgba(25, 23, 15, 0.18);
+        display: none;
+      }
+
+      .mongo-field-menu.open {
+        display: block;
+      }
+
+      .mongo-field-menu-title {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        color: var(--soft-ink);
+        margin-bottom: 4px;
+      }
+
+      .mongo-field-menu-hint,
+      .mongo-field-menu-empty {
+        font-size: 12px;
+        color: var(--soft-ink);
+        margin-bottom: 6px;
+      }
+
+      .mongo-field-menu-item {
+        width: 100%;
+        border: 1px solid transparent;
+        background: transparent;
+        padding: 6px 8px;
+        border-radius: 8px;
+        text-align: left;
+        font-size: 12px;
+        cursor: pointer;
+        color: var(--ink);
+      }
+
+      .mongo-field-menu-item:hover {
+        border-color: var(--accent);
+        background: #fff2e3;
+      }

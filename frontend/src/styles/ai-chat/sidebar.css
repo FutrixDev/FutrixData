@@ -1,0 +1,794 @@
+/* AI Chat Sidebar */
+.ai-sidebar {
+  --ai-rail: 56px;
+  --ai-ivory: #f9faef;
+  --ai-paper: #f3f4e9;
+  --ai-divider: #c5c8ba;
+  --ai-ink: #1a1c16;
+  --ai-ink-muted: #44483d;
+  --ai-sage: #4c662b;
+  --ai-amber: #b1d18a;
+  --ai-danger: #c04a3d;
+  --ai-warning: #c89b2c;
+  --ai-safe: #2f7a47;
+  --ai-caution: #8a6b3a;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: 100%;
+  color: var(--ai-ink);
+  background: linear-gradient(
+    165deg,
+    var(--ai-ivory) 0%,
+    var(--ai-paper) 62%,
+    color-mix(in oklab, var(--ai-paper) 85%, var(--ai-amber)) 100%
+  );
+  border: 1px solid var(--ai-divider);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px 16px;
+  padding-bottom: 48px;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: -12px 0 28px rgba(40, 52, 24, 0.12);
+}
+
+@media (max-width: 1100px) {
+  .ai-sidebar {
+    padding-bottom: 160px;
+  }
+}
+
+.ai-sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid color-mix(in oklab, var(--ai-divider) 60%, transparent);
+}
+
+.ai-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.ai-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.ai-composer-icon.ai-header-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklab, var(--ai-divider) 70%, transparent);
+  background: color-mix(in oklab, var(--ai-ivory) 85%, transparent);
+  color: var(--ai-ink-muted);
+}
+
+.ai-title-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ai-title {
+  font-weight: 700;
+  letter-spacing: 0.1px;
+  text-transform: none;
+  font-size: 13px;
+  line-height: 1.1;
+  color: var(--ai-ink);
+}
+
+.ai-title-sub {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ai-ink-muted);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ai-icon-btn {
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+  flex: 0 0 32px;
+  border-radius: 12px;
+  border: 1px solid var(--ai-divider);
+  background: color-mix(in oklab, var(--ai-paper) 80%, var(--ai-ivory));
+  color: var(--ai-ink);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.ai-icon-glyph {
+  width: 16px;
+  height: 16px;
+}
+
+.ai-icon-btn:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in oklab, var(--ai-sage) 35%, var(--ai-divider));
+  box-shadow: 0 6px 12px rgba(57, 77, 32, 0.12);
+}
+
+.ai-history-strip {
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  overflow: visible;
+}
+
+.ai-history-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.ai-history-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklab, var(--ai-divider) 70%, transparent);
+  background: color-mix(in oklab, var(--ai-paper) 80%, var(--ai-ivory));
+  padding: 4px 8px;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.ai-history-tab.active {
+  border-color: color-mix(in oklab, var(--ai-sage) 60%, var(--ai-divider));
+  background: color-mix(in oklab, var(--ai-amber) 20%, var(--ai-paper));
+  box-shadow: 0 6px 12px rgba(57, 77, 32, 0.12);
+}
+
+.ai-history-tab:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in oklab, var(--ai-amber) 28%, var(--ai-divider));
+}
+
+.ai-history-main {
+  background: transparent;
+  border: none;
+  padding: 0 2px;
+  min-height: 32px;
+  cursor: pointer;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.ai-history-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ai-ink);
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ai-history-delete {
+  border: none;
+  background: transparent;
+  color: var(--ai-ink-muted);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.ai-history-delete:hover {
+  color: var(--ai-sage);
+}
+
+.ai-sidebar-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow: hidden;
+}
+
+.ai-chat-stream {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 4px;
+}
+
+.ai-message {
+  max-width: 100%;
+  min-width: 0;
+  padding: 11px 13px;
+  border-radius: 16px;
+  font-size: 12px;
+  line-height: 1.55;
+  background: color-mix(in oklab, var(--ai-paper) 78%, var(--ai-ivory));
+  color: var(--ai-ink);
+}
+
+.ai-markdown {
+  word-break: break-word;
+}
+
+.ai-markdown :where(h1, h2, h3) {
+  margin: 0.6em 0 0.25em;
+  line-height: 1.25;
+}
+
+.ai-markdown :where(h1) {
+  font-size: 1.1em;
+}
+
+.ai-markdown :where(h2) {
+  font-size: 1.05em;
+}
+
+.ai-markdown :where(h3) {
+  font-size: 1em;
+}
+
+.ai-markdown :where(p) {
+  margin: 0.25em 0;
+}
+
+.ai-markdown :where(ul, ol) {
+  margin: 0.35em 0 0.35em 1.2em;
+  padding: 0;
+}
+
+.ai-markdown :where(code) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.92em;
+  padding: 0.12em 0.3em;
+  border-radius: 8px;
+  background: color-mix(in oklab, var(--ai-divider) 20%, transparent);
+}
+
+.ai-markdown :where(pre) {
+  margin: 0.6em 0;
+  padding: 10px 12px;
+  border-radius: 14px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  background: color-mix(in oklab, var(--ai-ink) 92%, var(--ai-paper));
+  color: #f6f7f2;
+  border: 1px solid color-mix(in oklab, var(--ai-divider) 30%, transparent);
+}
+
+.ai-markdown :where(pre code) {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+.ai-markdown :where(blockquote) {
+  margin: 0.6em 0;
+  padding: 0.4em 0.8em;
+  border-left: 3px solid color-mix(in oklab, var(--ai-sage) 55%, var(--ai-divider));
+  color: color-mix(in oklab, var(--ai-ink) 78%, var(--ai-ink-muted));
+  background: color-mix(in oklab, var(--ai-paper) 70%, transparent);
+  border-radius: 12px;
+}
+
+.ai-markdown :where(hr) {
+  border: 0;
+  height: 1px;
+  margin: 0.8em 0;
+  background: color-mix(in oklab, var(--ai-divider) 55%, transparent);
+}
+
+.ai-markdown :where(table) {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.6em 0;
+  font-size: 0.95em;
+}
+
+.ai-markdown :where(th, td) {
+  border: 1px solid color-mix(in oklab, var(--ai-divider) 60%, transparent);
+  padding: 6px 8px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.ai-markdown :where(th) {
+  background: color-mix(in oklab, var(--ai-amber) 16%, var(--ai-paper));
+  font-weight: 700;
+}
+
+.ai-markdown :where(a) {
+  color: color-mix(in oklab, var(--ai-sage) 70%, #0b3d91);
+  text-decoration: underline;
+}
+
+.ai-message.user {
+  align-self: flex-end;
+  background: color-mix(in oklab, var(--ai-amber) 26%, var(--ai-paper));
+}
+
+.ai-message.assistant {
+  align-self: flex-start;
+  background: color-mix(in oklab, var(--ai-paper) 92%, var(--ai-sage));
+  border: 1px solid color-mix(in oklab, var(--ai-divider) 60%, transparent);
+}
+
+.ai-message-implicit {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid color-mix(in oklab, var(--ai-divider) 50%, transparent);
+}
+
+.ai-message-implicit-label {
+  margin-bottom: 4px;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--ai-ink-muted);
+}
+
+.ai-message-implicit pre {
+  margin: 0;
+  padding: 9px 10px;
+  border-radius: 10px;
+  max-height: 180px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  background: color-mix(in oklab, var(--ai-ink) 88%, var(--ai-paper));
+  color: #f6f7f2;
+}
+
+.ai-message-implicit code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 11px;
+}
+
+.ai-plan-card {
+  margin-top: 10px;
+  border: 1px solid color-mix(in oklab, var(--ai-divider) 60%, transparent);
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--ai-paper) 90%, var(--ai-ivory));
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ai-plan-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ai-plan-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ai-ink);
+}
+
+.ai-plan-agent {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ai-ink-muted);
+}
+
+.ai-plan-summary {
+  font-size: 11px;
+  color: color-mix(in oklab, var(--ai-ink) 82%, var(--ai-ink-muted));
+}
+
+.ai-plan-tabs {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.ai-plan-tab {
+  border: 1px solid color-mix(in oklab, var(--ai-divider) 60%, transparent);
+  background: color-mix(in oklab, var(--ai-paper) 78%, transparent);
+  color: var(--ai-ink-muted);
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1.2;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.ai-plan-tab.active {
+  color: var(--ai-ink);
+  background: color-mix(in oklab, var(--ai-sage) 20%, var(--ai-paper));
+  border-color: color-mix(in oklab, var(--ai-sage) 55%, var(--ai-divider));
+}
+
+.ai-plan-markdown {
+  border: 1px dashed color-mix(in oklab, var(--ai-divider) 55%, transparent);
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.ai-plan-workflow {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.ai-plan-step {
+  border: 1px solid color-mix(in oklab, var(--ai-divider) 55%, transparent);
+  border-radius: 10px;
+  background: color-mix(in oklab, var(--ai-paper) 84%, var(--ai-ivory));
+  padding: 8px;
+  display: grid;
+  gap: 4px;
+}
+
+.ai-plan-step-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ai-plan-step-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  color: color-mix(in oklab, var(--ai-paper) 95%, #000);
+  background: color-mix(in oklab, var(--ai-ink-muted) 68%, var(--ai-divider));
+}
+
+.ai-plan-step-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ai-ink);
+}
+
+.ai-plan-step-status {
+  flex: 0 0 auto;
+  font-size: 10px;
+  color: var(--ai-ink-muted);
+}
+
+.ai-plan-step-description {
+  font-size: 11px;
+  color: color-mix(in oklab, var(--ai-ink) 78%, var(--ai-ink-muted));
+  padding-left: 26px;
+}
+
+.ai-plan-empty {
+  border: 1px dashed color-mix(in oklab, var(--ai-divider) 55%, transparent);
+  border-radius: 10px;
+  padding: 8px;
+  font-size: 11px;
+  color: var(--ai-ink-muted);
+}
+
+/* ── Approval card ── */
+.ai-approval-card {
+  --ai-approval-accent: var(--ai-warning);
+  --_card-bg: color-mix(in oklab, var(--ai-ivory) 62%, #fff 38%);
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklab, var(--ai-divider) 55%, var(--ai-approval-accent) 10%);
+  border-left: 3px solid color-mix(in oklab, var(--ai-approval-accent) 70%, var(--ai-sage) 30%);
+  background: var(--_card-bg);
+  padding: 11px 12px 10px;
+  box-shadow:
+    0 1px 2px rgba(40, 46, 28, 0.06),
+    0 4px 16px rgba(40, 46, 28, 0.10);
+}
+
+.ai-approval-tone-neutral { --ai-approval-accent: var(--ai-divider); }
+.ai-approval-tone-safe { --ai-approval-accent: var(--ai-safe); }
+.ai-approval-tone-warning { --ai-approval-accent: var(--ai-warning); }
+.ai-approval-tone-danger { --ai-approval-accent: var(--ai-danger); }
+.ai-approval-tone-caution { --ai-approval-accent: var(--ai-caution); }
+
+.ai-approval-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ai-approval-icon {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  color: color-mix(in oklab, var(--ai-approval-accent) 78%, var(--ai-ink) 22%);
+}
+
+.ai-approval-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ai-approval-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ai-ink);
+}
+
+.ai-approval-summary {
+  margin-top: 2px;
+  padding-left: 21px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--ai-ink-muted);
+  white-space: pre-wrap;
+}
+
+.ai-approval-details {
+  margin: 8px 0 0;
+  padding: 7px 9px;
+  border-radius: 8px;
+  background: color-mix(in oklab, var(--ai-paper) 52%, var(--_card-bg) 48%);
+  border: 1px solid color-mix(in oklab, var(--ai-divider) 35%, transparent);
+  display: grid;
+  gap: 6px;
+}
+
+.ai-approval-detail-grid {
+  display: grid;
+  gap: 4px;
+}
+
+.ai-approval-detail-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ai-approval-detail-label {
+  flex: 0 0 auto;
+  font-size: 10px;
+  font-weight: 600;
+  color: color-mix(in oklab, var(--ai-ink-muted) 72%, transparent);
+  letter-spacing: 0.02em;
+}
+
+.ai-approval-detail-value {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ai-ink);
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.ai-risk-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.ai-risk-low {
+  color: var(--ai-safe);
+  background: color-mix(in oklab, var(--ai-safe) 10%, var(--_card-bg));
+  border: 1px solid color-mix(in oklab, var(--ai-safe) 22%, var(--ai-divider));
+}
+
+.ai-risk-medium {
+  color: color-mix(in oklab, var(--ai-warning) 88%, #000);
+  background: color-mix(in oklab, var(--ai-warning) 12%, var(--_card-bg));
+  border: 1px solid color-mix(in oklab, var(--ai-warning) 26%, var(--ai-divider));
+}
+
+.ai-risk-high {
+  color: var(--ai-danger);
+  background: color-mix(in oklab, var(--ai-danger) 10%, var(--_card-bg));
+  border: 1px solid color-mix(in oklab, var(--ai-danger) 22%, var(--ai-divider));
+}
+
+.ai-approval-risk-notes {
+  font-size: 10px;
+  line-height: 1.4;
+  color: color-mix(in oklab, var(--ai-ink-muted) 78%, transparent);
+  white-space: pre-wrap;
+}
+
+.ai-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border: 1px solid var(--ai-divider);
+  color: var(--ai-ink-muted);
+  background: color-mix(in oklab, var(--ai-ink) 3%, var(--_card-bg));
+}
+
+.ai-trust-approval {
+  color: color-mix(in oklab, var(--ai-ink) 72%, #000);
+  background: color-mix(in oklab, var(--ai-ink) 8%, var(--_card-bg));
+  border-color: color-mix(in oklab, var(--ai-divider) 60%, var(--ai-ink) 12%);
+}
+
+.ai-trust-cautious {
+  color: #1d4ed8;
+  background: color-mix(in oklab, #60a5fa 10%, var(--_card-bg));
+  border-color: color-mix(in oklab, #60a5fa 26%, var(--ai-divider));
+}
+
+.ai-trust-trusted {
+  color: #b45309;
+  background: color-mix(in oklab, #f59e0b 10%, var(--_card-bg));
+  border-color: color-mix(in oklab, #f59e0b 28%, var(--ai-divider));
+}
+
+.ai-trust-danger {
+  color: var(--ai-danger);
+  background: color-mix(in oklab, var(--ai-danger) 10%, var(--_card-bg));
+  border-color: color-mix(in oklab, var(--ai-danger) 24%, var(--ai-divider));
+}
+
+.ai-approval-gate-note {
+  margin-top: 6px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: color-mix(in oklab, var(--ai-ink) 4%, var(--_card-bg));
+  border: 1px solid color-mix(in oklab, var(--ai-divider) 55%, transparent);
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: color-mix(in oklab, var(--ai-ink-muted) 86%, transparent);
+}
+
+.ai-approval-code-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: color-mix(in oklab, var(--ai-ink-muted) 72%, transparent);
+  letter-spacing: 0.02em;
+}
+
+.ai-approval-code pre {
+  margin-top: 4px;
+  margin-bottom: 0;
+  padding: 7px 9px;
+  border-radius: 6px;
+  background: color-mix(in oklab, var(--ai-ink) 5%, var(--_card-bg));
+  border: 1px solid color-mix(in oklab, var(--ai-divider) 38%, transparent);
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 120px;
+  font-size: 11px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  color: var(--ai-ink);
+}
+
+.ai-approval-code code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.ai-approval-actions {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.ai-approval-btn {
+  border-radius: 7px;
+  border: 1px solid color-mix(in oklab, var(--ai-divider) 60%, transparent);
+  background: var(--_card-bg);
+  color: var(--ai-ink-muted);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 13px;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.ai-approval-btn:hover:enabled {
+  border-color: var(--ai-divider);
+  color: var(--ai-ink);
+}
+
+.ai-approval-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ai-approval-approve {
+  background: color-mix(in oklab, var(--ai-sage) 84%, var(--ai-amber) 16%);
+  border-color: transparent;
+  color: #fff;
+}
+
+.ai-approval-approve:hover:enabled {
+  background: color-mix(in oklab, var(--ai-sage) 76%, var(--ai-amber) 24%);
+  box-shadow: 0 2px 8px color-mix(in oklab, var(--ai-sage) 20%, transparent);
+  color: #fff;
+}
+
+.ai-approval-reject:hover:enabled {
+  border-color: color-mix(in oklab, var(--ai-danger) 28%, var(--ai-divider));
+  color: var(--ai-danger);
+}
+
+/* Executing state */
+.ai-approval-card.is-executing {
+  pointer-events: none;
+}
+
+.ai-approval-card.is-executing .ai-approval-icon {
+  color: var(--ai-sage);
+}
+
+.ai-approval-card.is-executing .ai-approval-title {
+  color: var(--ai-sage);
+}
+
+.ai-approval-card.is-executing .ai-approval-details {
+  opacity: 0.4;
+}
+
+.ai-approval-btn.ai-approval-approve.is-executing {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  pointer-events: none;
+  background: color-mix(in oklab, var(--ai-sage) 65%, #777);
+  border-color: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  opacity: 1;
+}
+
+.ai-approval-spinner {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 12px;
+  animation: ai-approval-spin 0.75s linear infinite;
+}
+
+@keyframes ai-approval-spin {
+  to { transform: rotate(360deg); }
+}

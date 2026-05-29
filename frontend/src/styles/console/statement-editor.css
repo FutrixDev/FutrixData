@@ -1,0 +1,547 @@
+      .statement-shell {
+        position: relative;
+        background: var(--input-bg);
+        border: 1px solid var(--edge);
+        border-radius: 10px;
+        --statement-pad-y: 10px;
+        --statement-pad-x: 12px;
+        --statement-gutter: 20px;
+      }
+
+      .statement-tabs {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        min-width: 0;
+      }
+
+      .statement-tabs-list {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex: 1;
+        min-width: 0;
+        overflow-x: auto;
+        padding: 2px 0;
+        scrollbar-width: none;
+      }
+
+      .statement-tabs-list::-webkit-scrollbar {
+        display: none;
+      }
+
+      .statement-tab {
+        border: 1px solid var(--edge);
+        background: var(--panel);
+        color: var(--soft-ink);
+        border-radius: 999px;
+        padding: 4px 12px;
+        font-size: 11px;
+        cursor: pointer;
+        font-family: inherit;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+        flex: 0 0 auto;
+      }
+
+      .statement-tab-label {
+        min-width: 0;
+      }
+
+      .statement-tab-close {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        border-radius: 999px;
+        font-size: 12px;
+        line-height: 1;
+        opacity: 0.66;
+        cursor: pointer;
+        flex: 0 0 32px;
+        transition: background 0.12s ease, opacity 0.12s ease;
+      }
+
+      .statement-tab-close:hover {
+        background: color-mix(in oklab, var(--primary) 16%, transparent);
+        opacity: 1;
+      }
+
+      .statement-tab-rename-input {
+        width: 100%;
+        min-width: 72px;
+        max-width: 180px;
+        border: 1px solid color-mix(in oklab, var(--primary) 42%, var(--edge));
+        border-radius: 8px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-family: inherit;
+        background: var(--panel);
+        color: var(--ink);
+      }
+
+      .statement-tab-rename-input:focus {
+        outline: none;
+        border-color: color-mix(in oklab, var(--primary) 64%, var(--edge));
+      }
+
+      .statement-tab:hover {
+        border-color: color-mix(in oklab, var(--primary) 25%, var(--edge));
+        color: var(--ink);
+      }
+
+      .statement-tab.active {
+        background: color-mix(in oklab, var(--primary) 14%, var(--panel));
+        border-color: color-mix(in oklab, var(--primary) 35%, var(--edge));
+        color: var(--ink);
+      }
+
+      .statement-tab-add {
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        border: 1px dashed var(--edge);
+        background: transparent;
+        color: var(--soft-ink);
+        border-radius: 999px;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+        transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+      }
+
+      .statement-tab-add:hover {
+        background: color-mix(in oklab, var(--primary) 8%, var(--panel));
+        border-color: color-mix(in oklab, var(--primary) 35%, var(--edge));
+        color: var(--ink);
+      }
+
+      .statement-tab-add:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .context-menu {
+        position: fixed;
+        z-index: 120;
+        display: grid;
+        gap: 6px;
+        padding: 8px;
+        min-width: 186px;
+        max-width: min(240px, calc(100vw - 16px));
+        border-radius: 14px;
+        background:
+          linear-gradient(
+            160deg,
+            color-mix(in oklab, var(--panel-strong) 84%, var(--primary) 16%) 0%,
+            var(--panel-strong) 54%
+          );
+        border: 1px solid color-mix(in oklab, var(--edge) 72%, var(--primary) 28%);
+        box-shadow:
+          0 14px 34px color-mix(in oklab, #000 24%, transparent),
+          0 4px 12px color-mix(in oklab, #000 14%, transparent),
+          inset 0 1px 0 color-mix(in oklab, #fff 32%, transparent);
+        backdrop-filter: saturate(1.12) blur(10px);
+        -webkit-backdrop-filter: saturate(1.12) blur(10px);
+        transform-origin: top left;
+        animation: context-menu-enter 130ms cubic-bezier(0.18, 0.9, 0.2, 1);
+      }
+
+      .context-menu-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--ink);
+        text-align: left;
+        cursor: pointer;
+        padding: 8px 10px;
+        min-height: 34px;
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        font-family: inherit;
+        transition:
+          border-color 0.14s ease,
+          background 0.14s ease,
+          color 0.14s ease,
+          transform 0.14s ease;
+      }
+
+      .context-menu-item:hover {
+        background: color-mix(in oklab, var(--panel-soft) 62%, var(--primary) 38%);
+        border-color: color-mix(in oklab, var(--edge) 55%, var(--primary) 45%);
+        color: color-mix(in oklab, var(--ink) 88%, var(--primary) 12%);
+        transform: translateX(1px);
+      }
+
+      .context-menu-item:focus-visible {
+        outline: none;
+        border-color: color-mix(in oklab, var(--primary) 58%, var(--edge));
+        box-shadow: 0 0 0 2px color-mix(in oklab, var(--primary) 24%, transparent);
+      }
+
+      .context-menu-item:active:not(:disabled) {
+        transform: translateX(0);
+        background: color-mix(in oklab, var(--panel-soft) 55%, var(--primary) 45%);
+      }
+
+      .context-menu-item:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      @keyframes context-menu-enter {
+        from {
+          opacity: 0;
+          transform: translateY(4px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .context-menu {
+          animation: none;
+        }
+
+        .context-menu-item {
+          transition: none;
+        }
+      }
+
+      .autocomplete-dropdown {
+        position: absolute;
+        z-index: 100;
+        min-width: 260px;
+        max-width: 420px;
+        max-height: 320px;
+        background: var(--panel-strong);
+        border: 1px solid var(--edge);
+        border-radius: 12px;
+        box-shadow: var(--surface-shadow);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .autocomplete-dropdown.dragging {
+        user-select: none;
+        opacity: 0.95;
+      }
+
+      .autocomplete-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--edge);
+        background: var(--panel-soft);
+        cursor: grab;
+      }
+
+      .autocomplete-header:active {
+        cursor: grabbing;
+      }
+
+      .autocomplete-drag-handle {
+        font-size: 14px;
+        color: var(--soft-ink);
+        opacity: 0.6;
+        user-select: none;
+      }
+
+      .autocomplete-title {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--ink);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        flex: 1;
+      }
+
+      .autocomplete-hint {
+        font-size: 10px;
+        color: var(--soft-ink);
+      }
+
+      .autocomplete-list {
+        overflow-y: auto;
+        max-height: 260px;
+        padding: 6px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .autocomplete-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+        text-align: left;
+        font-size: 13px;
+        color: var(--ink);
+        transition: background 0.1s, border-color 0.1s;
+        width: 100%;
+      }
+
+      .autocomplete-item:hover,
+      .autocomplete-item.active {
+        background: color-mix(in oklab, var(--primary) 8%, var(--panel));
+        border-color: color-mix(in oklab, var(--primary) 25%, var(--edge));
+      }
+
+      .autocomplete-item.active {
+        background: color-mix(in oklab, var(--primary) 12%, var(--panel));
+        border-color: color-mix(in oklab, var(--primary) 35%, var(--edge));
+      }
+
+      .autocomplete-item-icon {
+        font-size: 14px;
+        flex: 0 0 20px;
+        text-align: center;
+      }
+
+      .autocomplete-item-label {
+        font-weight: 600;
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+
+      .autocomplete-item-label--sqlKeyword {
+        font-weight: 700;
+        color: var(--ds-mysql);
+      }
+
+      .autocomplete-item-label--mongoOperator,
+      .autocomplete-item-label--dbMethod,
+      .autocomplete-item-label--method {
+        font-weight: 700;
+        color: var(--ds-mongodb);
+      }
+
+      .autocomplete-item-label--esKeyword {
+        font-weight: 700;
+        color: var(--ds-elasticsearch);
+      }
+
+      .autocomplete-item-label--snippet {
+        color: color-mix(in oklab, var(--soft-ink) 84%, var(--ink) 16%);
+      }
+
+      .autocomplete-item-hint {
+        font-size: 11px;
+        color: var(--soft-ink);
+        flex: 0 0 auto;
+        white-space: nowrap;
+      }
+
+      .dark .autocomplete-dropdown {
+        background: var(--panel-strong);
+      }
+
+      .dark .autocomplete-header {
+        background: var(--panel);
+      }
+
+      .dark .autocomplete-item:hover,
+      .dark .autocomplete-item.active {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .dark .autocomplete-item.active {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .statement-shell > textarea#statement-input {
+        position: relative;
+        z-index: 2;
+        background: transparent;
+        padding: var(--statement-pad-y) var(--statement-pad-x) var(--statement-pad-y)
+          calc(var(--statement-pad-x) + var(--statement-gutter));
+        line-height: 1.4;
+        white-space: pre-wrap;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        border: none;
+        outline: none;
+      }
+
+      .statement-shell > .statement-highlight {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        margin: 0;
+        pointer-events: none;
+        overflow: hidden;
+        padding: var(--statement-pad-y) var(--statement-pad-x) var(--statement-pad-y)
+          calc(var(--statement-pad-x) + var(--statement-gutter));
+        line-height: 1.4;
+        white-space: pre-wrap;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        color: var(--ink);
+      }
+
+      .statement-shell > .statement-highlight .statement-token-keyword-sql {
+        color: var(--ds-mysql);
+        font-weight: 700;
+      }
+
+      .statement-shell > .statement-highlight .statement-token-keyword-mongo {
+        color: var(--ds-mongodb);
+        font-weight: 700;
+      }
+
+      .statement-shell > .statement-highlight .statement-token-keyword-es {
+        color: var(--ds-elasticsearch);
+        font-weight: 700;
+      }
+
+      .statement-shell > .statement-highlight .statement-token-method,
+      .statement-shell > .statement-highlight .statement-token-operator {
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .statement-shell > .statement-highlight .statement-token-string {
+        color: var(--success);
+      }
+
+      .statement-shell > .statement-highlight .statement-token-number {
+        color: var(--accent-dark);
+      }
+
+      .statement-shell > .statement-highlight .statement-token-comment {
+        color: var(--soft-ink);
+        font-style: italic;
+      }
+
+      .statement-gutter {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: calc(var(--statement-pad-x) + var(--statement-gutter));
+        z-index: 4;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .statement-gutter-inner {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+      }
+
+      .statement-runner {
+        pointer-events: auto;
+        position: absolute;
+        left: var(--statement-pad-x);
+        width: var(--statement-gutter);
+        height: 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--success);
+        font-size: 12px;
+        line-height: 1;
+        cursor: pointer;
+        opacity: 0.9;
+        transition: background 0.12s ease, border-color 0.12s ease, opacity 0.12s ease;
+      }
+
+      .statement-runner:hover {
+        background: var(--success-bg);
+        border-color: color-mix(in oklab, var(--success) 40%, var(--edge));
+        opacity: 1;
+      }
+
+      .statement-runner:active {
+        transform: scale(0.96);
+      }
+
+      .statement-shell > textarea#statement-input,
+      .statement-highlight,
+      .statement-ghost,
+      .statement-lint {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 13px;
+      }
+
+      .statement-ghost {
+        position: absolute;
+        inset: 0;
+        padding: var(--statement-pad-y) var(--statement-pad-x) var(--statement-pad-y)
+          calc(var(--statement-pad-x) + var(--statement-gutter));
+        line-height: 1.4;
+        color: transparent;
+        white-space: pre-wrap;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .statement-ghost .ghost-suffix {
+        color: rgba(25, 23, 15, 0.35);
+      }
+
+      .statement-lint {
+        position: absolute;
+        inset: 0;
+        padding: var(--statement-pad-y) var(--statement-pad-x) var(--statement-pad-y)
+          calc(var(--statement-pad-x) + var(--statement-gutter));
+        line-height: 1.4;
+        color: transparent;
+        white-space: pre-wrap;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+      }
+
+      .statement-lint .lint-error {
+        text-decoration: underline wavy #d04b1a;
+        text-decoration-thickness: 1.5px;
+        text-decoration-skip-ink: none;
+      }
+
+      .lint-message {
+        margin-top: 6px;
+        font-size: 12px;
+        color: var(--accent-dark);
+        display: none;
+      }
+
+      .lint-message.show {
+        display: block;
+      }

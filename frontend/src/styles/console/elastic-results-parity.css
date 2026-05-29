@@ -1,0 +1,865 @@
+.console-results-content--sql-editor .result.result--elastic-workspace {
+  display: flex;
+  flex-direction: column;
+  border-top: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.console-results-content--sql-editor .elastic-results-workspace {
+  --elastic-surface: var(--panel-strong);
+  --elastic-surface-soft: color-mix(in oklab, var(--panel-soft) 82%, transparent);
+  --elastic-surface-muted: color-mix(in oklab, var(--panel) 88%, transparent);
+  --elastic-border: color-mix(in oklab, var(--edge) 78%, var(--primary) 22%);
+  --elastic-border-soft: color-mix(in oklab, var(--edge) 88%, transparent);
+  --elastic-text: color-mix(in oklab, var(--ink) 92%, var(--primary) 8%);
+  --elastic-strong: var(--ink);
+  --elastic-muted: color-mix(in oklab, var(--soft-ink) 84%, var(--primary) 16%);
+  --elastic-accent: color-mix(in oklab, var(--primary) 76%, var(--ink) 24%);
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: 12px 0;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+.console-results-content--sql-editor .elastic-results-pane {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  border: 1px solid var(--elastic-border-soft);
+  border-radius: 10px;
+  background: var(--elastic-surface);
+  box-shadow: var(--surface-shadow-soft);
+  overflow: hidden;
+}
+
+.console-results-content--sql-editor .elastic-results-ops {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 0;
+  border-radius: 0;
+  background: var(--elastic-surface);
+  box-shadow: none;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--elastic-border-soft);
+}
+
+.console-results-content--sql-editor .elastic-results-ops-summary {
+  min-width: 0;
+}
+
+.console-results-content--sql-editor .elastic-results-ops-summary h3 {
+  margin: 0;
+  color: var(--elastic-strong);
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.console-results-content--sql-editor .elastic-results-ops-meta {
+  margin-left: 8px;
+  color: var(--elastic-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.console-results-content--sql-editor .elastic-results-ops-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.console-results-content--sql-editor .elastic-results-view-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid var(--elastic-border-soft);
+  border-radius: 7px;
+  background: var(--elastic-surface-soft);
+  padding: 2px;
+}
+
+.console-results-content--sql-editor .elastic-ops-button {
+  flex: 0 0 auto;
+  min-height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--elastic-border-soft);
+  background: var(--elastic-surface);
+  color: var(--elastic-muted);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 0 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.console-results-content--sql-editor .elastic-results-view-toggle .elastic-ops-button {
+  border-color: transparent;
+  background: transparent;
+  min-height: 32px;
+  padding: 0 9px;
+}
+
+.console-results-content--sql-editor .elastic-results-view-toggle .elastic-ops-button.active {
+  border-color: var(--elastic-border-soft);
+  background: var(--elastic-surface);
+  color: var(--elastic-accent);
+}
+
+.console-results-content--sql-editor .elastic-ops-button--icon {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.console-results-content--sql-editor .elastic-ops-icon {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2;
+  transition: transform 0.15s ease;
+}
+
+.console-results-content--sql-editor .elastic-ops-icon.is-open {
+  transform: rotate(180deg);
+}
+
+.console-results-content--sql-editor .elastic-ops-button:hover {
+  border-color: var(--elastic-border);
+  color: var(--elastic-accent);
+  background: var(--elastic-surface-soft);
+}
+
+.console-results-content--sql-editor .elastic-results-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.console-results-content--sql-editor .elastic-results-list-wrap {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.console-results-content--sql-editor .elastic-results-list {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+  background: transparent;
+  box-shadow: none;
+}
+
+.console-results-content--sql-editor .elastic-results-list-wrap>.meta {
+  margin: 16px;
+  border: 1px dashed var(--elastic-border-soft);
+  border-radius: 8px;
+  background: var(--elastic-surface-soft);
+  color: var(--elastic-muted);
+  padding: 16px;
+  text-align: center;
+}
+
+.console-results-content--sql-editor .elastic-results-table-head-wrap {
+  flex: 0 0 auto;
+  overflow: hidden;
+  border-bottom: 1px solid var(--elastic-border-soft);
+  background: var(--elastic-surface);
+  box-sizing: border-box;
+  padding-right: var(--elastic-results-body-scrollbar-width, 0px);
+}
+
+.console-results-content--sql-editor .elastic-results-table-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+  overflow: auto;
+  border-top: 0;
+}
+
+.console-results-content--sql-editor .elastic-results-table {
+  width: max-content;
+  min-width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--elastic-text);
+}
+
+.console-results-content--sql-editor .elastic-results-table thead th {
+  z-index: 3;
+  border-bottom: 0;
+  background: color-mix(in oklab, var(--elastic-surface) 94%, var(--elastic-surface-soft) 6%);
+  color: var(--elastic-strong);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-align: left;
+  padding: 9px 14px;
+  text-transform: uppercase;
+  min-width: 64px;
+}
+
+.console-results-content--sql-editor .elastic-results-table th,
+.console-results-content--sql-editor .elastic-results-table td {
+  border-left: 0;
+  border-right: 0;
+}
+
+.console-results-content--sql-editor .elastic-results-table th.elastic-col-toggle,
+.console-results-content--sql-editor .elastic-results-table td.elastic-cell-toggle {
+  width: 44px;
+  min-width: 44px;
+  max-width: 44px;
+  text-align: center;
+  padding: 0;
+}
+
+.console-results-content--sql-editor .elastic-results-table th.elastic-col-toggle {
+  background: var(--elastic-surface);
+  border-bottom-color: transparent;
+  min-width: 44px;
+}
+
+.console-results-content--sql-editor .elastic-results-table td.elastic-cell-toggle {
+  background: transparent;
+}
+
+.console-results-content--sql-editor .elastic-results-row td {
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  vertical-align: middle;
+}
+
+.console-results-content--sql-editor .elastic-results-row td:not(.elastic-cell-toggle) {
+  border-top: 1px solid var(--elastic-border-soft);
+  min-width: 64px;
+  max-width: 320px;
+}
+
+.console-results-content--sql-editor .elastic-results-row td:not(.elastic-cell-toggle) {
+  cursor: pointer;
+}
+
+.console-results-content--sql-editor .elastic-results-row:first-child td:not(.elastic-cell-toggle) {
+  border-top: 0;
+}
+
+.console-results-content--sql-editor .elastic-results-row:nth-child(even) td:not(.elastic-cell-toggle) {
+  background: color-mix(in oklab, var(--elastic-surface-soft) 50%, transparent);
+}
+
+.console-results-content--sql-editor .elastic-results-row:hover td:not(.elastic-cell-toggle) {
+  background: color-mix(in oklab, var(--elastic-surface-soft) 82%, var(--primary) 18%);
+}
+
+.console-results-content--sql-editor .elastic-results-row.is-open td:not(.elastic-cell-toggle) {
+  border-top-color: color-mix(in oklab, var(--elastic-border-soft) 70%, var(--primary) 30%);
+  background: color-mix(in oklab, var(--elastic-surface-soft) 76%, var(--primary) 24%);
+}
+
+.console-results-content--sql-editor .elastic-row-toggle {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--elastic-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.console-results-content--sql-editor .elastic-row-toggle:hover {
+  border-color: var(--elastic-border-soft);
+  background: var(--elastic-surface-soft);
+  color: var(--elastic-accent);
+}
+
+.console-results-content--sql-editor .elastic-result-chevron {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.2;
+  transform: rotate(0deg);
+  transition: transform 0.15s ease;
+}
+
+.console-results-content--sql-editor .elastic-results-row.is-open .elastic-result-chevron {
+  transform: rotate(90deg);
+}
+
+.console-results-content--sql-editor .elastic-result-cell {
+  min-width: 0;
+}
+
+.console-results-content--sql-editor .elastic-results-table thead th.elastic-result-head--width-xs,
+.console-results-content--sql-editor .elastic-result-cell--width-xs {
+  width: 72px;
+  min-width: 72px;
+  max-width: 72px;
+}
+
+.console-results-content--sql-editor .elastic-results-table thead th.elastic-result-head--width-sm,
+.console-results-content--sql-editor .elastic-result-cell--width-sm {
+  width: 128px;
+  min-width: 128px;
+  max-width: 128px;
+}
+
+.console-results-content--sql-editor .elastic-results-table thead th.elastic-result-head--width-md,
+.console-results-content--sql-editor .elastic-result-cell--width-md {
+  width: 196px;
+  min-width: 196px;
+  max-width: 196px;
+}
+
+.console-results-content--sql-editor .elastic-results-table thead th.elastic-result-head--width-lg,
+.console-results-content--sql-editor .elastic-result-cell--width-lg {
+  width: 280px;
+  min-width: 280px;
+  max-width: 280px;
+}
+
+.console-results-content--sql-editor .elastic-result-cell .value {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--elastic-strong);
+}
+
+.console-results-content--sql-editor .elastic-value-pill {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  min-height: 24px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--elastic-border-soft);
+  font-size: 11px;
+  line-height: 1.35;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.console-results-content--sql-editor .elastic-value-pill--identifier {
+  color: color-mix(in oklab, var(--elastic-text) 84%, #94a3b8 16%);
+  background: color-mix(in oklab, #94a3b8 10%, var(--elastic-surface));
+  border-color: color-mix(in oklab, #94a3b8 28%, var(--edge));
+  font-family: 'JetBrains Mono', 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+}
+
+.console-results-content--sql-editor .elastic-value-pill--timestamp {
+  color: color-mix(in oklab, #38bdf8 74%, var(--elastic-text));
+  background: color-mix(in oklab, #38bdf8 12%, var(--elastic-surface));
+  border-color: color-mix(in oklab, #38bdf8 32%, var(--edge));
+}
+
+.console-results-content--sql-editor .elastic-value-pill--number {
+  color: color-mix(in oklab, #3b82f6 82%, var(--elastic-text));
+  background: color-mix(in oklab, #3b82f6 12%, var(--elastic-surface));
+  border-color: color-mix(in oklab, #3b82f6 30%, var(--edge));
+}
+
+.console-results-content--sql-editor .elastic-value-pill--boolean {
+  color: color-mix(in oklab, #10b981 82%, var(--elastic-text));
+  background: color-mix(in oklab, #10b981 12%, var(--elastic-surface));
+  border-color: color-mix(in oklab, #10b981 30%, var(--edge));
+}
+
+.console-results-content--sql-editor .elastic-value-pill--array {
+  color: color-mix(in oklab, #8b5cf6 74%, var(--elastic-text));
+  background: color-mix(in oklab, #8b5cf6 10%, var(--elastic-surface));
+  border: 1px solid color-mix(in oklab, #8b5cf6 28%, var(--edge));
+  border-color: color-mix(in oklab, #8b5cf6 28%, var(--edge));
+}
+
+.console-results-content--sql-editor .elastic-value-pill--object {
+  color: color-mix(in oklab, #06b6d4 74%, var(--elastic-text));
+  background: color-mix(in oklab, #06b6d4 10%, var(--elastic-surface));
+  border: 1px solid color-mix(in oklab, #06b6d4 28%, var(--edge));
+  border-color: color-mix(in oklab, #06b6d4 28%, var(--edge));
+}
+
+.console-results-content--sql-editor .elastic-value-pill--keyword {
+  color: color-mix(in oklab, #f59e0b 78%, var(--elastic-text));
+  background: color-mix(in oklab, #f59e0b 10%, var(--elastic-surface));
+  border-color: color-mix(in oklab, #f59e0b 28%, var(--edge));
+}
+
+.console-results-content--sql-editor .elastic-result-cell .type-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.console-results-content--sql-editor .elastic-result-cell .type-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex: 0 0 6px;
+}
+
+.console-results-content--sql-editor .elastic-result-cell .type-dot--success {
+  background: #10b981;
+}
+
+.console-results-content--sql-editor .elastic-result-cell .type-dot--danger {
+  background: #ef4444;
+}
+
+.console-results-content--sql-editor .elastic-result-cell .type-dot--warning {
+  background: #f59e0b;
+}
+
+.console-results-content--sql-editor .elastic-result-cell .type-dot--info {
+  background: #3b82f6;
+}
+
+.console-results-content--sql-editor .elastic-result-cell .status-pill {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--elastic-border-soft);
+  font-size: 11px;
+  line-height: 1.35;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.console-results-content--sql-editor .elastic-result-cell .status-pill--success {
+  color: color-mix(in oklab, var(--success) 90%, #0f172a);
+  background: color-mix(in oklab, var(--success-bg) 88%, var(--panel));
+  border-color: color-mix(in oklab, var(--success) 44%, var(--edge));
+}
+
+.console-results-content--sql-editor .elastic-result-cell .status-pill--danger {
+  color: color-mix(in oklab, var(--danger) 90%, #7f1d1d);
+  background: color-mix(in oklab, var(--danger-bg) 84%, var(--panel));
+  border-color: color-mix(in oklab, var(--danger) 42%, var(--edge));
+}
+
+.console-results-content--sql-editor .elastic-result-cell .status-pill--warning {
+  color: #b45309;
+  background: color-mix(in oklab, #f59e0b 14%, var(--panel));
+  border-color: color-mix(in oklab, #f59e0b 30%, var(--edge));
+}
+
+.console-results-content--sql-editor .elastic-result-cell .status-pill--neutral {
+  color: var(--elastic-muted);
+  background: var(--elastic-surface-soft);
+}
+
+.console-results-content--sql-editor .elastic-results-row-detail td {
+  padding: 0;
+  border-top: 0;
+  background: color-mix(in oklab, var(--elastic-surface-soft) 80%, transparent);
+}
+
+.console-results-content--sql-editor .elastic-result-card-body {
+  border-top: 1px solid var(--elastic-border-soft);
+  background: transparent;
+  padding: 0;
+}
+
+.console-results-content--sql-editor .elastic-result-body-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px 8px;
+}
+
+.console-results-content--sql-editor .elastic-result-card-body h5 {
+  margin: 0;
+  color: var(--elastic-muted);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.console-results-content--sql-editor .elastic-result-body-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.console-results-content--sql-editor .elastic-result-body-actions button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--elastic-accent);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.console-results-content--sql-editor .elastic-result-body-actions button:hover {
+  color: color-mix(in oklab, var(--primary) 84%, #ffffff 16%);
+}
+
+.console-results-content--sql-editor .elastic-cell-context-menu {
+  position: fixed;
+  z-index: 12;
+  min-width: 168px;
+  padding: 6px;
+  border: 1px solid var(--elastic-border-soft);
+  border-radius: 10px;
+  background: color-mix(in oklab, var(--elastic-surface) 96%, #05070d 4%);
+  box-shadow: 0 18px 30px rgba(15, 23, 42, 0.2);
+}
+
+.console-results-content--sql-editor .elastic-cell-context-menu button {
+  width: 100%;
+  min-height: 32px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--elastic-text);
+  font-size: 11px;
+  font-weight: 600;
+  text-align: left;
+  padding: 0 10px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.console-results-content--sql-editor .elastic-cell-context-menu button:hover {
+  background: var(--elastic-surface-soft);
+  color: var(--elastic-accent);
+}
+
+.console-results-content--sql-editor .elastic-result-metadata {
+  margin: 0 12px 8px;
+  border: 1px solid var(--elastic-border-soft);
+  border-radius: 8px;
+  background: var(--elastic-surface);
+  padding: 8px 10px;
+  display: grid;
+  gap: 4px;
+}
+
+.console-results-content--sql-editor .elastic-result-metadata .meta-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.console-results-content--sql-editor .elastic-result-metadata .meta-key {
+  color: var(--elastic-muted);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  flex: 0 0 auto;
+}
+
+.console-results-content--sql-editor .elastic-result-metadata .meta-value {
+  color: var(--elastic-text);
+  font-size: 11px;
+  font-family: 'JetBrains Mono', 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+  min-width: 0;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.console-results-content--sql-editor .elastic-result-card-body pre {
+  margin: 0;
+  min-height: 200px;
+  max-height: 340px;
+  overflow: auto;
+  border-top: 1px solid var(--elastic-border-soft);
+  background: color-mix(in oklab, var(--elastic-surface) 92%, var(--elastic-surface-soft) 8%);
+  color: var(--elastic-text);
+  padding: 12px;
+  font-size: 12px;
+  line-height: 1.6;
+  border-radius: 0 0 12px 12px;
+}
+
+/* JSON token colors: see elastic-json-tokens.css */
+
+.console-results-content--sql-editor .elastic-results-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--elastic-border-soft);
+  background: color-mix(in oklab, var(--elastic-surface) 94%, var(--elastic-surface-soft) 6%);
+  color: var(--elastic-strong);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.console-results-content--sql-editor .elastic-results-footer-range {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.console-results-content--sql-editor .elastic-results-footer-note {
+  color: var(--elastic-accent);
+}
+
+.console-results-content--sql-editor .elastic-results-footer-pager {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.console-results-content--sql-editor .elastic-results-footer-pager button {
+  height: 32px;
+  min-width: 32px;
+  border-radius: 7px;
+  border: 1px solid var(--elastic-border-soft);
+  background: var(--elastic-surface);
+  color: var(--elastic-muted);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 8px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.console-results-content--sql-editor .elastic-results-footer-pager button:hover:not(:disabled) {
+  border-color: var(--elastic-border);
+  color: var(--elastic-accent);
+  background: var(--elastic-surface-soft);
+}
+
+.console-results-content--sql-editor .elastic-results-footer-pager button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.console-results-content--sql-editor .elastic-results-footer-pager .elastic-page-number.active {
+  border-color: color-mix(in oklab, var(--primary) 52%, var(--elastic-border-soft));
+  background: color-mix(in oklab, var(--primary) 12%, var(--elastic-surface));
+  color: var(--elastic-accent);
+}
+
+.console-results-content--sql-editor .elastic-results-footer-pager .elastic-page-number:disabled {
+  min-width: 18px;
+  padding: 0 2px;
+  border-color: transparent;
+  background: transparent;
+  opacity: 0.85;
+  cursor: default;
+}
+
+.console-results-content--sql-editor .elastic-results-raw-view {
+  min-height: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+  background: transparent;
+  box-shadow: none;
+}
+
+.console-results-content--sql-editor .elastic-results-raw-toolbar {
+  padding: 8px 10px;
+  color: var(--elastic-muted);
+  border-bottom: 1px solid var(--elastic-border-soft);
+  background: var(--elastic-surface-muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.console-results-content--sql-editor .elastic-results-raw-view pre {
+  margin: 0;
+  padding: 12px;
+  overflow: auto;
+  background: color-mix(in oklab, var(--panel) 84%, #0b1220 16%);
+  color: var(--elastic-text);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.dark .console-results-content--sql-editor .elastic-results-workspace {
+  --elastic-surface: color-mix(in oklab, var(--panel-strong) 90%, #06090f 10%);
+  --elastic-surface-soft: color-mix(in oklab, var(--panel-soft) 82%, #05070d 18%);
+  --elastic-surface-muted: color-mix(in oklab, var(--panel) 82%, #05070d 18%);
+  --elastic-border: color-mix(in oklab, var(--edge) 70%, var(--primary) 30%);
+  --elastic-border-soft: color-mix(in oklab, var(--edge) 90%, #10151f 10%);
+}
+
+.dark .console-results-content--sql-editor .elastic-results-pane {
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+}
+
+.dark .console-results-content--sql-editor .elastic-results-row:hover td:not(.elastic-cell-toggle) {
+  background: color-mix(in oklab, var(--panel-soft) 70%, var(--primary) 30%);
+}
+
+.dark .console-results-content--sql-editor .elastic-result-cell .status-pill--warning {
+  color: #facc15;
+  background: color-mix(in oklab, #f59e0b 24%, #0b1220 76%);
+}
+
+/* Dark JSON token colors: see elastic-json-tokens.css */
+
+@media (max-width: 980px) {
+  .console-results-content--sql-editor .elastic-results-workspace {
+    padding: 8px 0;
+  }
+
+  .console-results-content--sql-editor .elastic-results-ops {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px;
+  }
+
+  .console-results-content--sql-editor .elastic-results-ops-actions {
+    width: 100%;
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+
+  .console-results-content--sql-editor .elastic-result-body-head,
+  .console-results-content--sql-editor .elastic-result-metadata,
+  .console-results-content--sql-editor .elastic-result-card-body pre {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  .console-results-content--sql-editor .elastic-result-card-body pre {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 840px) {
+  .console-results-content--sql-editor .elastic-results-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .console-results-content--sql-editor .elastic-results-footer-range {
+    white-space: normal;
+  }
+
+  .console-results-content--sql-editor .elastic-results-footer-pager {
+    width: 100%;
+    max-width: 100%;
+    padding-bottom: 2px;
+  }
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-panel--statement.sql-editor-parity .console-results-panel {
+  background: transparent;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-results-content--sql-editor .result.result--elastic-workspace {
+  border-top: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-results-content--sql-editor .elastic-results-workspace,
+.console-shell.sql-editor-parity.elastic-stitch .console-results-content--sql-editor .elastic-results-pane,
+.console-shell.sql-editor-parity.elastic-stitch .console-results-content--sql-editor .elastic-results-ops,
+.console-shell.sql-editor-parity.elastic-stitch .console-results-content--sql-editor .elastic-result-card-body,
+.console-shell.sql-editor-parity.elastic-stitch .console-results-content--sql-editor .elastic-results-footer,
+.console-shell.sql-editor-parity.elastic-stitch .console-results-content--sql-editor .elastic-results-raw-view {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Flatten the results pane to integrate with Query Builder */
+.console-shell.sql-editor-parity.elastic-stitch .console-results-content--sql-editor .elastic-results-workspace {
+  padding: 0;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-results-content--sql-editor .elastic-results-pane {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: #ffffff;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-results-content--sql-editor .result-footer-sql-editor.result-footer-sql-editor--elastic {
+  height: 40px;
+  border-top: 1px solid color-mix(in oklab, var(--edge) 86%, var(--primary) 14%);
+  padding: 0 12px;
+  background: transparent;
+  color: color-mix(in oklab, var(--soft-ink) 90%, var(--primary) 10%);
+  font-size: 12px;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-results-content--sql-editor .result-footer-sql-editor.result-footer-sql-editor--elastic .pager {
+  gap: 6px;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-results-content--sql-editor .result-footer-sql-editor.result-footer-sql-editor--elastic .pager button {
+  min-width: 28px;
+  width: auto;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid color-mix(in oklab, var(--edge) 80%, var(--primary) 20%);
+  padding: 0 8px;
+  background: var(--panel);
+  color: var(--soft-ink);
+  box-shadow: none;
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-results-content--sql-editor .result-footer-sql-editor.result-footer-sql-editor--elastic .pager button.active {
+  border-color: color-mix(in oklab, var(--primary) 60%, var(--edge));
+  background: color-mix(in oklab, var(--primary) 14%, var(--panel));
+  color: color-mix(in oklab, var(--primary) 84%, var(--ink) 16%);
+}
+
+.console-shell.sql-editor-parity.elastic-stitch .console-results-content--sql-editor .result-footer-sql-editor.result-footer-sql-editor--elastic .pager button:disabled {
+  opacity: 0.5;
+  box-shadow: none;
+}

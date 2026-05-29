@@ -1,0 +1,267 @@
+      .btn {
+        border: 1px solid color-mix(in oklab, var(--primary) 40%, var(--edge));
+        border-radius: var(--control-radius);
+        min-height: var(--control-height);
+        padding: 6px 14px;
+        background: linear-gradient(
+          180deg,
+          color-mix(in oklab, var(--primary) 94%, #ffffff) 0%,
+          color-mix(in oklab, var(--primary) 78%, var(--accent-dark) 22%) 100%
+        );
+        color: var(--primary-foreground);
+        cursor: pointer;
+        font-weight: 600;
+        letter-spacing: 0.15px;
+        font-size: var(--control-font);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        box-shadow: 0 8px 16px rgba(37, 99, 235, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 18px rgba(37, 99, 235, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+        filter: brightness(1.02);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+        box-shadow: 0 6px 12px rgba(37, 99, 235, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+      }
+
+      .btn:focus-visible {
+        outline: 2px solid var(--ring);
+        outline-offset: 2px;
+      }
+
+      .btn.is-loading {
+        cursor: wait;
+      }
+
+      .btn.is-loading::before {
+        content: '';
+        width: 12px;
+        height: 12px;
+        border-radius: 999px;
+        border: 2px solid currentColor;
+        border-right-color: transparent;
+        animation: btn-loading-spin 0.7s linear infinite;
+      }
+
+      .btn.secondary {
+        background: linear-gradient(
+          180deg,
+          color-mix(in oklab, var(--panel) 92%, #ffffff) 0%,
+          color-mix(in oklab, var(--panel) 82%, #ffffff) 100%
+        );
+        color: var(--ink);
+        border: 1px solid var(--edge);
+        box-shadow: 0 6px 12px rgba(15, 23, 42, 0.08);
+      }
+
+      .btn.ghost {
+        background: transparent;
+        color: var(--soft-ink);
+        border: 1px solid color-mix(in oklab, var(--edge) 80%, transparent);
+        box-shadow: none;
+      }
+
+      .btn.danger {
+        background: linear-gradient(
+          180deg,
+          color-mix(in oklab, var(--danger) 12%, #ffffff) 0%,
+          color-mix(in oklab, var(--danger) 20%, #ffffff) 100%
+        );
+        color: #b91c1c;
+        border: 1px solid color-mix(in oklab, var(--danger) 35%, var(--edge));
+        box-shadow: 0 4px 10px rgba(185, 28, 28, 0.1);
+      }
+
+      .btn.success {
+        background: linear-gradient(
+          180deg,
+          color-mix(in oklab, var(--success) 28%, #ffffff) 0%,
+          color-mix(in oklab, var(--success) 70%, #16a34a) 100%
+        );
+        color: var(--primary-foreground);
+        border: 1px solid color-mix(in oklab, var(--success) 45%, transparent);
+        box-shadow: 0 8px 14px color-mix(in oklab, var(--success) 22%, transparent);
+      }
+
+      .btn.warning {
+        background: linear-gradient(180deg, rgba(252, 211, 77, 0.95) 0%, rgba(245, 158, 11, 0.95) 100%);
+        color: #1f2937;
+        border: 1px solid rgba(234, 179, 8, 0.55);
+        box-shadow: 0 8px 14px rgba(234, 179, 8, 0.2);
+      }
+
+      .btn.ghost.danger {
+        background: transparent;
+        color: #b91c1c;
+        border: 1px solid color-mix(in oklab, var(--danger) 40%, transparent);
+      }
+
+      .btn.secondary:hover,
+      .btn.ghost:hover,
+      .btn.danger:hover {
+        filter: brightness(1.02);
+      }
+
+      .btn.secondary:hover {
+        background: var(--panel-strong);
+      }
+
+      .btn.ghost:hover {
+        background: color-mix(in oklab, var(--panel-soft) 70%, transparent);
+        color: var(--ink);
+      }
+
+      .btn.test-connection-btn {
+        border-color: color-mix(in oklab, var(--primary) 55%, var(--edge));
+        background: linear-gradient(
+          180deg,
+          color-mix(in oklab, var(--primary) 14%, #ffffff) 0%,
+          color-mix(in oklab, var(--primary) 10%, var(--panel)) 100%
+        );
+        color: color-mix(in oklab, var(--ink) 92%, var(--primary));
+        box-shadow: 0 8px 14px rgba(37, 99, 235, 0.14);
+      }
+
+      .btn.test-connection-btn:hover {
+        box-shadow: 0 10px 18px rgba(37, 99, 235, 0.18);
+      }
+
+      .btn.ghost.danger.delete-btn {
+        border-style: dashed;
+        background: color-mix(in oklab, var(--danger) 10%, transparent);
+      }
+
+      .btn.ghost.danger.delete-btn:hover {
+        background: color-mix(in oklab, var(--danger) 18%, transparent);
+        color: #991b1b;
+      }
+
+.btn.ai-toggle {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  min-height: 32px;
+  padding: 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.75),
+    rgba(229, 236, 223, 0.55)
+  );
+  color: var(--ink);
+  border: 1px solid color-mix(in oklab, var(--edge) 70%, #fff);
+  box-shadow: 0 10px 18px rgba(15, 23, 42, 0.12);
+  letter-spacing: 0.1px;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.btn.ai-toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.btn.ai-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 24px rgba(15, 23, 42, 0.16);
+}
+
+@keyframes btn-loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Dark mode overrides ── */
+
+.dark .btn {
+  box-shadow: 0 8px 16px rgba(99, 102, 241, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.dark .btn:hover {
+  box-shadow: 0 10px 18px rgba(99, 102, 241, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.dark .btn:active {
+  box-shadow: 0 6px 12px rgba(99, 102, 241, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.dark .btn.secondary {
+  background: linear-gradient(
+    180deg,
+    rgba(129, 140, 248, 0.08) 0%,
+    rgba(129, 140, 248, 0.04) 100%
+  );
+  border-color: rgba(129, 140, 248, 0.12);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .btn.secondary:hover {
+  background: rgba(129, 140, 248, 0.12);
+}
+
+.dark .btn.danger {
+  background: linear-gradient(
+    180deg,
+    rgba(239, 68, 68, 0.16) 0%,
+    rgba(239, 68, 68, 0.08) 100%
+  );
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.3);
+  box-shadow: 0 8px 14px rgba(239, 68, 68, 0.12);
+}
+
+.dark .btn.ghost.danger {
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+.dark .btn.ghost.danger.delete-btn:hover {
+  color: #fca5a5;
+}
+
+.dark .btn.test-connection-btn {
+  background: linear-gradient(
+    180deg,
+    rgba(129, 140, 248, 0.14) 0%,
+    rgba(129, 140, 248, 0.08) 100%
+  );
+  box-shadow: 0 8px 14px rgba(99, 102, 241, 0.1);
+}
+
+.dark .btn.test-connection-btn:hover {
+  box-shadow: 0 10px 18px rgba(99, 102, 241, 0.14);
+}
+
+.dark .btn.ai-toggle {
+  background: linear-gradient(
+    135deg,
+    rgba(129, 140, 248, 0.18),
+    rgba(139, 92, 246, 0.12)
+  );
+  border-color: rgba(129, 140, 248, 0.15);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.3);
+}
+
+.dark .btn.ai-toggle::after {
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.2), transparent);
+}
+
+.dark .btn.ai-toggle:hover {
+  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.3);
+}

@@ -1,0 +1,161 @@
+      .result-tabs {
+        margin-top: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .result-tab {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 11px;
+        border: 1px solid var(--edge);
+        background: var(--panel-soft);
+        color: var(--soft-ink);
+        cursor: pointer;
+        max-width: 100%;
+      }
+
+      .result-tab:hover {
+        background: var(--panel);
+        color: var(--ink);
+      }
+
+      .result-tab.active {
+        background: color-mix(in oklab, var(--primary) 12%, var(--panel));
+        border-color: color-mix(in oklab, var(--primary) 35%, var(--edge));
+        color: var(--ink);
+      }
+
+      .result-tab-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--soft-ink);
+        flex: 0 0 auto;
+      }
+
+      .result-tab-dot.success {
+        background: var(--success);
+      }
+
+      .result-tab-dot.failed {
+        background: var(--danger);
+      }
+
+      .result-tab-dot.warning {
+        background: rgba(234, 179, 8, 0.95);
+      }
+
+      .result-tab-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 220px;
+      }
+
+      .result-tabs-clear {
+        margin-left: auto;
+      }
+
+      .explain-options {
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--soft-ink);
+        font-size: 12px;
+      }
+
+      .explain-options input {
+        accent-color: var(--accent);
+      }
+
+      .result-meta-row {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .result-meta {
+        font-size: 11px;
+        color: var(--soft-ink);
+        background: var(--panel-soft);
+        border: 1px solid var(--edge);
+        border-radius: 999px;
+        padding: 4px 10px;
+      }
+
+      .result-meta.result-meta--success {
+        color: color-mix(in oklab, var(--success) 88%, var(--ink) 12%);
+        border-color: color-mix(in oklab, var(--success) 45%, var(--edge));
+        background: color-mix(in oklab, var(--success) 14%, var(--panel-soft));
+      }
+
+      .result-meta-actions {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .result-meta-actions .btn.ghost {
+        background: linear-gradient(
+          180deg,
+          color-mix(in oklab, var(--primary) 10%, var(--panel)) 0%,
+          color-mix(in oklab, var(--primary) 6%, var(--panel)) 100%
+        );
+        color: var(--ink);
+        border-color: color-mix(in oklab, var(--primary) 30%, var(--edge));
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      }
+
+      .result-meta-actions .btn.ghost:hover {
+        background: linear-gradient(
+          180deg,
+          color-mix(in oklab, var(--primary) 14%, var(--panel)) 0%,
+          color-mix(in oklab, var(--primary) 8%, var(--panel)) 100%
+        );
+        border-color: color-mix(in oklab, var(--primary) 38%, var(--edge));
+      }
+
+      .result-viz-builder {
+        margin-top: 10px;
+        border: 1px solid var(--edge);
+        border-radius: 14px;
+        background: color-mix(in oklab, var(--panel-soft) 88%, var(--primary) 12%);
+        padding: 12px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .result-viz-builder-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .result-viz-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+        align-items: end;
+      }
+
+      .result-viz-field {
+        display: grid;
+        gap: 6px;
+      }
+
+      .result-viz-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+      }

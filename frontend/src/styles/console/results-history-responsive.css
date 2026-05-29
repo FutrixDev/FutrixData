@@ -1,0 +1,326 @@
+      .console-panel--statement {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+
+      .console-results-content {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+
+      .console-results-content--dialog {
+        flex: 1;
+        min-height: 0;
+      }
+
+      .result {
+        margin-top: 14px;
+        padding: 6px;
+        flex: 1;
+        min-height: 0;
+        max-height: none;
+        overflow: auto;
+        overscroll-behavior: contain;
+        border-radius: 12px;
+        border: 1px solid var(--edge);
+        background: var(--panel);
+      }
+
+      .result--mongo .mongo-result-list {
+        background: color-mix(in oklab, var(--panel-soft) 88%, var(--primary) 12%);
+        border-radius: 12px;
+        padding: 8px;
+      }
+
+      .mongo-result-shell {
+        display: grid;
+        gap: 8px;
+      }
+
+      .result-copy-row {
+        display: flex;
+        justify-content: flex-end;
+        gap: 6px;
+      }
+
+      .result-copy-row .btn {
+        white-space: nowrap;
+      }
+
+      .result--sql {
+        padding-top: 2px;
+      }
+
+      .result--sql .result-table-shell {
+        margin-top: -4px;
+      }
+
+      .result-table-shell {
+        display: grid;
+        gap: 8px;
+      }
+
+      .result-table-toolbar {
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: flex-end;
+        gap: 6px;
+        padding: 4px 2px;
+        background: var(--panel);
+        border-radius: 10px;
+        z-index: 1;
+      }
+
+      .result-table {
+        width: max-content;
+        min-width: 100%;
+      }
+
+      .result-table th,
+      .result-table td {
+        white-space: nowrap;
+      }
+
+      .result-table td {
+        max-width: 320px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .row-copy-button {
+        width: 26px;
+        height: 24px;
+        padding: 0;
+        border-radius: 8px;
+        border: 1px solid color-mix(in oklab, var(--edge) 70%, transparent);
+        background: transparent;
+        color: color-mix(in oklab, var(--ink) 70%, var(--soft-ink));
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(-2px);
+        transition:
+          opacity 120ms ease,
+          transform 120ms ease,
+          border-color 120ms ease,
+          background 120ms ease,
+          color 120ms ease;
+        pointer-events: none;
+      }
+
+      .row-copy-button .copy-icon {
+        width: 14px;
+        height: 14px;
+      }
+
+      .result-table tbody tr:hover .row-copy-button,
+      .result-table tbody tr:focus-within .row-copy-button,
+      .mongo-item:hover .row-copy-button,
+      .mongo-item:focus-within .row-copy-button,
+      .row-copy-button:focus-visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+        color: var(--ink);
+        border-color: color-mix(in oklab, var(--primary) 28%, var(--edge));
+        background: color-mix(in oklab, var(--panel-soft) 70%, transparent);
+      }
+
+      .row-copy-button:hover {
+        background: color-mix(in oklab, var(--panel-soft) 82%, transparent);
+      }
+
+      @media (hover: none) {
+        .row-copy-button {
+          opacity: 1;
+          transform: none;
+          pointer-events: auto;
+        }
+      }
+
+      .result-table-copy {
+        text-align: left;
+        white-space: nowrap;
+        width: 1%;
+      }
+
+      .result-json {
+        display: grid;
+        gap: 6px;
+      }
+
+      .mongo-item-copy {
+        flex: 0 0 auto;
+        margin-left: auto;
+        align-self: flex-start;
+      }
+
+      .result-paging-loading {
+        padding: 6px 4px;
+      }
+
+      .history {
+        margin-top: 12px;
+      }
+
+      .history-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 4px;
+      }
+
+      .history-head h4 {
+        margin: 0;
+      }
+
+      .history-more-btn {
+        border-color: color-mix(in oklab, var(--primary) 32%, var(--edge));
+        background: linear-gradient(
+          180deg,
+          color-mix(in oklab, var(--primary) 12%, transparent) 0%,
+          color-mix(in oklab, var(--primary) 6%, transparent) 100%
+        );
+        color: color-mix(in oklab, var(--primary) 72%, var(--ink));
+        letter-spacing: 0.08px;
+      }
+
+      .history-more-btn:hover {
+        background: linear-gradient(
+          180deg,
+          color-mix(in oklab, var(--primary) 18%, transparent) 0%,
+          color-mix(in oklab, var(--primary) 10%, transparent) 100%
+        );
+        border-color: color-mix(in oklab, var(--primary) 44%, var(--edge));
+        color: color-mix(in oklab, var(--primary) 78%, var(--ink));
+        filter: none;
+      }
+
+      .history-more-icon {
+        width: 14px;
+        height: 14px;
+      }
+
+      .history-list {
+        display: grid;
+        gap: 6px;
+        overflow: hidden;
+      }
+
+      .history-empty {
+        font-size: 12px;
+        color: var(--soft-ink);
+        padding: 4px 0;
+      }
+
+      .history-item {
+        border: 1px solid var(--edge);
+        background: var(--panel-soft);
+        border-radius: 10px;
+        padding: 7px 10px;
+        font-size: 12px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        cursor: pointer;
+        text-align: left;
+        color: var(--ink);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .history-item:hover {
+        background: var(--panel);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+        background: var(--panel-strong);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: 6px 8px;
+        border-bottom: 1px solid var(--edge);
+        text-align: left;
+      }
+
+      th {
+        background: var(--panel-soft);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--soft-ink);
+      }
+
+      .json {
+        padding: 8px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 11px;
+        white-space: pre-wrap;
+        margin: 0;
+        background: var(--panel-soft);
+        border: 1px solid var(--edge);
+        border-radius: 8px;
+      }
+
+      @media (max-width: 900px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+
+        main {
+          padding: 20px;
+        }
+
+        .list-toolbar {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+
+        .list-toolbar-actions {
+          width: 100%;
+        }
+
+        .console-shell {
+          grid-template-columns: 1fr;
+        }
+
+        .console-splitter {
+          display: none;
+        }
+
+        .ai-panel,
+        .ai-form-panel {
+          width: 100%;
+          min-width: 100%;
+          max-width: 100%;
+          resize: none;
+        }
+
+        .ai-panel-resizer {
+          display: none;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }

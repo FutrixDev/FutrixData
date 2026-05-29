@@ -1,5 +1,73 @@
-dist/
-artifacts/
-release-assets/
+HELP.md
+.gradle
+build/bin/
+build/darwin/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+!packaging/npm/futrixdata-cli/bin/
+!packaging/npm/futrixdata-cli/bin/futrixdata-cli.mjs
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+.gocache/
+.gomodcache/
+.gopath/
+
+# Runtime data (credentials, caches, history, logs, prompts, local state)
+/data/
+
+*.sbin
+*.bin
+
+# Runtime / build artifacts
+node_modules/
+.npm-cache/
+npm-cache/
+frontend/dist/
+frontend/wailsjs/
+frontend/package.json.md5
+
+# Local agent/test artifacts
+output/
+.worktrees
 .worktrees/
-.DS_Store
+
+# Playwright MCP logs
+.playwright-mcp/
+
+# Claude context
+.context/
+
+# Built binaries at repo root
+/futrixdata-cli
+/http
+.gstack/
