@@ -2,6 +2,7 @@ package daemon
 
 import (
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"os"
@@ -42,6 +43,37 @@ func shortDataDir(t *testing.T) string {
 	}
 	t.Cleanup(func() { _ = os.RemoveAll(dir) })
 	return filepath.Join(dir, "datasources.json")
+}
+
+func useDaemonTestCrypto(t *testing.T) {
+	t.Helper()
+	key := make([]byte, 32)
+	for i := range key {
+		key[i] = byte(i + 1)
+	}
+	encoded := base64.RawURLEncoding.EncodeToString(key)
+	store := map[string]string{
+		"local-root-encryption-key": encoded,
+		"masking-secret-v1":         encoded,
+	}
+	restore := keyring.UseBackendForTest(
+		func(_, account string) (string, error) {
+			if value, ok := store[account]; ok {
+				return value, nil
+			}
+			return "", keyring.ErrNotFound
+		},
+		func(_, account, secret string) error {
+			store[account] = secret
+			return nil
+		},
+	)
+	securefile.SetKeys(key)
+	securefile.RequireEncryption(true)
+	t.Cleanup(func() {
+		restore()
+		securefile.ResetForTest()
+	})
 }
 
 func TestHandleToolCall_DecodesArgs(t *testing.T) {
@@ -353,6 +385,7 @@ func TestDaemonE2E_PingAndStatus(t *testing.T) {
 // of dataDir made cleanup a silent no-op, leaking the handshake across
 // PID reuse and confusing reconnect logic.
 func TestDaemonShutdown_RemovesHandshake(t *testing.T) {
+	useDaemonTestCrypto(t)
 	dir := shortDataDir(t)
 	store := agentaudit.NewIdentityStore(bootstrap.AgentIdentityPath(dir))
 	if _, err := store.EnsureManual("shutdown-test"); err != nil {
@@ -406,6 +439,7 @@ func TestDaemonShutdown_RemovesHandshake(t *testing.T) {
 // would close before the response frame was flushed, and the caller would
 // see a connection-reset rather than a clean ack.
 func TestDaemonShutdownOp_GracefulHandoff(t *testing.T) {
+	useDaemonTestCrypto(t)
 	dir := shortDataDir(t)
 	store := agentaudit.NewIdentityStore(bootstrap.AgentIdentityPath(dir))
 	if _, err := store.EnsureManual("shutdown-op-test"); err != nil {

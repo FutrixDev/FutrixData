@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/base64"
 	"errors"
 	"net"
 	"os"
@@ -16,6 +17,8 @@ import (
 	"futrixdata/platform/internal/bootstrap"
 	"futrixdata/platform/internal/daemon"
 	"futrixdata/platform/internal/ipc"
+	"futrixdata/platform/internal/keyring"
+	"futrixdata/platform/internal/securefile"
 	"futrixdata/platform/internal/version"
 )
 
@@ -34,12 +37,44 @@ func shortDataPath(t *testing.T) string {
 	return filepath.Join(dir, "datasources.json")
 }
 
+func useHandoffTestCrypto(t *testing.T) {
+	t.Helper()
+	key := make([]byte, 32)
+	for i := range key {
+		key[i] = byte(i + 1)
+	}
+	encoded := base64.RawURLEncoding.EncodeToString(key)
+	store := map[string]string{
+		"local-root-encryption-key": encoded,
+		"masking-secret-v1":         encoded,
+	}
+	restore := keyring.UseBackendForTest(
+		func(_, account string) (string, error) {
+			if value, ok := store[account]; ok {
+				return value, nil
+			}
+			return "", keyring.ErrNotFound
+		},
+		func(_, account, secret string) error {
+			store[account] = secret
+			return nil
+		},
+	)
+	securefile.SetKeys(key)
+	securefile.RequireEncryption(true)
+	t.Cleanup(func() {
+		restore()
+		securefile.ResetForTest()
+	})
+}
+
 // TestTryDaemonHandoff_GUIPeerSkips pins the SingleInstanceLock fix: when an
 // existing daemon is tagged Mode=gui, a second GUI launch must NOT send
 // daemon.shutdown to it. Doing so would silently kill the user's open
 // desktop window's IPC server. The handoff signals skipEmbedded=true so
 // main() defers to wails.Run + OnSecondInstanceLaunch.
 func TestTryDaemonHandoff_GUIPeerSkips(t *testing.T) {
+	useHandoffTestCrypto(t)
 	dataPath := shortDataPath(t)
 	store := agentaudit.NewIdentityStore(bootstrap.AgentIdentityPath(dataPath))
 	if _, err := store.EnsureManual("handoff-gui-test"); err != nil {
@@ -94,6 +129,7 @@ func TestTryDaemonHandoff_GUIPeerSkips(t *testing.T) {
 // daemon.shutdown, waits for the handshake to disappear, and reports
 // skipEmbedded=false so main() proceeds to start the embedded daemon.
 func TestTryDaemonHandoff_HeadlessPeerShutsDown(t *testing.T) {
+	useHandoffTestCrypto(t)
 	dataPath := shortDataPath(t)
 	store := agentaudit.NewIdentityStore(bootstrap.AgentIdentityPath(dataPath))
 	if _, err := store.EnsureManual("handoff-headless-test"); err != nil {

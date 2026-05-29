@@ -10,7 +10,14 @@ import (
 	"futrixdata/platform/internal/bootstrap"
 )
 
+func useDefaultOpenCodeConfigEnv(t *testing.T) {
+	t.Helper()
+	t.Setenv("OPENCODE_CONFIG", "")
+	t.Setenv("XDG_CONFIG_HOME", "")
+}
+
 func TestDetectMCPAgents(t *testing.T) {
+	useDefaultOpenCodeConfigEnv(t)
 	home := t.TempDir()
 	os.MkdirAll(filepath.Join(home, ".claude"), 0755)
 	os.MkdirAll(filepath.Join(home, ".cursor"), 0755)
@@ -504,6 +511,7 @@ func TestUninstallMCPCodexTOML(t *testing.T) {
 // ---------------------------------------------------------------------------
 
 func TestInstallMCPOpenCode(t *testing.T) {
+	useDefaultOpenCodeConfigEnv(t)
 	home := t.TempDir()
 	// OpenCode detects by ~/.config/opencode dir.
 	os.MkdirAll(filepath.Join(home, ".config", "opencode"), 0755)
@@ -554,6 +562,7 @@ func TestInstallMCPOpenCode(t *testing.T) {
 }
 
 func TestInstallMCPOpenCodeJSONC(t *testing.T) {
+	useDefaultOpenCodeConfigEnv(t)
 	home := t.TempDir()
 	os.MkdirAll(filepath.Join(home, ".config", "opencode"), 0755)
 
