@@ -1,0 +1,25 @@
+{
+  "name": "@futrixdata/cli",
+  "version": "0.0.0-development",
+  "description": "FutrixData command line interface",
+  "homepage": "https://github.com/wangqianqianjun/FutrixData",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangqianqianjun/FutrixData.git"
+  },
+  "type": "module",
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "bin": {
+    "futrixdata-cli": "./bin/futrixdata-cli.mjs"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "postinstall": "node ./lib/install.mjs",
+    "test": "node --test ./tests/*.test.mjs"
+  }
+}

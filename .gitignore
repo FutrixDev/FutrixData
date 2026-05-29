@@ -44,7 +44,6 @@ out/
 
 # Runtime data (credentials, caches, history, logs, prompts, local state)
 /data/
-build/
 
 *.sbin
 *.bin
@@ -69,6 +68,6 @@ output/
 .context/
 
 # Built binaries at repo root
-futrixdata-cli
-http
+/futrixdata-cli
+/http
 .gstack/

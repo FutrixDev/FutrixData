@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, chmod, writeFile, readFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { mkdtemp, chmod, writeFile, readFile, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import http from 'node:http';
@@ -11,12 +10,12 @@ import { promisify } from 'node:util';
 const execFile = promisify(execFileCallback);
 
 async function createFakeTarball() {
-  const root = await mkdtemp(path.join(tmpdir(), 'futrixdata-cli-install-script-fixture-'));
+  const root = await mkdtemp(path.join(tmpdir(), 'futrixdata-cli-npm-pack-fixture-'));
   const payloadDir = path.join(root, 'payload');
   const archivePath = path.join(root, 'futrixdata-cli_darwin_arm64.tar.gz');
   await execFile('mkdir', ['-p', payloadDir]);
   const binaryPath = path.join(payloadDir, 'futrixdata-cli');
-  await writeFile(binaryPath, '#!/bin/sh\necho install-script-ok\n', 'utf8');
+  await writeFile(binaryPath, '#!/bin/sh\necho npm-pack-ok\n', 'utf8');
   await chmod(binaryPath, 0o755);
   await execFile('tar', ['-czf', archivePath, '-C', payloadDir, 'futrixdata-cli']);
   return { archivePath };
@@ -25,10 +24,7 @@ async function createFakeTarball() {
 async function serveFile(filePath) {
   const payload = await readFile(filePath);
   const server = http.createServer((req, res) => {
-    if (
-      req.url?.startsWith('/releases/download/v9.9.9/futrixdata-cli_') &&
-      req.url.endsWith('.tar.gz')
-    ) {
+    if (req.url === '/releases/download/v9.9.9/futrixdata-cli_darwin_arm64.tar.gz') {
       res.writeHead(200, { 'Content-Type': 'application/gzip' });
       res.end(payload);
       return;
@@ -44,28 +40,37 @@ async function serveFile(filePath) {
   };
 }
 
-test('install script downloads and installs futrixdata-cli into target bin dir', async () => {
+test('packed npm package installs and runs futrixdata-cli without repo-relative files', async () => {
   const { archivePath } = await createFakeTarball();
   const server = await serveFile(archivePath);
-  const homeDir = await mkdtemp(path.join(tmpdir(), 'futrixdata-cli-install-script-home-'));
-  const installDir = path.join(homeDir, 'bin');
+  const packageDir = path.join(process.cwd(), 'packaging/npm/futrixdata-cli');
+  const packOutputDir = await mkdtemp(path.join(tmpdir(), 'futrixdata-cli-npm-pack-output-'));
+  const prefixDir = await mkdtemp(path.join(tmpdir(), 'futrixdata-cli-npm-prefix-'));
 
   try {
-    await execFile('sh', ['scripts/install-futrixdata-cli.sh'], {
-      cwd: process.cwd(),
+    await execFile('npm', ['pack', '--pack-destination', packOutputDir], {
+      cwd: packageDir,
       env: {
         ...process.env,
-        HOME: homeDir,
-        FUTRIXDATA_CLI_VERSION: 'v9.9.9',
-        FUTRIXDATA_CLI_RELEASE_BASE_URL: server.baseURL,
-        FUTRIXDATA_CLI_INSTALL_DIR: installDir,
+        npm_config_ignore_scripts: 'true',
       },
     });
 
-    const installedBinary = path.join(installDir, 'futrixdata-cli');
-    assert.ok(existsSync(installedBinary));
-    const result = await execFile(installedBinary, []);
-    assert.equal(result.stdout.trim(), 'install-script-ok');
+    const files = await readdir(packOutputDir);
+    const tarballName = files.find((name) => name.endsWith('.tgz'));
+    assert.ok(tarballName, 'expected npm pack to produce a tarball');
+
+    await execFile('npm', ['install', '-g', path.join(packOutputDir, tarballName), '--prefix', prefixDir], {
+      env: {
+        ...process.env,
+        FUTRIXDATA_CLI_VERSION: 'v9.9.9',
+        FUTRIXDATA_CLI_RELEASE_BASE_URL: server.baseURL,
+      },
+    });
+
+    const installed = path.join(prefixDir, 'bin', 'futrixdata-cli');
+    const result = await execFile(installed, []);
+    assert.equal(result.stdout.trim(), 'npm-pack-ok');
   } finally {
     await server.close();
   }
